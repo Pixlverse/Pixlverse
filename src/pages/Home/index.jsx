@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import "./home.css";
@@ -40,7 +40,6 @@ const Home = () => {
     },
   ];
 
-  const containerRef = useRef(null);
 
   return (
     <>
@@ -424,7 +423,7 @@ const Home = () => {
       </section>
 
       {/* Testimonial Section */}
-      <section className="testimonial-section">
+      {/* <section className="testimonial-section">
         <h2 className="testimonial-title">What Our Clients Say</h2>
         <div className="testimonial-grid">
           {testimonials.map((t, i) => (
@@ -436,7 +435,7 @@ const Home = () => {
             </div>
           ))}
         </div>
-      </section>
+      </section> */}
 
       <Footer />
     </>

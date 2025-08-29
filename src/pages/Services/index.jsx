@@ -1,3 +1,4 @@
+
 import React from "react";
 import "./services.css";
 import Navbar from "../../components/Navbar";
@@ -45,7 +46,7 @@ const services = [
       "Monthly backups",
       "Performance audits",
       "Bug fixes and updates",
-      "Security monitoring",
+      "SEO Optimization",
     ],
   },
   {
@@ -59,17 +60,17 @@ const services = [
       "Rebranding support",
     ],
   },
-  {
-    icon: "/images/search-engine-optimization.png",
-    title: "SEO Optimization",
-    desc: "Make Your Website Findable, From Day One",
-    details: [
-      "Meta titles/descriptions",
-      "Page speed optimization",
-      "Sitemap.xml and robots.txt setup",
-      "Analytics & tracking",
-    ],
-  },
+  // {
+  //   icon: "/images/search-engine-optimization.png",
+  //   title: "SEO Optimization",
+  //   desc: "Make Your Website Findable, From Day One",
+  //   details: [
+  //     "Meta titles/descriptions",
+  //     "Page speed optimization",
+  //     "Sitemap.xml and robots.txt setup",
+  //     "Analytics & tracking",
+  //   ],
+  // },
   {
     icon: "/images/www.png",
     title: "Domain & Hosting Support",
@@ -87,31 +88,39 @@ const Services = () => {
   return (
     <>
       <Navbar />
-      <section className="services-section">
-        <h2 className="services-title">
-          Our{" "}
-          <span className="" style={{ color: "#bc3aab" }}>
-            Services
-          </span>
-        </h2>
+      <main className="services-hero">
+        <div className="services-hero-content">
+          <h1 className="services-hero-title">Elevate Your Digital Experience</h1>
+          <p className="services-hero-desc">Discover our full suite of web services designed for impact, performance, and growth.</p>
+        </div>
+      </main>
+      <section className="services-grid-section">
         <div className="services-grid">
-          {services.map((service, index) => (
-            <div key={index} className="service-card">
-              <span className="circle-accent"></span>
-              <div className="service-icon">
+          {services.map((service, idx) => (
+            <div className="service-masonry-card" key={idx}>
+              <div className="service-masonry-icon">
                 <img src={service.icon} alt={service.title} />
               </div>
-              <h3>{service.title}</h3>
-              <p className="service-desc">{service.desc}</p>
-              <ul>
-                {service.details.map((item, i) => (
-                  <li key={i}>{item}</li>
-                ))}
-              </ul>
+              <div className="service-masonry-content">
+                <h3 className="service-masonry-title">{service.title}</h3>
+                <p className="service-masonry-desc">{service.desc}</p>
+                <ul className="service-masonry-list">
+                  {service.details.map((item, i) => (
+                    <li key={i}>{item}</li>
+                  ))}
+                </ul>
+              </div>
             </div>
           ))}
         </div>
       </section>
+      {/* <section className="services-cta-section">
+        <div className="services-cta-card">
+          <h2>Ready to transform your web presence?</h2>
+          <p>Contact us today and let’s build something extraordinary together.</p>
+          <a href="/contact" className="services-cta-btn">Get in Touch</a>
+        </div>
+      </section> */}
       <Footer />
     </>
   );

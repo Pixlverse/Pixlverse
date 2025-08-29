@@ -18,13 +18,20 @@ const Navbar = () => {
         </div>
 
         <ul className={isOpen ? "nav-menu active" : "nav-menu"}>
-          {menuItems.map((item) => (
-            <li key={item} className="nav-item">
-              <a href={`${item.toLowerCase()}`} className="nav-link">
-                {item}
-              </a>
-            </li>
-          ))}
+          {menuItems.map((item) => {
+            const path = item.toLowerCase() === "about" ? "/" : `/${item.toLowerCase()}`;
+            const isActive = window.location.pathname === path || (item.toLowerCase() === "about" && window.location.pathname === "/");
+            return (
+              <li key={item} className="nav-item">
+                <a
+                  href={path}
+                  className={`nav-link${isActive ? " active" : ""}`}
+                >
+                  {item}
+                </a>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </nav>
