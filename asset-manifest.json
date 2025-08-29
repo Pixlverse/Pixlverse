@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Pixlverse/static/css/main.a7a7b6b6.css",
+    "main.js": "/Pixlverse/static/js/main.3a4660a7.js",
+    "index.html": "/Pixlverse/index.html",
+    "main.a7a7b6b6.css.map": "/Pixlverse/static/css/main.a7a7b6b6.css.map",
+    "main.3a4660a7.js.map": "/Pixlverse/static/js/main.3a4660a7.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a7a7b6b6.css",
+    "static/js/main.3a4660a7.js"
+  ]
+}
