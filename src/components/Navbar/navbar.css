@@ -56,7 +56,7 @@
 .nav-link.active {
   color: #bc3aab;
   font-weight: 700;
-  background:  #bb00a2 ;
+  background:  #8b2b7f ;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -113,7 +113,7 @@
 
 @media screen and (max-width: 900px) {
   .navbar-container {
-    padding: 0 0.5rem;
+    /* padding: 0 0.5rem; */
   }
   .nav-menu {
     gap: 18px;

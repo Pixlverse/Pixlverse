@@ -17,28 +17,28 @@ import {
 } from "react-icons/fa";
 
 const Home = () => {
-  const testimonials = [
-    {
-      name: "Rahul Menon",
-      designation: "Founder, TechSpark",
-      message:
-        "Pixlverse turned our vision into reality! The website not only looks stunning but also performs flawlessly. Their support is top-notch.",
-      img: "https://via.placeholder.com/100",
-    },
-    {
-      name: "Sarah Johnson",
-      designation: "CEO, BrightHomes",
-      message:
-        "Professional, creative, and always reliable. The team guided us step by step, and the end result exceeded our expectations.",
-      img: "https://via.placeholder.com/100",
-    },
-    {
-      name: "Amit Verma",
-      designation: "Director, SkillHub",
-      message: `Their attention to detail and dedication is unmatched. Weve seen real growth since launching our new website with Pixlverse.`,
-      img: "https://via.placeholder.com/100",
-    },
-  ];
+  // const testimonials = [
+  //   {
+  //     name: "Rahul Menon",
+  //     designation: "Founder, TechSpark",
+  //     message:
+  //       "Pixlverse turned our vision into reality! The website not only looks stunning but also performs flawlessly. Their support is top-notch.",
+  //     img: "https://via.placeholder.com/100",
+  //   },
+  //   {
+  //     name: "Sarah Johnson",
+  //     designation: "CEO, BrightHomes",
+  //     message:
+  //       "Professional, creative, and always reliable. The team guided us step by step, and the end result exceeded our expectations.",
+  //     img: "https://via.placeholder.com/100",
+  //   },
+  //   {
+  //     name: "Amit Verma",
+  //     designation: "Director, SkillHub",
+  //     message: `Their attention to detail and dedication is unmatched. Weve seen real growth since launching our new website with Pixlverse.`,
+  //     img: "https://via.placeholder.com/100",
+  //   },
+  // ];
 
 
   return (

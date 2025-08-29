@@ -19,14 +19,16 @@ const Navbar = () => {
 
         <ul className={isOpen ? "nav-menu active" : "nav-menu"}>
           {menuItems.map((item) => {
-            const path = item.toLowerCase() === "about" ? "/" : `/${item.toLowerCase()}`;
-            const isActive = window.location.pathname === path || (item.toLowerCase() === "about" && window.location.pathname === "/");
+            const path = `/${item.toLowerCase()}`;
+            const normalize = (p) => (p === "/" ? "/" : p.replace(/\/$/, ""));
+            const current = normalize(window.location.pathname || "/");
+            const target = normalize(path);
+
+            const isActive = current === target;
+
             return (
               <li key={item} className="nav-item">
-                <a
-                  href={path}
-                  className={`nav-link${isActive ? " active" : ""}`}
-                >
+                <a href={path} className={`nav-link${isActive ? " active" : ""}`}>
                   {item}
                 </a>
               </li>
