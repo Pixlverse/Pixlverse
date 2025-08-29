@@ -1,0 +1,140 @@
+.projects-page {
+  margin-top: 30px;
+  padding: 4rem 2rem;
+  background: #f9fafc;
+}
+
+.projects-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.projects-header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #222;
+}
+
+.projects-header p {
+  color: #555;
+  margin-top: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* exactly 2 columns */
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Mobile (below 768px) = 1 card per row */
+@media (max-width: 768px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.project-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.project-image-container {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.project-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.project-content {
+  padding: 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-name {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+  color: #111;
+}
+
+.project-desc {
+  flex-grow: 1;
+  color: #555;
+  line-height: 1.5;
+  margin-bottom: 1.2rem;
+  font-size: 0.95rem;
+}
+
+.project-btn {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  background: #bc3aab;
+  color: #fff;
+  font-weight: 500;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.3s ease;
+  align-self: flex-start;
+}
+
+.project-btn:hover {
+  background: #0056b3;
+}
+
+.contact-box {
+  background: linear-gradient(150deg, #1e2155fc, #b3306f);
+  border-radius: 12px;
+  padding: 3rem 2rem;
+  max-width: 900px;
+  margin: 4rem auto 0 auto;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.contact-content h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #ffffff;
+}
+
+.contact-content p {
+  font-size: 1.1rem;
+  color: #f6f6f6;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.contact-btns {
+  display: inline-block;
+  padding: 0.9rem 2rem;
+  background-color: #ffd900e4;
+  color: #000000;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+
+.contact-btns:hover {
+  background-color: #f1cd00e4;
+}
