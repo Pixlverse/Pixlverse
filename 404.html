@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Redirecting...</title>
+    <meta http-equiv="refresh" content="0; url=/" />
+    <script>
+      // For React Router: redirect to root and let the app handle the route
+      var redirectTo = '/';
+      if (window.location.pathname && window.location.pathname !== '/') {
+        redirectTo += '#' + window.location.pathname;
+      }
+      window.location.replace(redirectTo);
+    </script>
+  </head>
+  <body>
+    <p>Redirecting...</p>
+  </body>
+</html>
