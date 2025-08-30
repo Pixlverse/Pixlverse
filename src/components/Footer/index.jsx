@@ -21,7 +21,7 @@ const Footer = () => {
             Infinite Possibilities, Pixel Perfect. Crafting elegant,
             high-performing websites with unmatched support.
           </p>
-          <div className="footer-socials">
+          {/* <div className="footer-socials">
             <a
               href="https://facebook.com"
               target="_blank"
@@ -50,7 +50,7 @@ const Footer = () => {
             >
               <FaInstagram />
             </a>
-          </div>
+          </div> */}
         </div>
 
         <div className="footer-links">

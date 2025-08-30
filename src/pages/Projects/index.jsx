@@ -52,7 +52,7 @@ const Projects = () => {
   return (
     <>
       <Navbar />
-      <section className="projects-page">
+  <section className="projects-page reveal">
         <div className="projects-header">
           <h1>
             Our{" "}
@@ -72,22 +72,14 @@ const Projects = () => {
                 className="project-img"
               />
               <div className="project-content">
-                <h3 className="project-name">{project.title}</h3>
+                <h3 className="project-name"><a href={project.link} target="_blank" rel="noopener noreferrer" className="project-link">{project.title}</a></h3>
                 <p className="project-desc">{project.desc}</p>
-                <a
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="project-btn"
-                >
-                  Go to Site
-                </a>
               </div>
             </div>
           ))}
         </div>
 
-        <section className="contact-box">
+  <section className="contact-box reveal">
           <div className="contact-content">
             <h2>Ready to Transform Your Online Presence?</h2>
             <p>

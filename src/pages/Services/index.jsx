@@ -88,13 +88,13 @@ const Services = () => {
   return (
     <>
       <Navbar />
-      <main className="services-hero">
+  <main className="services-hero reveal">
         <div className="services-hero-content">
           <h1 className="services-hero-title">Elevate Your Digital Experience</h1>
           <p className="services-hero-desc">Discover our full suite of web services designed for impact, performance, and growth.</p>
         </div>
       </main>
-      <section className="services-grid-section">
+  <section className="services-grid-section reveal">
         <div className="services-grid">
           {services.map((service, idx) => (
             <div className="service-masonry-card" key={idx}>

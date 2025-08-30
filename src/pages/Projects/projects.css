@@ -77,6 +77,21 @@
   color: #111;
 }
 
+/* linked project title style */
+.project-link {
+  color: #111;
+  text-decoration: none;
+  font-weight: 700;
+  border-bottom: 3px solid transparent;
+  padding-bottom: 2px;
+  transition: color 220ms ease, border-color 220ms ease, transform 220ms ease;
+}
+.project-link:hover {
+  color: #bc3aab;
+  border-color: #ffd7f0;
+  transform: translateY(-2px);
+}
+
 .project-desc {
   flex-grow: 1;
   color: #555;

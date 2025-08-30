@@ -1,0 +1,36 @@
+/* Reveal animation for sections */
+.reveal {
+  --reveal-duration: 700ms;
+  --reveal-ease: cubic-bezier(.16,.84,.24,1);
+  --reveal-delay: 120ms; /* default small delay */
+
+  opacity: 0;
+  transform: translateY(20px) scale(0.998);
+  transition: opacity var(--reveal-duration) var(--reveal-ease), transform var(--reveal-duration) var(--reveal-ease);
+  transition-delay: var(--reveal-delay);
+  will-change: opacity, transform;
+}
+
+.reveal.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition-delay: 0ms; /* show immediately when class added */
+}
+
+/* Animate direct children with a small stagger for a smoother effect */
+.reveal > * {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity calc(var(--reveal-duration) * 0.9) var(--reveal-ease), transform calc(var(--reveal-duration) * 0.9) var(--reveal-ease);
+}
+
+.reveal.show > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Optional per-element data-delay shorthand (applies to the reveal container)
+   Use like: <section class="reveal" style={{'--reveal-delay':'200ms'}}> */
+.reveal[data-delay="100"] { transition-delay: 0.1s; }
+.reveal[data-delay="200"] { transition-delay: 0.2s; }
+.reveal[data-delay="300"] { transition-delay: 0.3s; }

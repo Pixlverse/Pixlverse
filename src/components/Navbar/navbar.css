@@ -6,7 +6,7 @@
   width: 100%;
   position: fixed;
   top: 0;
-  padding: 10px;
+  padding: 10px 0;
   left: 0;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   z-index: 999;
@@ -56,7 +56,7 @@
 .nav-link.active {
   color: #bc3aab;
   font-weight: 700;
-  background:  #8b2b7f ;
+  background:  #bb00a2 ;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -113,7 +113,7 @@
 
 @media screen and (max-width: 900px) {
   .navbar-container {
-    /* padding: 0 0.5rem; */
+    padding: 0 0.5rem;
   }
   .nav-menu {
     gap: 18px;
@@ -125,32 +125,61 @@
 }
 
 @media screen and (max-width: 768px) {
+  /* Mobile: smoother open/close using opacity + transform */
   .nav-menu {
     position: absolute;
     top: 64px;
     left: 0;
-    width: 100vw;
-    gap: 30px;
+    right: 0;
+    width: 100%;
+    gap: 12px;
     flex-direction: column;
     background-color: white;
-    max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease;
     box-sizing: border-box;
+    opacity: 0;
+    transform: translateY(-8px);
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 320ms cubic-bezier(.16,.84,.24,1), transform 320ms cubic-bezier(.16,.84,.24,1), visibility 0ms linear 320ms;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    padding: 0;
   }
 
+  /* When active, make it visible and allow interactions */
   .nav-menu.active {
-    max-height: 900px;
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+    pointer-events: auto;
+    transition-delay: 0s;
     padding: 1rem 0;
     color: #8c52ff;
   }
 
   .nav-item {
     text-align: center;
-    padding: 0.5rem 0;
+    padding: 0.6rem 0;
+    transform: translateY(-6px);
+    opacity: 0;
+    transition: transform 280ms cubic-bezier(.22,.9,.36,1), opacity 280ms ease;
   }
+
+  /* Reveal items with a small stagger */
+  .nav-menu.active .nav-item {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .nav-menu.active .nav-item:nth-child(1) { transition-delay: 40ms; }
+  .nav-menu.active .nav-item:nth-child(2) { transition-delay: 80ms; }
+  .nav-menu.active .nav-item:nth-child(3) { transition-delay: 120ms; }
+  .nav-menu.active .nav-item:nth-child(4) { transition-delay: 160ms; }
+  .nav-menu.active .nav-item:nth-child(5) { transition-delay: 200ms; }
+  .nav-menu.active .nav-item:nth-child(6) { transition-delay: 240ms; }
 
   .menu-icon {
     display: block;
+    z-index: 1100;
   }
 }

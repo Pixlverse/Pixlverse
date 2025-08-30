@@ -50,7 +50,7 @@ const Home = () => {
           marginTop: "50px",
         }}
       >
-        <section id="hero" className="hero-section">
+  <section id="hero" className="hero-section reveal">
           <div className="hero-content">
             <h1>Unleashing Creativity at Pixlverse</h1>
             <p className="slogan">Infinite Possibilities, Pixel Perfect!</p>
@@ -78,7 +78,7 @@ const Home = () => {
           </div>
         </section>
       </section>
-      <section id="services" className="services-sectionn">
+  <section id="services" className="services-sectionn reveal">
         <div className="bokeh-background">
           <span></span>
           <span></span>
@@ -174,7 +174,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <section className="enquiry-section">
+  <section className="enquiry-section reveal">
         <div className="enquiry-container">
           <h2>Have a project in mind?</h2>
           <p>
@@ -191,7 +191,7 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="creations-section">
+  <section className="creations-section reveal">
         <div className="creations-header">
           <h2>
             Our <span className="highlight">Creations</span>
@@ -208,20 +208,13 @@ const Home = () => {
             />
 
             <div className="project-details">
-              <h3 className="project-title">Nearbymart</h3>
+              <h3 className="project-title"><a href="https://www.thenearbymart.com/" target="_blank" rel="noopener noreferrer" className="project-link">Nearbymart</a></h3>
               <p style={{ letterSpacing: 0.2 }}>
                 <strong>Nearbymart Hypermarket</strong> brings world-class
                 quality-first products and convenience to your neighborhood at
                 prices you will love every day.
               </p>
-              <a
-                href="https://www.thenearbymart.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="live-demo-btn"
-              >
-                Go to Site
-              </a>
+              
             </div>
           </div>
           <div className="creation-card">
@@ -232,21 +225,14 @@ const Home = () => {
             />
 
             <div className="project-details">
-              <h3 className="project-title">AJ Homes & Lettings Ltd</h3>
+              <h3 className="project-title"><a href="https://www.ajhomeslettings.co.uk/" target="_blank" rel="noopener noreferrer" className="project-link">AJ Homes & Lettings Ltd</a></h3>
               <p style={{ letterSpacing: 0.2 }}>
                 <strong> AJ Homes & Lettings Ltd</strong> is{" "}
                 <strong>Birmingham’s</strong> leading property agency,
                 presenting their services, property listings, and dedication to
                 high-quality lettings and sales.
               </p>
-              <a
-                href="https://www.ajhomeslettings.co.uk/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="live-demo-btn"
-              >
-                Go to Site
-              </a>
+              
             </div>
           </div>
           <div className="creation-card">
@@ -257,21 +243,14 @@ const Home = () => {
             />
 
             <div className="project-details">
-              <h3 className="project-title">Komath & Associates</h3>
+              <h3 className="project-title"><a href="https://komathassociates.in/" target="_blank" rel="noopener noreferrer" className="project-link">Komath & Associates</a></h3>
               <p>
                 <strong>Komath & Associates </strong> is a distinguished law
                 firm based in Kochi, known for delivering exceptional legal
                 services for around two decades with a team of highly
                 experienced and dedicated professionals.
               </p>
-              <a
-                href="https://komathassociates.in/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="live-demo-btn"
-              >
-                Go to Site
-              </a>
+              
             </div>
           </div>
           <div className="creation-card">
@@ -282,21 +261,14 @@ const Home = () => {
             />
 
             <div className="project-details">
-              <h3 className="project-title">N'Able by Shibi Anand</h3>
+              <h3 className="project-title"><a href="https://shibianand.com/" target="_blank" rel="noopener noreferrer" className="project-link">N'Able by Shibi Anand</a></h3>
               <p>
                 <strong>N'Able by Shibi Anand</strong> empowers individuals and
                 educational institutions to realize their full potential through
                 personalized support, transformative learning experiences, and
                 expert consultation.
               </p>
-              <a
-                href="https://shibianand.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="live-demo-btn"
-              >
-                Go to Site
-              </a>
+              
             </div>
           </div>
           <div className="creation-card">
@@ -307,21 +279,14 @@ const Home = () => {
             />
 
             <div className="project-details">
-              <h3 className="project-title">Evolvers Career Clinic</h3>
+              <h3 className="project-title"><a href="https://www.evolverscareerclinic.com/" target="_blank" rel="noopener noreferrer" className="project-link">Evolvers Career Clinic</a></h3>
               <p>
                 <strong>Evolvers Career Clinic</strong> is a career
                 transformation partner offering recruiter-backed resumes,
                 LinkedIn profiles, interview prep, and global application
                 support tailored to real hiring standards.
               </p>
-              <a
-                href="https://www.evolverscareerclinic.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="live-demo-btn"
-              >
-                Go to Site
-              </a>
+              
             </div>
           </div>
           <div className="creation-card">
@@ -332,23 +297,14 @@ const Home = () => {
             />
 
             <div className="project-details">
-              <h3 className="project-title">
-                Intern-Preneur Development Program (IPDP)
-              </h3>
+              <h3 className="project-title"><a href="https://internpreneur.in/" target="_blank" rel="noopener noreferrer" className="project-link">Intern-Preneur Development Program (IPDP)</a></h3>
               <p>
                 <strong>IPDP</strong> is India’s exclusive online finishing
                 school, helping students, graduates, and professionals boost
                 employability through real-world skills and career-ready
                 training.
               </p>
-              <a
-                href="https://internpreneur.in/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="live-demo-btn"
-              >
-                Go to Site
-              </a>
+              
             </div>
           </div>
         </div>
@@ -363,7 +319,7 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="why-us-section">
+  <section className="why-us-section reveal">
         <div className="why-us-header">
           <h2>
             Why <span className="highlight">Pixlverse?</span>
@@ -402,9 +358,9 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="contact-cta-section">
+  <section className="contact-cta-section reveal">
         <div className="contact-cta-box">
-          <div className="contact-cta-image" style={{ width: "10%" }}>
+          <div className="contact-cta-image">
             <img src="/images/jigsaw.png" alt="CTA" />
           </div>
 

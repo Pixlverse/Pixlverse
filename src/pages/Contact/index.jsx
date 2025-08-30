@@ -8,7 +8,7 @@ const Contact = () => {
   return (
     <>
       <Navbar />
-      <section className="contact-section">
+  <section className="contact-section reveal">
         <div className="contact-container">
           {/* Left - Contact Form */}
           <div className="contact-form-box">

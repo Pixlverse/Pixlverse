@@ -8,7 +8,7 @@ const About = () => {
     <div>
       <Navbar />
       <section className="bubble-bg">
-        <section className="about-section" style={{ marginTop: "60px" }}>
+        <section className="about-section reveal" style={{ marginTop: "60px" }}>
           <div className="about-content">
             <div className="text">
               <h2 style={{ fontSize: "2.5rem", marginBottom: "20px" }}>
@@ -66,7 +66,7 @@ const About = () => {
         </section>
 
         {/* Why Pixlverse */}
-        <section className="about-section reverse">
+  <section className="about-section reverse reveal">
           <div className="about-content">
             <div className="text">
               <h2 style={{ fontSize: "2.5rem", marginBottom: "20px" }}>
@@ -106,7 +106,7 @@ const About = () => {
       </section>
 
       {/* Achievements */}
-      <section className="achievements">
+  <section className="achievements reveal">
         <h2 style={{ fontSize: "2.1rem", marginBottom: "20px" }}>
           What We’ve{" "}
           <span className="" style={{ color: "#bc3aab" }}>
