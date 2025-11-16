@@ -1,14 +1,50 @@
 // Contact.jsx
-import React from "react";
+import React, { useState } from "react";
 import "./contact.css";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 
 const Contact = () => {
+  const [formStatus, setFormStatus] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setFormStatus("");
+
+    const formData = new FormData(e.target);
+
+    try {
+      const response = await fetch("https://formspree.io/f/mblqpgkg", {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      if (response.ok) {
+        setFormStatus("success");
+        e.target.reset();
+        setTimeout(() => setFormStatus(""), 3000);
+      } else {
+        setFormStatus("error");
+        setTimeout(() => setFormStatus(""), 3000);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      setFormStatus("error");
+      setTimeout(() => setFormStatus(""), 3000);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <>
       <Navbar />
-  <section className="contact-section reveal">
+      <section className="contact-section reveal">
         <div className="contact-container">
           {/* Left - Contact Form */}
           <div className="contact-form-box">
@@ -19,16 +55,52 @@ const Contact = () => {
               and we’ll respond within 24 hours.
             </p>
 
-            <form className="contact-form">
+            <form className="contact-form" onSubmit={handleSubmit}>
               <div className="form-row">
-                <input type="text" placeholder="First Name" />
-                <input type="text" placeholder="Last Name" />
+                <input 
+                  type="text" 
+                  name="firstName"
+                  placeholder="First Name" 
+                  required
+                />
+                <input 
+                  type="text" 
+                  name="lastName"
+                  placeholder="Last Name" 
+                  required
+                />
               </div>
-              <input type="email" placeholder="Email Address" />
-              <textarea placeholder="Leave us a message"></textarea>
+              <input 
+                type="email" 
+                name="email"
+                placeholder="Email Address" 
+                required
+              />
+              <input 
+                type="tel" 
+                name="phone"
+                placeholder="Contact Number" 
+                required
+              />
+              <textarea 
+                name="message"
+                placeholder="Leave us a message"
+                required
+              ></textarea>
 
-              <button type="submit" className="contactt-btn">
-                Send Message
+              {formStatus === "success" && (
+                <p className="form-success">✓ Message sent successfully! We'll get back to you soon.</p>
+              )}
+              {formStatus === "error" && (
+                <p className="form-error">✗ Oops! Something went wrong. Please try again.</p>
+              )}
+
+              <button 
+                type="submit" 
+                className="contactt-btn"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? "Sending..." : "Send Message"}
               </button>
             </form>
           </div>

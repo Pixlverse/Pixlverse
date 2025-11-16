@@ -4,6 +4,48 @@
   background: #f9fbff;
   display: flex;
   justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Floating animations */
+@keyframes float-bubble {
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  25% { transform: translateY(-20px) translateX(10px); }
+  50% { transform: translateY(-40px) translateX(0px); }
+  75% { transform: translateY(-20px) translateX(-10px); }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-30px); }
+}
+
+/* Bubble decorations */
+.contact-section::before {
+  content: "";
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: linear-gradient(135deg, rgba(188, 58, 171, 0.08), transparent);
+  border-radius: 40% 60% 30% 70% / 60% 30% 70% 40%;
+  top: -100px;
+  right: -100px;
+  animation: float-slow 15s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.contact-section::after {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle at 40% 40%, rgba(176, 51, 159, 0.1), transparent);
+  border-radius: 50%;
+  bottom: -80px;
+  left: -80px;
+  animation: float-bubble 12s ease-in-out infinite;
+  pointer-events: none;
 }
 
 .contact-container {
@@ -52,6 +94,26 @@
   transition: 0.3s;
 }
 
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  font-size: 15px;
+  margin-bottom: 15px;
+  outline: none;
+  transition: 0.3s;
+  background: #fafbff;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: #bc3aab;
+  box-shadow: 0 0 0 3px rgba(188, 58, 171, 0.1);
+  background: #fff;
+}
+
 .contact-form input:focus,
 .contact-form textarea:focus {
   border-color: #bc3aab;
@@ -66,6 +128,39 @@
 .contact-form textarea {
   height: 120px;
   resize: none;
+}
+
+.form-success {
+  color: #24b700;
+  background-color: #e8f5e9;
+  border-left: 4px solid #24b700;
+  padding: 12px 15px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  font-weight: 500;
+  animation: slideIn 0.3s ease;
+}
+
+.form-error {
+  color: #d32f2f;
+  background-color: #ffebee;
+  border-left: 4px solid #d32f2f;
+  padding: 12px 15px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  font-weight: 500;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .form-policy {

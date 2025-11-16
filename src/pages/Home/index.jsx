@@ -17,28 +17,20 @@ import {
 } from "react-icons/fa";
 
 const Home = () => {
-  // const testimonials = [
-  //   {
-  //     name: "Rahul Menon",
-  //     designation: "Founder, TechSpark",
-  //     message:
-  //       "Pixlverse turned our vision into reality! The website not only looks stunning but also performs flawlessly. Their support is top-notch.",
-  //     img: "https://via.placeholder.com/100",
-  //   },
-  //   {
-  //     name: "Sarah Johnson",
-  //     designation: "CEO, BrightHomes",
-  //     message:
-  //       "Professional, creative, and always reliable. The team guided us step by step, and the end result exceeded our expectations.",
-  //     img: "https://via.placeholder.com/100",
-  //   },
-  //   {
-  //     name: "Amit Verma",
-  //     designation: "Director, SkillHub",
-  //     message: `Their attention to detail and dedication is unmatched. Weve seen real growth since launching our new website with Pixlverse.`,
-  //     img: "https://via.placeholder.com/100",
-  //   },
-  // ];
+  const testimonials = [
+    {
+      name: "Ananthu Vasudev",
+      message:
+        "I have been working with the team at Pixlverse since 2023, right from their early stages. Having collaborated with several developers over the past 13 years, I can confidently say this is the best team I have worked with. Despite being one of the youngest teams, they stand out because of their professionalism, approach, and commitment. They value their words and our time, and communicate clearly without over-committing. Pixlverse is a no-nonsense team - completely dependable, trustworthy, and a true pleasure to work with.",
+      img: "/images/ananthu.jpg",
+    },
+    {
+      name: "Shibi Anand",
+      message:
+        "The Pixlverse team built my website and made the whole process easy. They were approachable, patient, and open to feedback, which made me comfortable sharing ideas and asking for changes. What I really valued was their balance of professionalism and flexibility - they got things done without making it feel heavy. They know their work well and bring in both clarity and creativity. If you're looking for a team that listens, understands what you need, and actually delivers, I'd recommend them without hesitation.",
+      img: "/images/shibi.jpg",
+    },
+  ];
 
 
   return (
@@ -379,7 +371,7 @@ const Home = () => {
       </section>
 
       {/* Testimonial Section */}
-      {/* <section className="testimonial-section">
+      <section className="testimonial-section reveal">
         <h2 className="testimonial-title">What Our Clients Say</h2>
         <div className="testimonial-grid">
           {testimonials.map((t, i) => (
@@ -387,11 +379,11 @@ const Home = () => {
               <img src={t.img} alt={t.name} className="testimonial-img" />
               <h3>{t.name}</h3>
               <p className="designation">{t.designation}</p>
-              <p className="message">“{t.message}”</p>
+              <p className="message">"{t.message}"</p>
             </div>
           ))}
         </div>
-      </section> */}
+      </section>
 
       <Footer />
     </>

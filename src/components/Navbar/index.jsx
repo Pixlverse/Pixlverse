@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./navbar.css";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const menuItems = ["About", "Projects", "Services", "Contact"];
+  const menuItems = ["Home", "About", "Projects", "Services", "Contact"];
 
   return (
     <nav className="navbar">
@@ -19,7 +19,7 @@ const Navbar = () => {
 
         <ul className={isOpen ? "nav-menu active" : "nav-menu"}>
           {menuItems.map((item) => {
-            const path = `/${item.toLowerCase()}`;
+            const path = item === "Home" ? "/" : `/${item.toLowerCase()}`;
             const normalize = (p) => (p === "/" ? "/" : p.replace(/\/$/, ""));
             const current = normalize(window.location.pathname || "/");
             const target = normalize(path);

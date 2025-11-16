@@ -70,15 +70,6 @@ const Footer = () => {
             </li>
           </ul>
         </div>
-
-        <div className="footer-newsletter">
-          <h4>Subscribe</h4>
-          <p>Get updates on new projects and tips.</p>
-          <form>
-            <input type="email" placeholder="Your email" required />
-            <button type="submit">Subscribe</button>
-          </form>
-        </div>
       </div>
 
       <div className="footer-bottom">

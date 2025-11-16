@@ -12,6 +12,34 @@ html,
   min-height: 100vh;
 }
 
+/* Floating Bubble Decorations */
+@keyframes float-bubble {
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  25% { transform: translateY(-20px) translateX(10px); }
+  50% { transform: translateY(-40px) translateX(0px); }
+  75% { transform: translateY(-20px) translateX(-10px); }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-30px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(188, 58, 171, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(188, 58, 171, 0.6); }
+}
+
+/* Paint Stroke Animation */
+@keyframes paint-stroke {
+  0% { 
+    clip-path: polygon(0 50%, 0 50%, 0 50%, 0 50%);
+  }
+  100% { 
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+}
+
 .hero-section {
   display: flex;
   align-items: center;
@@ -19,6 +47,35 @@ html,
   padding: 1rem 1rem;
   margin-top: 3%;
   flex-wrap: wrap;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Bubble decorations for hero section */
+.hero-section::before {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle at 30% 30%, rgba(188, 58, 171, 0.15), transparent);
+  border-radius: 50%;
+  top: -100px;
+  right: -50px;
+  animation: float-bubble 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.hero-section::after {
+  content: "";
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle at 30% 30%, rgba(176, 51, 159, 0.1), transparent);
+  border-radius: 50%;
+  bottom: -80px;
+  left: -100px;
+  animation: float-bubble 10s ease-in-out infinite reverse;
+  pointer-events: none;
 }
 
 .hero-content {
@@ -114,6 +171,37 @@ html,
   background: linear-gradient(100deg, #ea949430, #c1d3ff80);
   padding: 4rem 2rem;
   text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Paint stroke elements */
+.services-sectionn::before {
+  content: "";
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  top: 0;
+  left: 0;
+  background: linear-gradient(45deg, rgba(188, 58, 171, 0.08), transparent);
+  border-radius: 60% 40% 70% 30% / 40% 50% 30% 60%;
+  animation: float-slow 15s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.services-sectionn::after {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  bottom: -50px;
+  right: 0;
+  background: radial-gradient(circle at 40% 40%, rgba(176, 51, 159, 0.12), transparent);
+  border-radius: 40% 60% 30% 70% / 60% 30% 70% 40%;
+  animation: float-bubble 12s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .services-header h2 {
@@ -128,12 +216,19 @@ html,
   font-size: 1.1rem;
 }
 
+.services-header {
+  position: relative;
+  z-index: 1;
+}
+
 .services-gridd {
   display: grid;
   gap: 2rem;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   max-width: 1200px;
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 
 @media (max-width: 768px) {
@@ -149,11 +244,31 @@ html,
   border-radius: 16px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-cardd::before {
+  content: "";
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(circle at 30% 30%, rgba(188, 58, 171, 0.08), transparent);
+  border-radius: 50%;
+  top: -50px;
+  right: -50px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
 }
 
 .service-cardd:hover {
   transform: translateY(-5px);
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.348);
+}
+
+.service-cardd:hover::before {
+  opacity: 1;
 }
 
 .emoji {
@@ -200,9 +315,43 @@ html,
   overflow: hidden;
 }
 
+/* Bubble decorations for enquiry section */
+.enquiry-section::before {
+  content: "";
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.1), transparent);
+  border-radius: 50%;
+  top: -150px;
+  left: -100px;
+  animation: float-bubble 12s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.enquiry-section::after {
+  content: "";
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle at 60% 60%, rgba(255, 255, 255, 0.08), transparent);
+  border-radius: 40% 60% 30% 70% / 60% 30% 70% 40%;
+  bottom: -100px;
+  right: -50px;
+  animation: float-slow 15s ease-in-out infinite;
+  pointer-events: none;
+}
+
 .enquiry-container {
   max-width: 800px;
   margin: 0 auto;
+}
+
+.enquiry-container {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 
 .enquiry-section h2 {
@@ -243,11 +392,49 @@ html,
   padding: 4rem 2rem;
   background-color: #f9f9fc;
   text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Bubble elements for creations section */
+.creations-section::before {
+  content: "";
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  background: linear-gradient(135deg, rgba(188, 58, 171, 0.1), transparent);
+  border-radius: 40% 60% 30% 70% / 60% 30% 70% 40%;
+  top: 50px;
+  right: -100px;
+  animation: float-slow 14s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.creations-section::after {
+  content: "";
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle at 30% 30%, rgba(176, 51, 159, 0.12), transparent);
+  border-radius: 50%;
+  bottom: -80px;
+  left: 50px;
+  animation: float-bubble 11s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .creations-header h2 {
   font-size: 2.5rem;
   margin-bottom: 0.5rem;
+}
+
+.creations-header h2 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  position: relative;
+  z-index: 1;
 }
 
 .creations-header .highlight {
@@ -281,10 +468,30 @@ html,
   overflow: hidden;
   text-align: left;
   transition: transform 0.3s ease;
+  position: relative;
+}
+
+.creation-card::before {
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle at 40% 40%, rgba(188, 58, 171, 0.1), transparent);
+  border-radius: 50%;
+  bottom: -30px;
+  right: -30px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 1;
 }
 
 .creation-card:hover {
   transform: translateY(-5px);
+}
+
+.creation-card:hover::before {
+  opacity: 1;
 }
 
 .project-image {
@@ -364,9 +571,43 @@ html,
   overflow: hidden;
 }
 
+/* Bubble decorations for why-us section */
+.why-us-section::before {
+  content: "";
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle at 40% 40%, rgba(188, 58, 171, 0.12), transparent);
+  border-radius: 40% 60% 30% 70% / 60% 30% 70% 40%;
+  top: -100px;
+  left: -150px;
+  animation: float-slow 16s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.why-us-section::after {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: linear-gradient(135deg, rgba(176, 51, 159, 0.1), transparent);
+  border-radius: 50%;
+  bottom: 50px;
+  right: -80px;
+  animation: float-bubble 13s ease-in-out infinite;
+  pointer-events: none;
+}
+
 .why-us-header h2 {
   font-size: 2.4rem;
   margin-bottom: 1rem;
+}
+
+.why-us-header h2 {
+  font-size: 2.4rem;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
 }
 
 .why-us-header .highlight {
@@ -379,6 +620,16 @@ html,
   color: #555;
   font-size: 1.05rem;
   line-height: 1.6;
+}
+
+.why-us-header p {
+  max-width: 700px;
+  margin: 0 auto 3rem;
+  color: #555;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  position: relative;
+  z-index: 1;
 }
 
 .why-us-grid {
@@ -399,10 +650,40 @@ html,
   text-align: center;
 }
 
+.why-us-card {
+  background: #fff;
+  border: 2px solid #f1e8f3;
+  padding: 2rem 1.5rem;
+  border-radius: 14px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: default;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.why-us-card::before {
+  content: "";
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle at 30% 30%, rgba(188, 58, 171, 0.08), transparent);
+  border-radius: 50%;
+  top: -40px;
+  right: -40px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
 .why-us-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
   border-color: #bc3aab20;
+}
+
+.why-us-card:hover::before {
+  opacity: 1;
 }
 
 .why-us-icon {
@@ -467,6 +748,35 @@ html,
 .contact-cta-section {
   padding: 3rem 1rem;
   background: #f0f4f8;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Bubble decorations for contact section */
+.contact-cta-section::before {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: linear-gradient(135deg, rgba(188, 58, 171, 0.1), transparent);
+  border-radius: 40% 60% 30% 70% / 60% 30% 70% 40%;
+  top: 50px;
+  right: -100px;
+  animation: float-slow 12s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.contact-cta-section::after {
+  content: "";
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle at 40% 40%, rgba(176, 51, 159, 0.08), transparent);
+  border-radius: 50%;
+  bottom: -80px;
+  left: -80px;
+  animation: float-bubble 10s ease-in-out infinite;
+  pointer-events: none;
 }
 
 .contact-cta-box {
@@ -551,6 +861,35 @@ html,
   padding: 4rem 1rem;
   background: linear-gradient(150deg, #1e2155fc, #b3306f);
   text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Bubble decorations for testimonial section */
+.testimonial-section::before {
+  content: "";
+  position: absolute;
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.12), transparent);
+  border-radius: 40% 60% 30% 70% / 60% 30% 70% 40%;
+  top: -100px;
+  right: -100px;
+  animation: float-slow 14s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.testimonial-section::after {
+  content: "";
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle at 60% 60%, rgba(255, 255, 255, 0.08), transparent);
+  border-radius: 50%;
+  bottom: -80px;
+  left: -80px;
+  animation: float-bubble 12s ease-in-out infinite;
+  pointer-events: none;
 }
 
 .testimonial-title {
@@ -576,9 +915,37 @@ html,
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.testimonial-card {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.testimonial-card::before {
+  content: "";
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle at 30% 30%, rgba(188, 58, 171, 0.08), transparent);
+  border-radius: 50%;
+  top: -40px;
+  right: -40px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
 .testimonial-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.testimonial-card:hover::before {
+  opacity: 1;
 }
 
 .testimonial-card:nth-child(3) {

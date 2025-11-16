@@ -2,6 +2,50 @@
   margin-top: 30px;
   padding: 4rem 2rem;
   background: #f9fafc;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Floating animations */
+@keyframes float-bubble {
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  25% { transform: translateY(-20px) translateX(10px); }
+  50% { transform: translateY(-40px) translateX(0px); }
+  75% { transform: translateY(-20px) translateX(-10px); }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-30px); }
+}
+
+/* Bubble decorations */
+.projects-page::before {
+  content: "";
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: linear-gradient(135deg, rgba(188, 58, 171, 0.08), transparent);
+  border-radius: 40% 60% 30% 70% / 60% 30% 70% 40%;
+  top: 50px;
+  right: -100px;
+  animation: float-slow 14s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.projects-page::after {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle at 40% 40%, rgba(176, 51, 159, 0.1), transparent);
+  border-radius: 50%;
+  bottom: -80px;
+  left: 50px;
+  animation: float-bubble 11s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .projects-header {
@@ -13,6 +57,14 @@
   font-size: 2.5rem;
   font-weight: 700;
   color: #222;
+}
+
+.projects-header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #222;
+  position: relative;
+  z-index: 1;
 }
 
 .projects-header p {
@@ -44,11 +96,31 @@
   display: flex;
   flex-direction: column;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+
+.project-card::before {
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle at 40% 40%, rgba(188, 58, 171, 0.1), transparent);
+  border-radius: 50%;
+  bottom: -30px;
+  right: -30px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 1;
 }
 
 .project-card:hover {
   transform: translateY(-8px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.project-card:hover::before {
+  opacity: 1;
 }
 
 .project-image-container {
@@ -130,6 +202,14 @@
   font-size: 2rem;
   margin-bottom: 1rem;
   color: #ffffff;
+}
+
+.contact-content h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #ffffff;
+  position: relative;
+  z-index: 1;
 }
 
 .contact-content p {
