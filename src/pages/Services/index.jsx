@@ -1,126 +1,102 @@
-
 import React from "react";
-import "./services.css";
+import { Link } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-
-const services = [
-  {
-    icon: "/images/graphic-designer.png",
-    title: "Website Design",
-    desc: "Pixel-Perfect Interfaces, Purpose-Driven Layouts",
-    details: [
-      "Custom UI/UX wireframes",
-      "Responsive mobile-first layouts",
-      "Brand color and typography matching",
-      "Figma mockups (on request)",
-    ],
-  },
-  {
-    icon: "/images/app-development.png",
-    title: "Web Development",
-    desc: "Modern Code for High-Performance Sites",
-    details: [
-      "Static, dynamic, or full-stack websites",
-      "Optimized code & lazy loading",
-      "Cross-browser compatibility",
-      "APIs & integrations",
-    ],
-  },
-  {
-    icon: "/images/content-management.png",
-    title: "CMS Integration",
-    desc: "Control Your Content. No Code Needed.",
-    details: [
-      "CMS selection and setup",
-      "Custom templates",
-      "CMS training/support",
-      "SEO-friendly structure",
-    ],
-  },
-  {
-    icon: "/images/optimizing (1).png",
-    title: "Maintenance & Support",
-    desc: "We Stay With You, So Your Website Stays Strong",
-    details: [
-      "Monthly backups",
-      "Performance audits",
-      "Bug fixes and updates",
-      "SEO Optimization",
-    ],
-  },
-  {
-    icon: "/images/turnaround.png",
-    title: "Website Revamps",
-    desc: "Upgrade Your Digital Look Without Starting from Scratch",
-    details: [
-      "Visual and functional audit",
-      "Redesigned UI/UX",
-      "Content optimization",
-      "Rebranding support",
-    ],
-  },
-  // {
-  //   icon: "/images/search-engine-optimization.png",
-  //   title: "SEO Optimization",
-  //   desc: "Make Your Website Findable, From Day One",
-  //   details: [
-  //     "Meta titles/descriptions",
-  //     "Page speed optimization",
-  //     "Sitemap.xml and robots.txt setup",
-  //     "Analytics & tracking",
-  //   ],
-  // },
-  {
-    icon: "/images/www.png",
-    title: "Domain & Hosting Support",
-    desc: "We Take Care of the Technical Stuff",
-    details: [
-      "Domain registration help",
-      "DNS & CNAME configuration",
-      "Hosting setup",
-      "SSL certificate installation",
-    ],
-  },
-];
+import PageHero from "../../components/PageHero";
+import Reveal from "../../components/Reveal";
+import SEO from "../../components/SEO";
+import ServiceIcon from "../../components/ServiceIcon";
+import "./services.css";
+import { FaArrowRight, FaCheck } from "react-icons/fa";
+import { SERVICES, PROCESS } from "../../data/site";
+import { servicesSchema, breadcrumbSchema } from "../../seo/schema";
 
 const Services = () => {
   return (
     <>
+      <SEO
+        title="Web Design, Development & SEO Services in Kerala, India | Pixlverse"
+        description="Explore Pixlverse's full suite of web services — website design, web development, SEO optimization, maintenance, revamps, and domain & hosting — for businesses in Kerala and across India."
+        keywords="website design services Kerala, web development services India, SEO services Kerala, website maintenance, website revamp, domain hosting Kerala, web design company Kerala"
+        path="/services"
+        jsonLd={[servicesSchema, breadcrumbSchema([{ name: "Home", path: "/" }, { name: "Services", path: "/services" }])]}
+      />
       <Navbar />
-  <main className="services-hero reveal">
-        <div className="services-hero-content">
-          <h1 className="services-hero-title">Elevate Your Digital Experience</h1>
-          <p className="services-hero-desc">Discover our full suite of web services designed for impact, performance, and growth.</p>
-        </div>
-      </main>
-  <section className="services-grid-section reveal">
-        <div className="services-grid">
-          {services.map((service, idx) => (
-            <div className="service-masonry-card" key={idx}>
-              <div className="service-masonry-icon">
-                <img src={service.icon} alt={service.title} />
-              </div>
-              <div className="service-masonry-content">
-                <h3 className="service-masonry-title">{service.title}</h3>
-                <p className="service-masonry-desc">{service.desc}</p>
-                <ul className="service-masonry-list">
-                  {service.details.map((item, i) => (
-                    <li key={i}>{item}</li>
+
+      <main>
+        <PageHero
+          eyebrow="Our services"
+          title="Elevate your digital experience"
+          subtitle="A full suite of web services designed for impact, performance and growth — from first pixel to long-term partnership."
+        >
+          <div className="page-hero-meta">
+            {SERVICES.map((s) => (
+              <span key={s.title} className="ph-chip">
+                <ServiceIcon name={s.icon} /> {s.title}
+              </span>
+            ))}
+          </div>
+        </PageHero>
+
+        {/* Services list */}
+        <section className="section section--flush-top">
+          <div className="container services-stack">
+            {SERVICES.map((s, i) => (
+              <Reveal key={s.title} className="service-row card" delay={(i % 2) * 0.06}>
+                <div className="service-row-head">
+                  <span className="service-row-icon">
+                    <ServiceIcon name={s.icon} />
+                  </span>
+                  <div>
+                    <h2>{s.title}</h2>
+                    <p className="service-row-tagline">{s.tagline}</p>
+                  </div>
+                </div>
+                <p className="service-row-blurb">{s.blurb}</p>
+                <ul className="service-points">
+                  {s.points.map((p) => (
+                    <li key={p}><FaCheck /> {p}</li>
                   ))}
                 </ul>
-              </div>
+              </Reveal>
+            ))}
+          </div>
+        </section>
+
+        {/* Process */}
+        <section className="section section--dark">
+          <div className="container">
+            <Reveal className="section-head">
+              <span className="eyebrow">How we work</span>
+              <h2>From first idea to successful launch</h2>
+              <p>A clear, collaborative process that keeps you in the loop at every step.</p>
+            </Reveal>
+            <div className="svc-process">
+              {PROCESS.map((p, i) => (
+                <Reveal key={p.step} className="svc-process-card" delay={i * 0.08}>
+                  <span className="svc-step">{p.step}</span>
+                  <h3>{p.title}</h3>
+                  <p>{p.desc}</p>
+                </Reveal>
+              ))}
             </div>
-          ))}
-        </div>
-      </section>
-      {/* <section className="services-cta-section">
-        <div className="services-cta-card">
-          <h2>Ready to transform your web presence?</h2>
-          <p>Contact us today and let’s build something extraordinary together.</p>
-          <a href="/contact" className="services-cta-btn">Get in Touch</a>
-        </div>
-      </section> */}
+          </div>
+        </section>
+
+        {/* CTA */}
+        <section className="section">
+          <div className="container">
+            <Reveal className="cta-box" direction="up">
+              <h2>Ready to start your project?</h2>
+              <p>Tell us what you have in mind — we'll send a transparent quote within 24 hours.</p>
+              <Link to="/contact" className="btn btn--primary">
+                Get a free quote <FaArrowRight />
+              </Link>
+            </Reveal>
+          </div>
+        </section>
+      </main>
+
       <Footer />
     </>
   );

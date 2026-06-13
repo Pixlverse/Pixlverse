@@ -1,332 +1,96 @@
-.about-section {
-  padding: 3rem 1rem;
-  margin: 10px;
-  display: flex;
-  justify-content: center;
-}
-
-.about-section {
-  padding: 3rem 1rem;
-  display: flex;
-  justify-content: center;
-  position: relative;
-  z-index: 1;
-}
-
-/* Floating animations */
-@keyframes float-bubble {
-  0%, 100% { transform: translateY(0px) translateX(0px); }
-  25% { transform: translateY(-20px) translateX(10px); }
-  50% { transform: translateY(-40px) translateX(0px); }
-  75% { transform: translateY(-20px) translateX(-10px); }
-}
-
-@keyframes float-slow {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-30px); }
-}
-
-.about-content {
-  display: flex;
-  max-width: 1100px;
+.about-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
-  gap: 2rem;
+  gap: clamp(32px, 5vw, 64px);
+}
+
+.about-media img {
   width: 100%;
-  flex-direction: row; /* default desktop layout */
-}
-/* Bubble Background */
-.bubble-bg {
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(135deg, #f9f9ff, #fff); /* soft gradient */
-}
-
-.bubble-bg::before,
-.bubble-bg::after {
-  content: "";
-  position: absolute;
-  border-radius: 50%;
-  background: rgba(188, 58, 171, 0.1); /* soft purple bubble */
-  animation: float 20s infinite linear;
-}
-
-.bubble-bg::before {
-  width: 300px;
-  height: 300px;
-  top: -150px;
-  left: -150px;
-}
-
-.bubble-bg::after {
-  width: 200px;
-  height: 200px;
-  bottom: -100px;
-  right: -100px;
-  animation-delay: 5s;
-}
-
-/* Floating animation */
-@keyframes float {
-  0% {
-    transform: translateY(0) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-30px) rotate(180deg);
-  }
-  100% {
-    transform: translateY(0) rotate(360deg);
-  }
-}
-
-.about-section.reverse .about-content {
-  flex-direction: row-reverse; /* flip on desktop only */
-}
-
-.about-content .text,
-.about-content .image {
-  flex: 1 1 50%;
-}
-
-.about-content .image img {
-  width: 100%;
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border);
+  aspect-ratio: 4 / 3;
   object-fit: cover;
 }
 
-/* Responsive: stack on mobile */
-@media (max-width: 900px) {
-  .about-content,
-  .about-section.reverse .about-content {
-    flex-direction: column; /* always text above image */
-    text-align: center;
-  }
-
-  .about-content .text,
-  .about-content .image {
-    flex: 1 1 100%;
-  }
-
-  .about-content .image img {
-    max-width: 100%;
-    height: auto;
-  }
+.about-text h2 {
+  font-size: clamp(1.7rem, 3.4vw, 2.5rem);
+  margin: 16px 0 16px;
 }
-
-/* Achievements */
-.achievements {
-  padding: 3rem 1rem;
-  font-size: 1.1rem;
-  text-align: center;
-  background: #f9f9f9;
-  position: relative;
-  overflow: hidden;
+.about-text p {
+  color: var(--muted);
+  margin-bottom: 16px;
+  font-size: 1.02rem;
 }
-
-/* Bubble decorations */
-.achievements::before {
-  content: "";
-  position: absolute;
-  width: 400px;
-  height: 400px;
-  background: linear-gradient(135deg, rgba(188, 58, 171, 0.08), transparent);
-  border-radius: 40% 60% 30% 70% / 60% 30% 70% 40%;
-  top: -100px;
-  right: -100px;
-  animation: float-slow 15s ease-in-out infinite;
-  pointer-events: none;
-}
-
-.achievements::after {
-  content: "";
-  position: absolute;
-  width: 300px;
-  height: 300px;
-  background: radial-gradient(circle at 40% 40%, rgba(176, 51, 159, 0.1), transparent);
-  border-radius: 50%;
-  bottom: 50px;
-  left: -80px;
-  animation: float-bubble 12s ease-in-out infinite;
-  pointer-events: none;
-}
-
-.achievements-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  justify-content: center;
-  margin-top: 2rem;
-}
-
-.achievement-card {
-  background: #fff;
-  padding: 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  max-width: 300px;
-  line-height: 30px;
-  text-align: center;
-}
-
-.achievement-card img {
-  margin-bottom: 1rem;
-}
-/* CTA Section */
-.cta-section {
-  background: linear-gradient(135deg, #eef3ff, #f9fbff);
-  padding: 4rem 1rem; /* Enough padding */
-  display: flex;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Bubble decorations for CTA section */
-.cta-section::before {
-  content: "";
-  position: absolute;
-  width: 350px;
-  height: 350px;
-  background: radial-gradient(circle at 40% 40%, rgba(188, 58, 171, 0.1), transparent);
-  border-radius: 40% 60% 30% 70% / 60% 30% 70% 40%;
-  top: -100px;
-  left: -100px;
-  animation: float-slow 14s ease-in-out infinite;
-  pointer-events: none;
-}
-
-.cta-section::after {
-  content: "";
-  position: absolute;
-  width: 300px;
-  height: 300px;
-  background: linear-gradient(135deg, rgba(176, 51, 159, 0.08), transparent);
-  border-radius: 50%;
-  bottom: -80px;
-  right: -80px;
-  animation: float-bubble 12s ease-in-out infinite;
-  pointer-events: none;
-}
-
-.cta-box {
-  display: flex;
-  flex-wrap: wrap;
-  max-width: 1200px;
-  width: 100%;
-  margin: auto;
-  gap: 2.5rem;
-  align-items: center;
-  justify-content: space-between;
-  background: #fff;
-  padding: 3rem 2rem;
-  border-radius: 20px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  position: relative; /* Fix overlap issue */
-  z-index: 1; /* Stay above background */
-}
-
-.cta-text {
-  flex: 1 1 50%;
-  min-width: 300px;
-}
-
-.cta-text h2 {
-  font-size: 2.2rem;
-  margin-bottom: 1rem;
-  color: #222;
-  line-height: 1.3;
-}
-
-.cta-text h2 span {
-  font-weight: 700;
-}
-
-.cta-text p {
-  margin-bottom: 1.2rem;
-  line-height: 1.7;
-  color: #444;
-}
-
-.cta-text ul {
-  list-style: none;
-  padding: 0;
-  margin: 1.5rem 0;
-}
-
-.cta-text ul li {
-  margin-bottom: 1rem;
-  font-size: 1.05rem;
-  padding-left: 30px;
-  position: relative;
-  font-weight: 500;
-  color: #333;
-}
-
-.cta-text ul li::before {
-  position: absolute;
-  left: 0;
-  color: #00b894;
-  font-weight: bold;
-  font-size: 1.1rem;
-}
-
-.cta-contact-btn {
-  display: inline-block;
-  padding: 1rem 2rem;
-  background-color: #bc3aab;
-  color: white;
-  text-decoration: none;
-  border-radius: 50px;
+.about-quote {
+  font-family: var(--font-display);
   font-weight: 600;
-  transition: all 0.3s ease;
+  font-size: 1.2rem !important;
+  color: #cbb1ff !important;
+  border-left: 3px solid #8a5cff;
+  padding-left: 18px;
 }
 
-.cta-contact-btn:hover {
-  background-color: #972a89;
-  transform: translateY(-3px);
+/* Stats */
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
 }
-
-.cta-image {
-  flex: 1 1 45%;
-  min-width: 280px;
+.about-stat {
+  padding: 30px 22px;
   text-align: center;
 }
-
-.cta-image img {
-  width: 100%;
-  max-width: 420px;
-  border-radius: 16px;
-  object-fit: cover;
-  animation: float 4s ease-in-out infinite;
+.about-stat-value {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  display: block;
 }
+.about-stat-label { color: var(--muted); font-size: 0.92rem; }
 
-/* Floating animation */
-@keyframes float {
-  0% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
+/* Values */
+.about-values {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
 }
+.value-card { padding: 32px 28px; }
+.value-check {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--grad);
+  color: #fff;
+  margin-bottom: 18px;
+}
+.value-card h3 { font-size: 1.2rem; margin-bottom: 10px; }
+.value-card p { color: var(--muted); font-size: 0.96rem; }
 
-/* Responsive */
+/* CTA */
+.about-cta {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto;
+  background: var(--bg-tint);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: clamp(40px, 6vw, 64px) 32px;
+}
+.about-cta h2 { font-size: clamp(1.7rem, 3.4vw, 2.4rem); margin-bottom: 14px; }
+.about-cta p { color: var(--muted); margin-bottom: 26px; }
+
 @media (max-width: 900px) {
-  .cta-box {
-    flex-direction: column;
-    text-align: center;
-    padding: 2rem;
-    gap: 2rem;
-  }
-
-  .cta-text {
-    flex: 1 1 100%;
-    margin-bottom: 1.5rem;
-  }
-
-  .cta-image {
-    flex: 1 1 100%;
-  }
+  .about-split { grid-template-columns: 1fr; }
+  .about-split--reverse .about-media { order: -1; }
+  .about-text { text-align: center; }
+  .about-quote { border-left: 0; padding-left: 0; }
+  .about-stats { grid-template-columns: repeat(2, 1fr); }
+  .about-values { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .about-stats { grid-template-columns: 1fr; }
 }

@@ -1,97 +1,120 @@
 import React from "react";
-import "./projects.css";
+import { Link } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import PageHero from "../../components/PageHero";
+import Reveal from "../../components/Reveal";
+import SEO from "../../components/SEO";
+import "./projects.css";
+import { FaArrowRight, FaExternalLinkAlt } from "react-icons/fa";
+import { PROJECTS, SITE } from "../../data/site";
+import { breadcrumbSchema } from "../../seo/schema";
+
+const portfolioSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: "Pixlverse Portfolio",
+  description: "Websites designed and developed by Pixlverse.",
+  hasPart: PROJECTS.map((p) => ({
+    "@type": "CreativeWork",
+    name: p.name,
+    url: p.url,
+    creator: { "@id": `${SITE.url}/#organization` },
+  })),
+};
 
 const Projects = () => {
-  const projectsData = [
-    {
-      img: "/images/nearby.png",
-      title: "Nearbymart",
-      desc: "Nearbymart Hypermarket brings world-class quality-first products and convenience to your neighborhood at prices you will love every day.",
-      link: "https://www.thenearbymart.com/",
-    },
-    {
-      img: "/images/aj.png",
-      title: "AJ Homes & Lettings Ltd",
-      desc: "AJ Homes & Lettings Ltd is Birmingham’s leading property agency, presenting their services, property listings, and dedication to high-quality lettings and sales.",
-      link: "https://www.ajhomeslettings.co.uk/",
-    },
-    {
-      img: "/images/image.png",
-      title: "Komath & Associates",
-      desc: "Komath & Associates is a distinguished law firm based in Kochi, delivering exceptional legal services for around two decades with a team of dedicated professionals.",
-      link: "https://komathassociates.in/",
-    },
-    {
-      img: "/images/shibi.png",
-      title: "N'Able by Shibi Anand",
-      desc: "N'Able by Shibi Anand empowers individuals and institutions through personalized support, transformative learning experiences, and expert consultation.",
-      link: "https://shibianand.com/",
-    },
-    {
-      img: "/images/evolvers.png",
-      title: "Evolvers Career Clinic",
-      desc: "Evolvers Career Clinic is a career transformation partner offering recruiter-backed resumes, LinkedIn profiles, interview prep, and global application support.",
-      link: "https://www.evolverscareerclinic.com/",
-    },
-    {
-      img: "/images/ipdp.png",
-      title: "Intern-Preneur Development Program (IPDP)",
-      desc: "IPDP is India’s exclusive online finishing school, helping students, graduates, and professionals boost employability through career-ready training.",
-      link: "https://internpreneur.in/",
-    },
-    {
-      img: "/images/blindschool.png",
-      title: "Govt. High School for the Blind",
-      desc: "Government High School for the Blind, Olassa, Kottayam, is the only high school for the visually challenged owned by the Government of Kerala.",
-      link: "https://blindschoolktm.com/",
-    },
-  ];
-
   return (
     <>
+      <SEO
+        title="Our Work | Website Design & Development Portfolio | Pixlverse Kerala"
+        description="Explore websites designed and developed by Pixlverse for clients across India and the UK — e-commerce, real estate, legal, education and non-profit projects."
+        keywords="Pixlverse portfolio, website design portfolio Kerala, web development examples India, web development company Kerala"
+        path="/projects"
+        jsonLd={[
+          portfolioSchema,
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Projects", path: "/projects" },
+          ]),
+        ]}
+      />
       <Navbar />
-  <section className="projects-page reveal">
-        <div className="projects-header">
-          <h1>
-            Our{" "}
-            <span className="" style={{ color: "#bc3aab" }}>
-              Creations
-            </span>
-          </h1>
-          <p>Showcasing the work we’ve proudly delivered for our clients</p>
-        </div>
 
-        <div className="projects-grid">
-          {projectsData.map((project, index) => (
-            <div className="project-card" key={index}>
-              <img
-                src={project.img}
-                alt={project.title}
-                className="project-img"
-              />
-              <div className="project-content">
-                <h3 className="project-name"><a href={project.link} target="_blank" rel="noopener noreferrer" className="project-link">{project.title}</a></h3>
-                <p className="project-desc">{project.desc}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+      <main>
+        <PageHero
+          eyebrow="Our creations"
+          title="Work we're proud to share"
+          subtitle="A showcase of the websites we've designed and built for clients across industries and continents."
+        >
+          {/* <div className="ph-stats">
+            <div className="ph-stat"><b>{PROJECTS.length}+</b><span>Websites delivered</span></div>
+            <div className="ph-stat"><b>3+</b><span>Countries served</span></div>
+            <div className="ph-stat"><b>7</b><span>Industries</span></div>
+          </div> */}
+        </PageHero>
 
-  <section className="contact-box reveal">
-          <div className="contact-content">
-            <h2>Ready to Transform Your Online Presence?</h2>
-            <p>
-              From idea to execution, we’ll create a powerful digital presence
-              that puts your brand at the forefront.
-            </p>
-            <a href="/contact" className="contact-btns">
-              Start Your Project
-            </a>
+        <section className="section section--flush-top">
+          <div className="container projects-grid">
+            {PROJECTS.map((p, i) => (
+              <Reveal
+                key={p.name}
+                className="project-card card"
+                delay={(i % 2) * 0.08}
+              >
+                <a
+                  href={p.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="project-media"
+                >
+                  <img
+                    src={p.image}
+                    alt={`${p.name} website built by Pixlverse`}
+                    loading="lazy"
+                  />
+                  <span className="project-cat">{p.category}</span>
+                  <span className="project-overlay">
+                    <FaExternalLinkAlt />
+                  </span>
+                </a>
+                <div className="project-body">
+                  <h2>
+                    <a href={p.url} target="_blank" rel="noopener noreferrer">
+                      {p.name}
+                    </a>
+                  </h2>
+                  <p>{p.blurb}</p>
+                  <a
+                    href={p.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="project-link"
+                  >
+                    Visit live site <FaArrowRight />
+                  </a>
+                </div>
+              </Reveal>
+            ))}
           </div>
         </section>
-      </section>
+
+        <section className="section section--dark">
+          <div className="container">
+            <Reveal className="projects-cta" direction="up">
+              <h2>Ready to transform your online presence?</h2>
+              <p>
+                From idea to execution, we'll create a powerful digital presence
+                that puts your brand at the forefront.
+              </p>
+              <Link to="/contact" className="btn btn--primary">
+                Start your project <FaArrowRight />
+              </Link>
+            </Reveal>
+          </div>
+        </section>
+      </main>
+
       <Footer />
     </>
   );

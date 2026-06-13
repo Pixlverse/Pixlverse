@@ -1,11 +1,376 @@
+/* ============================================================
+   Pixlverse — Design System
+   Refined purple · light & airy
+   Fonts (Sora + DM Sans) are loaded in public/index.html.
+   ============================================================ */
+
+:root {
+  /* Brand */
+  --violet: #7b3fe4;
+  --violet-600: #6a2fd6;
+  --violet-700: #5a23bd;
+  --plum: #b43f8f;
+  --grad: linear-gradient(120deg, #7b3fe4 0%, #b43f8f 100%);
+  --grad-soft: linear-gradient(120deg, #7b3fe4 0%, #a24fd8 55%, #b43f8f 100%);
+
+  /* Neutrals */
+  --ink: #16121f;
+  --ink-2: #2b2540;
+  --muted: #5b5470;
+  --muted-2: #8a83a0;
+  --line: #ece7f6;
+  --border: rgba(123, 63, 228, 0.12);
+
+  /* Surfaces */
+  --bg: #ffffff;
+  --bg-soft: #e6e1f0;
+  --bg-tint: #efe8fb;
+  --bg-dark: #16151c;
+  --bg-ink: #100f15;
+
+  /* Effects */
+  --shadow-sm: 0 1px 2px rgba(22, 18, 31, 0.04), 0 4px 12px rgba(123, 63, 228, 0.05);
+  --shadow-md: 0 8px 30px rgba(123, 63, 228, 0.1);
+  --shadow-lg: 0 24px 60px rgba(90, 35, 189, 0.16);
+  --ring: 0 0 0 4px rgba(123, 63, 228, 0.14);
+
+  /* Geometry */
+  --radius: 18px;
+  --radius-sm: 12px;
+  --radius-lg: 28px;
+  --maxw: 1200px;
+
+  --font-display: "Sora", system-ui, sans-serif;
+  --font-body: "DM Sans", system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
-  font-family: "DM Sans", sans-serif;
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--bg);
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: var(--font-display);
+  color: var(--ink);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  margin: 0;
+  font-weight: 700;
+}
+
+p { margin: 0; }
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+::selection {
+  background: rgba(123, 63, 228, 0.18);
+  color: var(--ink);
+}
+
+/* ---------- Layout utilities ---------- */
+.container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section {
+  padding: clamp(64px, 9vw, 120px) 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.section--tint { background: var(--bg-tint); }
+
+/* Ambient colour so plain (white) sections never read as flat. */
+.section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(48% 42% at 90% -5%, rgba(123, 63, 228, 0.06), transparent 70%),
+    radial-gradient(46% 40% at 4% 105%, rgba(180, 63, 143, 0.05), transparent 72%);
+}
+
+/* Charcoal bands — section--dark and the (former lavender) section--soft now
+   share the same neutral charcoal; violet/plum used only as glow accents.
+   White cards pop against it; alternates with plain white sections. */
+.section--dark,
+.section--soft {
+  background: var(--bg-dark);
+  color: #cfc8e6;
+}
+.section--dark::before,
+.section--soft::before {
+  background:
+    radial-gradient(46% 50% at 12% -5%, rgba(123, 63, 228, 0.28), transparent 60%),
+    radial-gradient(44% 46% at 92% 105%, rgba(180, 63, 143, 0.20), transparent 62%);
+}
+/* Lighten only text that sits directly on the band — NOT inside white cards. */
+.section--dark .section-head h2,
+.section--soft .section-head h2,
+.section--dark .about-text h2,
+.section--soft .about-text h2,
+.section--dark .projects-cta h2,
+.section--soft .projects-cta h2 { color: #fff; }
+
+.section--dark .section-head p,
+.section--soft .section-head p,
+.section--dark .about-text p,
+.section--soft .about-text p,
+.section--dark .projects-cta p,
+.section--soft .projects-cta p { color: #b3a9d0; }
+
+.section--dark .eyebrow,
+.section--soft .eyebrow {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.16);
+  color: #d3b6ff;
+}
+
+/* white cards on dark bands: remove the border entirely (a transparent border
+   still let the white card bg show as a 1px ring around clipped images), and
+   use a dark shadow so it doesn't read as a halo against the dark background */
+.section--dark .card,
+.section--soft .card {
+  border: 0;
+  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.4);
+}
+.section--dark .card:hover,
+.section--soft .card:hover {
+  border: 0;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+}
+
+.section > .container { position: relative; z-index: 1; }
+
+/* ---------- Elegant CTA box (shared across pages) ---------- */
+.cta-box {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  text-align: center;
+  border-radius: var(--radius-lg);
+  padding: clamp(50px, 8vw, 88px) 32px;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background:
+    radial-gradient(120% 150% at 0% 0%, #8a4cff 0%, transparent 52%),
+    radial-gradient(120% 150% at 100% 100%, #d24fa6 0%, transparent 52%),
+    linear-gradient(135deg, #2a1556 0%, #1b1330 55%, #3a1438 100%);
+  box-shadow: 0 30px 70px rgba(90, 35, 189, 0.32);
+}
+/* soft sheen + faint grid for depth */
+.cta-box::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(60% 50% at 50% -10%, rgba(255, 255, 255, 0.16), transparent 60%);
+  pointer-events: none;
+}
+.cta-box h2 {
+  color: #fff;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  margin-bottom: 16px;
+}
+.cta-box p {
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 580px;
+  margin: 0 auto 30px;
+  font-size: 1.05rem;
+}
+.cta-box .btn-row { justify-content: center; }
+
+/* white primary button reads as elegant + high-contrast on the gradient box */
+.cta-box .btn--primary {
+  background: #fff;
+  color: var(--violet-700);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+}
+.cta-box .btn--primary:hover {
+  background: #fff;
+  color: var(--violet-700);
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+}
+
+/* ---------- Eyebrow / section heads ---------- */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--violet);
+  background: var(--bg-tint);
+  border: 1px solid var(--border);
+  padding: 7px 14px;
+  border-radius: 999px;
+}
+
+.section-head {
+  max-width: 640px;
+  margin: 0 auto clamp(40px, 6vw, 64px);
+  text-align: center;
+}
+
+.section-head h2 {
+  font-size: clamp(1.9rem, 4vw, 2.9rem);
+  margin: 18px 0 14px;
+}
+
+.section-head p {
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+.gradient-text {
+  background: var(--grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 14px 26px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, color 0.25s ease;
+  white-space: nowrap;
+}
+
+.btn:active { transform: translateY(1px) scale(0.99); }
+
+.btn--primary {
+  background: var(--grad);
+  color: #fff;
+  box-shadow: 0 10px 26px rgba(123, 63, 228, 0.32);
+}
+.btn--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px rgba(123, 63, 228, 0.42);
+}
+
+.btn--ghost {
+  background: #fff;
+  color: var(--ink);
+  border-color: var(--line);
+  box-shadow: var(--shadow-sm);
+}
+.btn--ghost:hover {
+  transform: translateY(-2px);
+  border-color: var(--violet);
+  color: var(--violet);
+}
+
+.btn--light {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.28);
+  backdrop-filter: blur(6px);
+}
+.btn--light:hover { background: rgba(255, 255, 255, 0.22); transform: translateY(-2px); }
+
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+/* ---------- Cards ---------- */
+.card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--border);
+}
+
+/* ---------- Page hero spacer for fixed nav ---------- */
+.page-top {
+  padding-top: 110px;
+}
+
+/* ---------- Accessibility ---------- */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .container { padding: 0 20px; }
 }

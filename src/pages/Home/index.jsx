@@ -1,389 +1,374 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import Reveal from "../../components/Reveal";
+import SEO from "../../components/SEO";
+import ServiceIcon from "../../components/ServiceIcon";
 import "./home.css";
 import {
-  FaPaintBrush,
-  FaCode,
-  // FaPuzzlePiece,
-  FaTools,
-  FaFlask,
-  FaChartLine,
-  FaCloud,
+  FaArrowRight,
   FaCheckCircle,
   FaBolt,
   FaComments,
   FaBrain,
+  FaStar,
+  FaQuoteLeft,
 } from "react-icons/fa";
+import {
+  SERVICES,
+  PROJECTS,
+  TESTIMONIALS,
+  PROCESS,
+  STATS,
+  FAQS,
+} from "../../data/site";
+import { organizationSchema, websiteSchema, faqSchema } from "../../seo/schema";
+
+const WHY = [
+  {
+    icon: <FaCheckCircle />,
+    color: "#24b700",
+    title: "Pixel-perfect execution",
+    text: "Every detail crafted with care, from spacing to micro-interactions.",
+  },
+  {
+    icon: <FaBolt />,
+    color: "#f5a524",
+    title: "Built for speed & SEO",
+    text: "Fast-loading, search-optimised sites that get found and convert.",
+  },
+  {
+    icon: <FaComments />,
+    color: "#00abff",
+    title: "Ongoing collaboration",
+    text: "Clear communication and continuous support well beyond launch.",
+  },
+  {
+    icon: <FaBrain />,
+    color: "#b43f8f",
+    title: "Tech + design strategy",
+    text: "We pair clean engineering with thoughtful, business-driven design.",
+  },
+];
 
 const Home = () => {
-  const testimonials = [
-    {
-      name: "Ananthu Vasudev",
-      message:
-        "I have been working with the team at Pixlverse since 2023, right from their early stages. Having collaborated with several developers over the past 13 years, I can confidently say this is the best team I have worked with. Despite being one of the youngest teams, they stand out because of their professionalism, approach, and commitment. They value their words and our time, and communicate clearly without over-committing. Pixlverse is a no-nonsense team - completely dependable, trustworthy, and a true pleasure to work with.",
-      img: "/images/ananthu.jpg",
-    },
-    {
-      name: "Shibi Anand",
-      message:
-        "The Pixlverse team built my website and made the whole process easy. They were approachable, patient, and open to feedback, which made me comfortable sharing ideas and asking for changes. What I really valued was their balance of professionalism and flexibility - they got things done without making it feel heavy. They know their work well and bring in both clarity and creativity. If you're looking for a team that listens, understands what you need, and actually delivers, I'd recommend them without hesitation.",
-      img: "/images/shibi.jpg",
-    },
-  ];
-
-
+  const newLocal = (
+    <span className="hero-pill hero-pill-4">
+      <FaBrain style={{ color: "#b43f8f" }} /> Strategy-led design
+    </span>
+  );
   return (
     <>
+      <SEO
+        title="Pixlverse | Best Website Design & Development Company in India"
+        description="Pixlverse is a top website design & development studio in Kerala, India. We build elegant, fast, SEO-optimised websites for businesses. Get a free quote today."
+        keywords="website design Kerala, web development Kerala, best website builder Kerala, website development company India, website designers in Kerala, SEO optimization Kerala, affordable website design India, custom website development"
+        path="/"
+        jsonLd={[organizationSchema, websiteSchema, faqSchema]}
+      />
       <Navbar />
-      <section
-        style={{
-          padding: "2rem",
-          marginTop: "50px",
-        }}
-      >
-  <section id="hero" className="hero-section reveal">
-          <div className="hero-content">
-            <h1>Unleashing Creativity at Pixlverse</h1>
-            <p className="slogan">Infinite Possibilities, Pixel Perfect!</p>
-            <p className="description">
-              Crafting elegant, high-performing websites with unmatched support.
-              We don’t just build websites. We build digital experiences backed
-              by clean code, thoughtful design, and continuous support.
-            </p>
-            <button
-              className="cta-button1"
-              onClick={() => (window.location.href = "/projects")}
-            >
-              Browse Our Creations
-            </button>
-            <button
-              className="cta-button"
-              onClick={() => (window.location.href = "/contact")}
-            >
-              Get a Quote
-            </button>
+
+      <main>
+        {/* ===================== HERO ===================== */}
+        <section className="hero">
+          <div className="hero-bg" aria-hidden="true">
+            <span className="blob blob-1"></span>
+            <span className="blob blob-2"></span>
+            <span className="grid-fade"></span>
+          </div>
+          <div className="container hero-inner">
+            <Reveal className="hero-copy" direction="up">
+              {/* <span className="eyebrow">Website Studio · Kerala, India</span> */}
+              <h1>
+                We build websites that{" "}
+                <span className="gradient-text">win you customers</span>.
+              </h1>
+              <p className="hero-sub">
+                We design and build elegant, high-performing websites that load
+                fast, rank well and turn visitors into customers — backed by
+                clean code, thoughtful design and support that never stops at
+                launch. Infinite possibilities, pixel perfect.
+              </p>
+              <div className="btn-row hero-cta">
+                <Link to="/contact" className="btn btn--primary">
+                  Get a free quote <FaArrowRight />
+                </Link>
+                <Link to="/projects" className="btn btn--ghost">
+                  View our work
+                </Link>
+              </div>
+
+              <div className="hero-trust">
+                <div className="hero-stars">
+                  {[...Array(5)].map((_, i) => (
+                    <FaStar key={i} />
+                  ))}
+                </div>
+                <span>
+                  Trusted by 20+ businesses across India &amp; the UK since 2023
+                </span>
+              </div>
+            </Reveal>
           </div>
 
-          <div className="hero-image">
-            <img src="/images/sl2.jpg" alt="Pixlverse Work" />
+          <div className="hero-pills" aria-hidden="true">
+            <span className="hero-pill hero-pill-1">
+              <FaBolt /> Fast &amp; SEO-ready
+            </span>
+            <span className="hero-pill hero-pill-2">
+              <FaCheckCircle style={{ color: "#24b700" }} /> Pixel-perfect
+              design
+            </span>
+            <span className="hero-pill hero-pill-3">
+              <FaComments style={{ color: "#00abff" }} /> Ongoing support
+            </span>
+            {newLocal}
           </div>
         </section>
-      </section>
-  <section id="services" className="services-sectionn reveal">
-        <div className="bokeh-background">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-        <div className="services-header">
-          <h2>
-            What We{" "}
-            <span className="" style={{ color: "#bc3aab" }}>
-              Offer
-            </span>
-          </h2>
-          <p>Expertly crafted digital solutions for modern brands</p>
-        </div>
-        <div className="services-gridd">
-          <div className="service-cardd">
-            <div className="icon-circle">
-              <FaPaintBrush className="service-iconn" />
-            </div>
-            <h3>Website Design</h3>
-            <p>
-              Clean, modern, user-focused UI/UX crafted to tell your brand story
-              effectively.
-            </p>
-          </div>
 
-          <div className="service-cardd">
-            <div className="icon-circle">
-              <FaCode className="service-iconn" />
-            </div>
-            <h3>Web Development</h3>
-            <p>
-              Fast, scalable websites built with the latest tech — from static
-              pages to web apps.
-            </p>
-          </div>
-
-          {/* <div className="service-cardd">
-            <div className="icon-circle">
-              <FaPuzzlePiece className="service-iconn" />
-            </div>
-            <h3>CMS Integration</h3>
-            <p>
-              Easily manage your content with WordPress, Webflow, or headless
-              CMS setups.
-            </p>
-          </div> */}
-
-          <div className="service-cardd">
-            <div className="icon-circle">
-              <FaTools className="service-iconn" />
-            </div>
-            <h3>Maintenance & Support</h3>
-            <p>
-              We don’t disappear after launch. We keep your site updated, fast,
-              and secure.
-            </p>
-          </div>
-
-          <div className="service-cardd">
-            <div className="icon-circle">
-              <FaFlask className="service-iconn" />
-            </div>
-            <h3>Website Revamps</h3>
-            <p>
-              Outdated site? We’ll redesign and rebuild it into something
-              stunning.
-            </p>
-          </div>
-
-          <div className="service-cardd">
-            <div className="icon-circle">
-              <FaChartLine className="service-iconn" />
-            </div>
-            <h3>SEO Optimization</h3>
-            <p>
-              Built-in technical SEO and performance practices to improve
-              discoverability.
-            </p>
-          </div>
-
-          <div className="service-cardd">
-            <div className="icon-circle">
-              <FaCloud className="service-iconn" />
-            </div>
-            <h3>Domain & Hosting</h3>
-            <p>
-              Complete setup of domains, DNS, and hosting – so you don’t worry
-              about the tech.
-            </p>
-          </div>
-        </div>
-      </section>
-  <section className="enquiry-section reveal">
-        <div className="enquiry-container">
-          <h2>Have a project in mind?</h2>
-          <p>
-            Whether you're starting from scratch or want to revamp your site,
-            we’re here to turn your ideas into a pixel-perfect digital
-            experience.
-          </p>
-          <button
-            className="cta-button3"
-            onClick={() => (window.location.href = "/contact")}
-          >
-            Get a Quote
-          </button>
-        </div>
-      </section>
-
-  <section className="creations-section reveal">
-        <div className="creations-header">
-          <h2>
-            Our <span className="highlight">Creations</span>
-          </h2>
-          <p>Take a look at some of our recent projects.</p>
-        </div>
-
-        <div className="creations-grid">
-          <div className="creation-card">
-            <img
-              src="/images/nearby.png"
-              alt="Project 1"
-              className="project-image"
-            />
-
-            <div className="project-details">
-              <h3 className="project-title"><a href="https://www.thenearbymart.com/" target="_blank" rel="noopener noreferrer" className="project-link">Nearbymart</a></h3>
-              <p style={{ letterSpacing: 0.2 }}>
-                <strong>Nearbymart Hypermarket</strong> brings world-class
-                quality-first products and convenience to your neighborhood at
-                prices you will love every day.
-              </p>
-              
-            </div>
-          </div>
-          <div className="creation-card">
-            <img
-              src="/images/aj.png"
-              alt="Project 1"
-              className="project-image"
-            />
-
-            <div className="project-details">
-              <h3 className="project-title"><a href="https://www.ajhomeslettings.co.uk/" target="_blank" rel="noopener noreferrer" className="project-link">AJ Homes & Lettings Ltd</a></h3>
-              <p style={{ letterSpacing: 0.2 }}>
-                <strong> AJ Homes & Lettings Ltd</strong> is{" "}
-                <strong>Birmingham’s</strong> leading property agency,
-                presenting their services, property listings, and dedication to
-                high-quality lettings and sales.
-              </p>
-              
-            </div>
-          </div>
-          <div className="creation-card">
-            <img
-              src="/images/image.png"
-              alt="Project 1"
-              className="project-image"
-            />
-
-            <div className="project-details">
-              <h3 className="project-title"><a href="https://komathassociates.in/" target="_blank" rel="noopener noreferrer" className="project-link">Komath & Associates</a></h3>
+        {/* ===================== SERVICES ===================== */}
+        <section className="section section--dark" id="services">
+          <div className="container">
+            <Reveal className="section-head">
+              <span className="eyebrow">What we offer</span>
+              <h2>Everything your website needs, in one team</h2>
               <p>
-                <strong>Komath & Associates </strong> is a distinguished law
-                firm based in Kochi, known for delivering exceptional legal
-                services for around two decades with a team of highly
-                experienced and dedicated professionals.
+                Expertly crafted digital solutions for modern brands — from
+                first pixel to long-term growth.
               </p>
-              
-            </div>
-          </div>
-          <div className="creation-card">
-            <img
-              src="/images/shibi.png"
-              alt="Project 1"
-              className="project-image"
-            />
+            </Reveal>
 
-            <div className="project-details">
-              <h3 className="project-title"><a href="https://shibianand.com/" target="_blank" rel="noopener noreferrer" className="project-link">N'Able by Shibi Anand</a></h3>
+            <div className="services-grid">
+              {SERVICES.map((s, i) => (
+                <Reveal
+                  key={s.title}
+                  className="service-card card"
+                  delay={(i % 3) * 0.08}
+                >
+                  <div className="service-icon">
+                    <ServiceIcon name={s.icon} />
+                  </div>
+                  <h3>{s.title}</h3>
+                  <p>{s.blurb}</p>
+                </Reveal>
+              ))}
+            </div>
+
+            <Reveal className="services-foot" direction="none" delay={0.1}>
+              <Link to="/services" className="btn btn--ghost">
+                Explore all services <FaArrowRight />
+              </Link>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* ===================== PROCESS ===================== */}
+        <section className="section">
+          <div className="container">
+            <Reveal className="section-head">
+              <span className="eyebrow">How we work</span>
+              <h2>A simple process, a polished result</h2>
               <p>
-                <strong>N'Able by Shibi Anand</strong> empowers individuals and
-                educational institutions to realize their full potential through
-                personalized support, transformative learning experiences, and
-                expert consultation.
+                We guide you from the very first idea to a successful launch —
+                and stay on long after.
               </p>
-              
+            </Reveal>
+
+            <div className="process-grid">
+              {PROCESS.map((p, i) => (
+                <Reveal key={p.step} className="process-card" delay={i * 0.08}>
+                  <span className="process-step">{p.step}</span>
+                  <h3>{p.title}</h3>
+                  <p>{p.desc}</p>
+                </Reveal>
+              ))}
             </div>
           </div>
-          <div className="creation-card">
-            <img
-              src="/images/evolvers.png"
-              alt="Project 1"
-              className="project-image"
-            />
+        </section>
 
-            <div className="project-details">
-              <h3 className="project-title"><a href="https://www.evolverscareerclinic.com/" target="_blank" rel="noopener noreferrer" className="project-link">Evolvers Career Clinic</a></h3>
+        {/* ===================== FEATURED WORK ===================== */}
+        <section className="section section--soft">
+          <div className="container">
+            <Reveal className="section-head">
+              <span className="eyebrow">Our creations</span>
+              <h2>Recent work we're proud of</h2>
               <p>
-                <strong>Evolvers Career Clinic</strong> is a career
-                transformation partner offering recruiter-backed resumes,
-                LinkedIn profiles, interview prep, and global application
-                support tailored to real hiring standards.
+                A look at some of the websites we've designed and built for our
+                clients.
               </p>
-              
-            </div>
-          </div>
-          <div className="creation-card">
-            <img
-              src="/images/ipdp.png"
-              alt="Project 1"
-              className="project-image"
-            />
+            </Reveal>
 
-            <div className="project-details">
-              <h3 className="project-title"><a href="https://internpreneur.in/" target="_blank" rel="noopener noreferrer" className="project-link">Intern-Preneur Development Program (IPDP)</a></h3>
+            <div className="work-grid">
+              {PROJECTS.slice(0, 4).map((p, i) => (
+                <Reveal
+                  key={p.name}
+                  className="work-card card"
+                  delay={(i % 3) * 0.08}
+                >
+                  <a
+                    href={p.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="work-media"
+                  >
+                    <img
+                      src={p.image}
+                      alt={`${p.name} website by Pixlverse`}
+                      loading="lazy"
+                    />
+                    <span className="work-cat">{p.category}</span>
+                  </a>
+                  <div className="work-body">
+                    <h3>
+                      <a href={p.url} target="_blank" rel="noopener noreferrer">
+                        {p.name}
+                      </a>
+                    </h3>
+                    <p>{p.blurb}</p>
+                    <a
+                      href={p.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="work-link"
+                    >
+                      Visit site <FaArrowRight />
+                    </a>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+
+            <Reveal className="services-foot" direction="none" delay={0.1}>
+              <Link to="/projects" className="btn btn--ghost">
+                Explore more projects <FaArrowRight />
+              </Link>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* ===================== WHY US ===================== */}
+        <section className="section">
+          <div className="container">
+            <Reveal className="section-head">
+              <span className="eyebrow">Why Pixlverse</span>
+              <h2>More than a website — a digital partner</h2>
               <p>
-                <strong>IPDP</strong> is India’s exclusive online finishing
-                school, helping students, graduates, and professionals boost
-                employability through real-world skills and career-ready
-                training.
+                We don't just build websites. We build digital experiences and
+                stand by you from concept to code to customer.
               </p>
-              
+            </Reveal>
+
+            <Reveal className="stats-box" direction="up">
+              <div className="stats-grid">
+                {STATS.map((s) => (
+                  <div className="stat" key={s.label}>
+                    <span className="stat-value">{s.value}</span>
+                    <span className="stat-label">{s.label}</span>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+
+            <div className="why-grid">
+              {WHY.map((w, i) => (
+                <Reveal
+                  key={w.title}
+                  className="why-card card"
+                  delay={(i % 2) * 0.08}
+                >
+                  <span className="why-icon" style={{ color: w.color }}>
+                    {w.icon}
+                  </span>
+                  <h3>{w.title}</h3>
+                  <p>{w.text}</p>
+                </Reveal>
+              ))}
             </div>
           </div>
-        </div>
-        <div className="creations-header">
-          <a
-            rel="noopener noreferrer"
-            className="projects-btn"
-            href="/projects"
-          >
-            {`Explore More Projects >`}
-          </a>
-        </div>
-      </section>
+        </section>
 
-  <section className="why-us-section reveal">
-        <div className="why-us-header">
-          <h2>
-            Why <span className="highlight">Pixlverse?</span>
-          </h2>
-          <p>
-            We don’t just build websites. We build digital experiences backed by
-            clean code, thoughtful design, and continuous support. Whether
-            you're launching or scaling, we stand by you from concept to code to
-            customer.
-          </p>
-        </div>
+        {/* ===================== TESTIMONIALS ===================== */}
+        <section className="section section--soft">
+          <div className="container">
+            <Reveal className="section-head">
+              <span className="eyebrow">Client love</span>
+              <h2>What our clients say</h2>
+              <p>
+                Don't just take our word for it — here's what working with
+                Pixlverse feels like.
+              </p>
+            </Reveal>
 
-        <div className="why-us-grid">
-          <div className="why-us-card">
-            <FaCheckCircle
-              className="why-us-icon"
-              style={{ color: "#24b700" }}
-            />
-            <h3>Pixel-perfect execution</h3>
-          </div>
-
-          <div className="why-us-card">
-            <FaBolt className="why-us-icon" style={{ color: "#ffbf00" }} />
-            <h3>Optimized for speed and SEO</h3>
-          </div>
-
-          <div className="why-us-card">
-            <FaComments className="why-us-icon" style={{ color: "#00abff" }} />
-            <h3>Ongoing support & collaboration</h3>
-          </div>
-
-          <div className="why-us-card">
-            <FaBrain className="why-us-icon" style={{ color: "#ff0052" }} />
-            <h3>Tech + design strategy</h3>
-          </div>
-        </div>
-      </section>
-
-  <section className="contact-cta-section reveal">
-        <div className="contact-cta-box">
-          <div className="contact-cta-image">
-            <img src="/images/jigsaw.png" alt="CTA" />
-          </div>
-
-          <div className="contact-cta-content">
-            <h2>Not sure where to start?</h2>
-            <p>
-              Let’s craft a website that perfectly aligns with your business
-              goals — while guiding you seamlessly from the very first idea to a
-              successful launch and beyond.
-            </p>
-            <a href="/contact" className="contact-cta-btn">
-              Contact Us
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonial Section */}
-      <section className="testimonial-section reveal">
-        <h2 className="testimonial-title">What Our Clients Say</h2>
-        <div className="testimonial-grid">
-          {testimonials.map((t, i) => (
-            <div className="testimonial-card" key={i}>
-              <img src={t.img} alt={t.name} className="testimonial-img" />
-              <h3>{t.name}</h3>
-              <p className="designation">{t.designation}</p>
-              <p className="message">"{t.message}"</p>
+            <div className="testimonial-grid">
+              {TESTIMONIALS.map((t, i) => (
+                <Reveal
+                  key={t.name}
+                  className="testimonial-card card"
+                  delay={i * 0.1}
+                >
+                  <FaQuoteLeft className="quote-mark" />
+                  <p className="testimonial-text">{t.message}</p>
+                  <div className="testimonial-person">
+                    <img src={t.img} alt={t.name} loading="lazy" />
+                    <div>
+                      <strong>{t.name}</strong>
+                      <span>{t.role}</span>
+                    </div>
+                  </div>
+                </Reveal>
+              ))}
             </div>
-          ))}
-        </div>
-      </section>
+          </div>
+        </section>
+
+        {/* ===================== FAQ ===================== */}
+        <section className="section">
+          <div className="container faq-wrap">
+            <Reveal className="section-head">
+              <span className="eyebrow">FAQ</span>
+              <h2>Questions, answered</h2>
+              <p>Everything you might want to know before working with us.</p>
+            </Reveal>
+
+            <div className="faq-list">
+              {FAQS.map((f, i) => (
+                <Reveal
+                  key={i}
+                  as="details"
+                  className="faq-item"
+                  delay={(i % 3) * 0.05}
+                >
+                  <summary>{f.q}</summary>
+                  <p>{f.a}</p>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ===================== FINAL CTA ===================== */}
+        <section className="final-cta">
+          <div className="container">
+            <Reveal className="cta-box" direction="up">
+              <h2>Not sure where to start?</h2>
+              <p>
+                Let's craft a website that aligns perfectly with your business
+                goals — and guide you seamlessly from the first idea to a
+                successful launch and beyond.
+              </p>
+              <div className="btn-row">
+                <Link to="/contact" className="btn btn--primary">
+                  Get a free quote <FaArrowRight />
+                </Link>
+                <Link to="/services" className="btn btn--light">
+                  See what we do
+                </Link>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+      </main>
 
       <Footer />
     </>

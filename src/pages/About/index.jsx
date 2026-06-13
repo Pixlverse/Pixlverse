@@ -1,186 +1,189 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import PageHero from "../../components/PageHero";
+import Reveal from "../../components/Reveal";
+import SEO from "../../components/SEO";
 import "./about.css";
+import { FaArrowRight, FaCheck } from "react-icons/fa";
+import { STATS } from "../../data/site";
+import { organizationSchema, breadcrumbSchema } from "../../seo/schema";
+
+const VALUES = [
+  {
+    title: "Clarity over jargon",
+    text: "We explain things in plain language and never over-commit. You always know what's happening.",
+  },
+  {
+    title: "Craft over shortcuts",
+    text: "Clean, maintainable code and considered design — the kind that lasts and scales.",
+  },
+  {
+    title: "Partnership over hand-offs",
+    text: "We don't disappear at launch. We stay on as your long-term digital partner.",
+  },
+];
 
 const About = () => {
   return (
-    <div>
+    <>
+      <SEO
+        title="About Pixlverse | Website Design & Development Team in Kerala, India"
+        description="Since 2023, Pixlverse has partnered with clients across India and the UK to build elegant, high-performing websites. Learn about our purpose-driven web studio in Kerala."
+        keywords="about Pixlverse, website design team Kerala, web development studio India, web designers Kerala"
+        path="/about"
+        jsonLd={[
+          organizationSchema,
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "About", path: "/about" },
+          ]),
+        ]}
+      />
       <Navbar />
-      <section className="bubble-bg">
-        <section className="about-section reveal" style={{ marginTop: "60px" }}>
-          <div className="about-content">
-            <div className="text">
-              <h2 style={{ fontSize: "2.5rem", marginBottom: "20px" }}>
-                Building With{" "}
-                <span className="" style={{ color: "#bc3aab" }}>
-                  Purpose
-                </span>
-              </h2>
-              <p style={{ lineHeight: "1.6" }}>
-                At{" "}
-                <span
-                  className=""
-                  style={{ color: "#bc3aab", fontWeight: "600" }}
-                >
-                  Pixlverse
-                </span>
-                , we specialize in crafting elegant, high-performing websites
-                that do more than just look good — they work hard for your
-                business. Every project is built with a balance of clean,
-                maintainable code and thoughtful, user-centric design, ensuring
-                a smooth, fast, and memorable experience for your visitors.
+
+      <main>
+        <PageHero
+          eyebrow="About Pixlverse"
+          title="Building with purpose, pixel by pixel"
+          subtitle="We craft elegant, high-performing websites that do more than look good — they work hard for your business."
+        >
+          {/* <div className="ph-stats">
+            {STATS.map((s) => (
+              <div className="ph-stat" key={s.label}>
+                <b className="gradient-text">{s.value}</b>
+                <span>{s.label}</span>
+              </div>
+            ))}
+          </div> */}
+        </PageHero>
+
+        {/* Story */}
+        <section className="section section--flush-top">
+          <div className="container about-split">
+            <Reveal className="about-media" direction="right">
+              <img
+                src="/images/sl3.jpg"
+                alt="The Pixlverse team crafting a website"
+              />
+            </Reveal>
+            <Reveal className="about-text" direction="left" delay={0.1}>
+              <span className="eyebrow">Our story</span>
+              <h2>A studio built on craft &amp; care</h2>
+              <p>
+                At Pixlverse, every project is built with a balance of clean,
+                maintainable code and thoughtful, user-centric design — ensuring
+                a smooth, fast and memorable experience for your visitors.
               </p>
-              <p style={{ lineHeight: "1.6" }}>
-                <span
-                  className=""
-                  style={{ color: "#bc3aab", fontWeight: "600" }}
-                >
-                  Since 2023
-                </span>
-                , we’ve been partnering with clients from around the globe,
-                transforming ideas into digital realities that drive results.
-                Whether you need a brand-new website or want to elevate your
-                existing one, our commitment goes beyond launch — we provide
-                continuous support to keep your online presence{" "}
-                <span
-                  className=""
-                  style={{ color: "#bc3aab", fontWeight: "600" }}
-                >
-                  secure, relevant,
-                </span>{" "}
-                and{" "}
-                <span
-                  className=""
-                  style={{ color: "#bc3aab", fontWeight: "600" }}
-                >
-                  {" "}
-                  ahead of the curve .
-                </span>
+              <p>
+                Since <strong>2023</strong>, we've partnered with clients across
+                India and the world, transforming ideas into digital realities
+                that drive results. Whether you need a brand-new website or want
+                to elevate an existing one, our commitment goes beyond launch —
+                we provide continuous support to keep your online presence
+                secure, relevant and ahead of the curve.
               </p>
-            </div>
-            <div className="image">
-              <img src="/images/sl3.jpg" alt="Web development illustration" />
+            </Reveal>
+          </div>
+        </section>
+
+        {/* Why */}
+        <section className="section section--dark">
+          <div className="container about-split about-split--reverse">
+            <Reveal className="about-media" direction="left">
+              <img src="/images/sl5.jpg" alt="Pixlverse digital design work" />
+            </Reveal>
+            <Reveal className="about-text" direction="right" delay={0.1}>
+              <span className="eyebrow">Why Pixlverse</span>
+              <h2>Your idea, turned into a digital brochure</h2>
+              <p>
+                Your website isn't just a collection of pages — it's your
+                digital brochure, the first impression that can take your brand
+                to the next level. Our goal is to ensure every website we
+                deliver reflects your unique vision while clearly communicating
+                your value to the world.
+              </p>
+              <p className="about-quote">
+                "Your idea. We turn it into a digital brochure."
+              </p>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* Stats */}
+        <section className="section">
+          <div className="container">
+            <Reveal className="section-head">
+              <span className="eyebrow">Our impact</span>
+              <h2>Trusted by businesses, near and far</h2>
+              <p>
+                From tech and finance to healthcare, education, consulting and
+                logistics — across 3+ countries.
+              </p>
+            </Reveal>
+            <div className="about-stats">
+              {STATS.map((s, i) => (
+                <Reveal
+                  key={s.label}
+                  className="about-stat card"
+                  delay={i * 0.08}
+                >
+                  <span className="about-stat-value gradient-text">
+                    {s.value}
+                  </span>
+                  <span className="about-stat-label">{s.label}</span>
+                </Reveal>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Why Pixlverse */}
-  <section className="about-section reverse reveal">
-          <div className="about-content">
-            <div className="text">
-              <h2 style={{ fontSize: "2.5rem", marginBottom: "20px" }}>
-                Why{" "}
-                <span className="" style={{ color: "#bc3aab" }}>
-                  Pixlverse?
-                </span>
-              </h2>
-              <p style={{ lineHeight: "1.6" }}>
-                We believe your website isn’t just a collection of pages — it’s
-                your digital brochure, the first impression that can take your
-                brand to the next level. Our goal is to ensure that every
-                website we deliver reflects your unique vision while effectively
-                communicating your value to the world.
-              </p>
-              <p className="slogan">
-                <span
-                  className=""
-                  style={{ color: "#bc3aab", fontWeight: "600" }}
+        {/* Values */}
+        <section className="section section--soft">
+          <div className="container">
+            <Reveal className="section-head">
+              <span className="eyebrow">How we think</span>
+              <h2>The values behind every build</h2>
+            </Reveal>
+            <div className="about-values">
+              {VALUES.map((v, i) => (
+                <Reveal
+                  key={v.title}
+                  className="value-card card"
+                  delay={i * 0.08}
                 >
-                  Your Idea.{" "}
-                </span>
-                We turn it into a{" "}
-                <span
-                  className=""
-                  style={{ color: "#bc3aab", fontWeight: "600" }}
-                >
-                  digital brochure.
-                </span>
-              </p>
-            </div>
-            <div className="image">
-              <img src="/images/sl5.jpg" alt="Creative design illustration" />
+                  <span className="value-check">
+                    <FaCheck />
+                  </span>
+                  <h3>{v.title}</h3>
+                  <p>{v.text}</p>
+                </Reveal>
+              ))}
             </div>
           </div>
         </section>
-      </section>
 
-      {/* Achievements */}
-  <section className="achievements reveal">
-        <h2 style={{ fontSize: "2.1rem", marginBottom: "20px" }}>
-          What We’ve{" "}
-          <span className="" style={{ color: "#bc3aab" }}>
-            Achieved
-          </span>
-        </h2>
-        <div className="achievements-grid">
-          <div className="achievement-card">
-            <img
-              src="images/project-management.png"
-              style={{ width: "80px", height: "80px" }}
-              alt="Projects Icon"
-            />
-            <p>
-              Successfully delivered{" "}
-              <strong style={{ color: "#bc3aab" }}>10+ projects</strong> with
-              measurable impact
-            </p>
+        {/* CTA */}
+        <section className="section">
+          <div className="container">
+            <Reveal className="cta-box" direction="up">
+              <h2>Not sure where to start?</h2>
+              <p>
+                We know planning a website can feel overwhelming — that's where
+                we come in. We'll help you identify your goals, shape a
+                strategy, and build a site that grows with your business.
+              </p>
+              <Link to="/contact" className="btn btn--primary">
+                Let's talk <FaArrowRight />
+              </Link>
+            </Reveal>
           </div>
-          <div className="achievement-card">
-            <img
-              src="images/online-analytical.png"
-              style={{ width: "80px", height: "80px" }}
-              alt="Industries Icon"
-            />
-            <p>
-              <strong style={{ color: "#bc3aab" }}>Trusted </strong> by
-              businesses in tech, finance, healthcare, education, consulting,
-              logistics, and more
-            </p>
-          </div>
-          <div className="achievement-card">
-            <img
-              src="images/map.png"
-              style={{ width: "80px", height: "80px" }}
-              alt="Countries Icon"
-            />
-            <p>
-              Serving clients internationally across{" "}
-              <strong style={{ color: "#bc3aab" }}>3+ countries</strong>
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Not Sure Where to Start */}
-      <section className="cta-section">
-        <div className="cta-box">
-          <div className="cta-text">
-            <h2>
-              Not Sure <span style={{ color: "#bc3aab" }}>Where to Start?</span>
-            </h2>
-            <p>
-              We know planning a website can feel overwhelming — but that’s
-              where we come in. Our process is designed to help you:
-            </p>
-            <ul>
-              <li>✔ Identify your business goals and target audience</li>
-              <li>✔ Create a strategy that aligns with your vision</li>
-              <li>✔ Build a website that grows with your business</li>
-            </ul>
-            <p>
-              Let’s turn your ideas into a powerful online presence. We’ll guide
-              you every step of the way.
-            </p>
-            <a href="/contact" className="cta-contact-btn">
-              Contact Us
-            </a>
-          </div>
-        </div>
-      </section>
+        </section>
+      </main>
 
       <Footer />
-    </div>
+    </>
   );
 };
 
