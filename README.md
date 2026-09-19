@@ -1,36 +1,45 @@
-
 # Pixlverse
 
-Pixlverse is a web application project. This README provides an overview of the project structure, setup instructions, and usage guidelines.
+### Infinite Possibilities, Pixel Perfect.
 
-## Project Structure
+Pixlverse is a web design and development studio focused on creating
+elegant, high-performing websites that load fast, rank well, and turn
+visitors into customers.
 
-- `public/` - Static assets and images
-- `src/` - Source code
-  - `components/` - Reusable UI components
-  - `pages/` - Application pages (Home, About, Contact, Projects, Services)
-- `package.json` - Project dependencies and scripts
+We combine thoughtful design, clean code, and ongoing support to help
+businesses build a stronger digital presence.
 
-## Setup
+---
 
-1. **Install dependencies:**
-	```powershell
-	npm install
-	```
-2. **Start the development server:**
-	```powershell
-	npm start
-	```
+## What We Do
 
-## Usage
+- Website Design
+- Web Development
+- CMS Integration
+- Website Revamps
+- SEO Optimization
+- Maintenance & Support
+- Domain & Hosting Support
 
-- Access the app at `http://localhost:3000` after starting the server.
-- Modify source files in `src/` to customize pages and components.
+---
 
-## Contributing
+## Our Work
 
-Feel free to fork the repository and submit pull requests for improvements or bug fixes.
+We build websites for businesses across different industries,
+including:
 
-## License
+- Technology
+- Finance
+- Healthcare
+- Education
+- Consulting
+- Logistics
+- Operations
 
-This project is licensed under the MIT License.
+---
+
+## Let's Build Something
+
+🌐 https://pixlverse.in/
+
+📩 explore.pixlverse@gmail.com
