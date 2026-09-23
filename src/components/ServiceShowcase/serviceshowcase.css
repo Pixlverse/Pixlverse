@@ -1,0 +1,196 @@
+.svc-showcase {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.svc-row {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  gap: clamp(28px, 4vw, 64px);
+  align-items: center;
+  padding: clamp(34px, 4vw, 56px) 0;
+  /* clears the floating navbar when a jump link lands here */
+  scroll-margin-top: 110px;
+}
+.svc-row + .svc-row { border-top: 1px solid var(--line); }
+
+/* Sides swap down the page so the eye zig-zags instead of running in a column.
+   The column ratio has to swap with it: `order` alone moves the art into the
+   wider column, which makes its 4:3 panel taller than the rows above it. */
+.svc-row--flip {
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+}
+.svc-row--flip .svc-art { order: 2; }
+
+/* ---------- the illustration panel ---------- */
+.svc-art {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  /* the service's own accent, as a ground for its drawing */
+  background:
+    radial-gradient(
+      70% 60% at 30% 20%,
+      color-mix(in srgb, var(--accent) 22%, transparent),
+      transparent 70%
+    ),
+    linear-gradient(
+      150deg,
+      color-mix(in srgb, var(--accent) 12%, #ffffff),
+      color-mix(in srgb, var(--accent) 5%, #ffffff)
+    );
+  border: 1px solid color-mix(in srgb, var(--accent) 18%, transparent);
+  box-shadow: 0 22px 50px rgba(22, 18, 31, 0.1);
+  transition: box-shadow 0.4s ease;
+}
+@supports not (color: color-mix(in srgb, red, blue)) {
+  .svc-art { background: var(--bg-tint); border-color: var(--border); }
+}
+.svc-row:hover .svc-art { box-shadow: 0 30px 66px rgba(22, 18, 31, 0.16); }
+
+/* ServiceArt positions itself as a corner watermark by default — here it is
+   the subject, so it is pulled back into flow and scaled up. */
+.svc-art .service-art {
+  position: static;
+  width: 70%;
+  max-width: none;
+  z-index: 0;
+  color: var(--accent);
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.svc-row:hover .svc-art .service-art { transform: translateY(-8px) scale(1.04); }
+
+.svc-art-index {
+  position: absolute;
+  top: clamp(10px, 1.6vw, 20px);
+  left: clamp(14px, 2vw, 26px);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.6rem, 4.6vw, 4.2rem);
+  line-height: 1;
+  color: color-mix(in srgb, var(--accent) 22%, transparent);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* a glare that sweeps the panel on hover — the same cue the service cards use */
+.svc-art-sheen {
+  position: absolute;
+  top: -60%;
+  left: -75%;
+  width: 55%;
+  height: 220%;
+  opacity: 0;
+  transform: rotate(18deg);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.55) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transition: transform 0.95s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease;
+  pointer-events: none;
+}
+.svc-row:hover .svc-art-sheen {
+  opacity: 1;
+  transform: translateX(330%) rotate(18deg);
+}
+
+/* ---------- the detail ---------- */
+.svc-body { min-width: 0; }
+
+.svc-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 6px 14px 6px 10px;
+  border-radius: 999px;
+  margin-bottom: 14px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 11%, transparent);
+}
+.svc-kicker svg { font-size: 0.95rem; }
+@supports not (color: color-mix(in srgb, red, blue)) {
+  .svc-kicker { background: var(--bg-tint); }
+}
+
+.svc-body h2 {
+  font-size: clamp(1.4rem, 2.3vw, 1.85rem);
+  line-height: 1.2;
+  margin-bottom: 12px;
+  text-wrap: balance;
+}
+.svc-blurb {
+  color: var(--muted);
+  font-size: 0.98rem;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.svc-points {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 22px;
+  margin: 0 0 20px;
+  padding: 0;
+  list-style: none;
+}
+.svc-points li {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+  color: var(--ink-2);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+.svc-points svg {
+  margin-top: 0.28em;
+  font-size: 0.7rem;
+  color: var(--accent);
+}
+
+.svc-best {
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--accent);
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+.svc-best strong { color: var(--ink); }
+@supports not (color: color-mix(in srgb, red, blue)) {
+  .svc-best { background: var(--bg-tint); }
+}
+
+/* ---------- stacked ---------- */
+@media (max-width: 880px) {
+  .svc-row {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 32px 0;
+  }
+  /* the drawing leads on a narrow screen, whichever side it sat on */
+  .svc-row--flip .svc-art { order: 0; }
+  .svc-art { aspect-ratio: 16 / 10; }
+}
+
+@media (max-width: 560px) {
+  .svc-points { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .svc-art .service-art,
+  .svc-art-sheen { transition: none; }
+  .svc-row:hover .svc-art .service-art { transform: none; }
+  .svc-row:hover .svc-art-sheen { opacity: 0; }
+}

@@ -1,7 +1,9 @@
 // JSON-LD structured data builders for rich results & local SEO.
 import { SITE, FAQS, SERVICES } from "../data/site";
 
-const sameAs = []; // add social profile URLs here when available
+/* Social profiles Google can use to tie this entity together. Add more as
+   they go live. */
+const sameAs = [SITE.instagram];
 
 // ProfessionalService / web design business — drives local pack + knowledge results.
 export const organizationSchema = {
@@ -11,11 +13,11 @@ export const organizationSchema = {
   name: SITE.name,
   alternateName: "Pixlverse Web Studio",
   description:
-    "Pixlverse is a website design and development studio in Kerala, India, building elegant, high-performing, SEO-optimised websites for businesses across India and beyond.",
+    "Pixlverse is a website design and development studio in Kerala, India. We build fast, SEO-ready websites for businesses across India, the UK, Qatar and Dubai, and we stay on after launch to keep them secure, updated and growing.",
   url: SITE.url,
   email: SITE.email,
   image: SITE.defaultOgImage,
-  logo: SITE.defaultOgImage,
+  logo: SITE.organizationLogo,
   foundingDate: SITE.founded,
   priceRange: "$$",
   knowsAbout: [
@@ -23,6 +25,7 @@ export const organizationSchema = {
     "Web Development",
     "SEO Optimization",
     "Website Maintenance",
+    "Website Redesign",
     "Domain and Hosting",
     "UI/UX Design",
   ],

@@ -113,9 +113,31 @@ code {
 }
 
 .section {
-  padding: clamp(64px, 9vw, 120px) 0;
+  padding: clamp(44px, 5vw, 68px) 0;
   position: relative;
   overflow: hidden;
+}
+
+/* An elliptical top edge — highest in the middle, falling away at the sides —
+   so the band tucks under the arc the card deck above it sits on rather than
+   cutting across it with a hard horizontal line. */
+.section--curve-top {
+  border-top-left-radius: 50% 68px;
+  border-top-right-radius: 50% 68px;
+  margin-top: -34px;
+  padding-top: calc(clamp(44px, 5vw, 68px) + 34px);
+}
+
+/* Below this the deck stacks, so there is no arc left to answer — and at
+   phone width the same radius reads as a dome cut out of the page rather than
+   a soft edge. Straight line instead. */
+@media (max-width: 900px) {
+  .section--curve-top {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    margin-top: 0;
+    padding-top: clamp(44px, 5vw, 68px);
+  }
 }
 
 .section--tint { background: var(--bg-tint); }
@@ -185,13 +207,15 @@ code {
 .section > .container { position: relative; z-index: 1; }
 
 /* ---------- Elegant CTA box (shared across pages) ---------- */
+/* The end-of-page CTA. Content runs down the left; the right is given over to
+   <CtaRadar>, whose rings push out from a source just off the panel's edge. */
 .cta-box {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  text-align: center;
+  text-align: left;
   border-radius: var(--radius-lg);
-  padding: clamp(50px, 8vw, 88px) 32px;
+  padding: clamp(46px, 7vw, 82px) clamp(30px, 5vw, 66px);
   color: #fff;
   border: 1px solid rgba(255, 255, 255, 0.1);
   background:
@@ -210,18 +234,33 @@ code {
     radial-gradient(60% 50% at 50% -10%, rgba(255, 255, 255, 0.16), transparent 60%);
   pointer-events: none;
 }
+/* everything readable sits above the rings */
+.cta-box > * { position: relative; z-index: 1; }
+
 .cta-box h2 {
   color: #fff;
-  font-size: clamp(1.8rem, 4vw, 2.8rem);
-  margin-bottom: 16px;
+  font-size: clamp(1.6rem, 3vw, 2.25rem);
+  /* 70% of the panel — the rings only occupy the far right, so holding the
+     copy to a narrow column just left a hole down the middle */
+  max-width: 70%;
+  margin-bottom: 12px;
+  text-wrap: balance;
 }
 .cta-box p {
   color: rgba(255, 255, 255, 0.85);
-  max-width: 580px;
-  margin: 0 auto 30px;
-  font-size: 1.05rem;
+  /* the same 70%, but never past a readable measure */
+  max-width: min(70%, 64ch);
+  margin: 0 0 28px;
+  font-size: 1rem;
+  line-height: 1.6;
 }
-.cta-box .btn-row { justify-content: center; }
+.cta-box .btn-row { justify-content: flex-start; }
+
+@media (max-width: 760px) {
+  /* the rings move behind the copy at this width, so the text can have it all */
+  .cta-box h2,
+  .cta-box p { max-width: none; }
+}
 
 /* white primary button reads as elegant + high-contrast on the gradient box */
 .cta-box .btn--primary {
@@ -253,20 +292,30 @@ code {
   border-radius: 999px;
 }
 
+/* The measure is wider than the copy needs because the headings are what set
+   it: at the old 640px a title like "Everything Your Business Needs Online,
+   From One Team" broke to three lines and the band grew a screenful of empty
+   space around it. Wider column + a smaller step keeps them to two. */
 .section-head {
-  max-width: 640px;
-  margin: 0 auto clamp(40px, 6vw, 64px);
+  max-width: 780px;
+  margin: 0 auto clamp(24px, 3vw, 36px);
   text-align: center;
 }
 
 .section-head h2 {
-  font-size: clamp(1.9rem, 4vw, 2.9rem);
-  margin: 18px 0 14px;
+  font-size: clamp(1.65rem, 3vw, 2.3rem);
+  line-height: 1.15;
+  margin: 0 0 10px;
+  text-wrap: balance;
 }
 
 .section-head p {
+  max-width: 640px;
+  margin: 0 auto;
   color: var(--muted);
-  font-size: 1.05rem;
+  font-size: 1rem;
+  line-height: 1.6;
+  text-wrap: pretty;
 }
 
 .gradient-text {
@@ -311,10 +360,14 @@ code {
   border-color: var(--line);
   box-shadow: var(--shadow-sm);
 }
+/* These sit on the dark bands, where a saturated 1px border read as a hard
+   ring stuck to the edge of the pill. Lift it with a soft violet bloom and a
+   deeper label instead, matching the hero's white primary button. */
 .btn--ghost:hover {
   transform: translateY(-2px);
-  border-color: var(--violet);
-  color: var(--violet);
+  border-color: rgba(123, 63, 228, 0.22);
+  color: var(--violet-700);
+  box-shadow: 0 14px 32px rgba(90, 35, 189, 0.32);
 }
 
 .btn--light {

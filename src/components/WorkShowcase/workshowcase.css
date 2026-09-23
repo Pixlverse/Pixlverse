@@ -1,0 +1,111 @@
+.showcase {
+  display: grid;
+  gap: clamp(44px, 6vw, 78px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.showcase-row {
+  display: grid;
+  /* the site gets the bigger half — it is the thing being shown */
+  grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.32fr);
+  gap: clamp(24px, 3.4vw, 52px);
+  align-items: center;
+}
+
+/* Every other row leads with the site instead of the write-up. Only the order
+   and the column ratio swap — the copy keeps its rail on its own left edge, so
+   the block reads identically whichever side it lands on. */
+.showcase-row--flip {
+  grid-template-columns: minmax(0, 1.32fr) minmax(0, 0.88fr);
+}
+.showcase-row--flip .showcase-shot { order: -1; }
+
+/* ---------- copy ---------- */
+.showcase-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  min-width: 0;
+  padding-left: 24px;
+  border-left: 2px solid rgba(123, 63, 228, 0.55);
+}
+
+.showcase-index {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: #d3b6ff;
+}
+
+.showcase-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.3rem, 2.2vw, 1.75rem);
+  line-height: 1.16;
+  color: #fff;
+  margin: 2px 0 0;
+}
+
+.showcase-cat {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.46);
+}
+.showcase-cat em { font-style: normal; font-weight: 500; text-transform: none; }
+
+.showcase-blurb {
+  margin: 10px 0 0;
+  max-width: 46ch;
+  color: #b3a9d0;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.showcase-visit {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  color: #d3b6ff;
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+.showcase-visit svg { transition: transform 0.25s ease; }
+.showcase-visit:hover svg { transform: translateX(4px); }
+.showcase-visit:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
+  border-radius: 6px;
+}
+
+/* ---------- the site ---------- */
+.showcase-shot {
+  display: block;
+  min-width: 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 28px 60px rgba(0, 0, 0, 0.48);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.showcase-shot:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 34px 70px rgba(0, 0, 0, 0.56);
+}
+
+/* ---------- stacked ---------- */
+@media (max-width: 900px) {
+  .showcase-row {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  /* the screenshot is the hook, so it leads on a narrow screen */
+  .showcase-shot { order: -1; }
+  .showcase-copy { padding-left: 18px; }
+  .showcase-blurb { max-width: none; }
+}

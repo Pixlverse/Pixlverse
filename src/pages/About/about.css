@@ -33,22 +33,10 @@
 }
 
 /* Stats */
-.about-stats {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 22px;
-}
-.about-stat {
-  padding: 30px 22px;
-  text-align: center;
-}
-.about-stat-value {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(2rem, 4vw, 2.8rem);
-  display: block;
-}
-.about-stat-label { color: var(--muted); font-size: 0.92rem; }
+/* The trust figures are now <StatCircles>, which carries its own styles. */
+
+/* Industries served */
+/* The sector strip is now <SectorMarquee>, which carries its own styles. */
 
 /* Values */
 .about-values {
@@ -56,19 +44,64 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
 }
-.value-card { padding: 32px 28px; }
-.value-check {
+/* White cards on the dark band. The accent is a wash rising from the bottom
+   and a tint behind the icon — enough colour to tell the three apart, not
+   enough to turn them into three coloured blocks. */
+.value-card {
+  position: relative;
+  overflow: hidden;
+  padding: 28px 26px 30px;
+  border-radius: var(--radius);
+  background: linear-gradient(
+    170deg,
+    #ffffff 46%,
+    color-mix(in srgb, var(--accent) 10%, #ffffff) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.4);
+  transition: box-shadow 0.35s ease;
+}
+@supports not (color: color-mix(in srgb, red, blue)) {
+  .value-card { background: #fff; }
+}
+.value-card:hover { box-shadow: 0 30px 62px rgba(0, 0, 0, 0.5); }
+
+.value-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+/* the icon sits on a soft disc of its own accent rather than a solid chip */
+.value-icon {
+  flex: none;
   display: grid;
   place-items: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  background: var(--grad);
-  color: #fff;
-  margin-bottom: 18px;
+  width: 42px;
+  height: 42px;
+  border-radius: 13px;
+  font-size: 1.05rem;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 13%, transparent);
+  transition: transform 0.3s ease;
 }
-.value-card h3 { font-size: 1.2rem; margin-bottom: 10px; }
-.value-card p { color: var(--muted); font-size: 0.96rem; }
+@supports not (color: color-mix(in srgb, red, blue)) {
+  .value-icon { background: var(--bg-tint); }
+}
+.value-card:hover .value-icon { transform: translateY(-2px) rotate(-6deg); }
+
+.value-card h3 {
+  color: var(--ink);
+  font-size: 1.12rem;
+  line-height: 1.3;
+  margin: 0;
+}
+.value-card p {
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
 
 /* CTA */
 .about-cta {
@@ -88,9 +121,7 @@
   .about-split--reverse .about-media { order: -1; }
   .about-text { text-align: center; }
   .about-quote { border-left: 0; padding-left: 0; }
-  .about-stats { grid-template-columns: repeat(2, 1fr); }
   .about-values { grid-template-columns: 1fr; }
 }
 @media (max-width: 480px) {
-  .about-stats { grid-template-columns: 1fr; }
 }

@@ -20,7 +20,8 @@
   color: var(--ink-2);
 }
 .field input,
-.field textarea {
+.field textarea,
+.field select {
   width: 100%;
   font-family: var(--font-body);
   font-size: 1rem;
@@ -35,11 +36,34 @@
 .field input::placeholder,
 .field textarea::placeholder { color: var(--muted-2); }
 .field input:focus,
-.field textarea:focus {
+.field textarea:focus,
+.field select:focus {
   outline: none;
   border-color: var(--violet);
   background: #fff;
   box-shadow: var(--ring);
+}
+
+/* "What do you need?" — native select styled to match the text inputs */
+.field--select { position: relative; }
+.field select {
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  padding-right: 44px;
+}
+.field select:invalid { color: var(--muted-2); }
+.field--select::after {
+  content: "";
+  position: absolute;
+  right: 18px;
+  bottom: 21px;
+  width: 9px;
+  height: 9px;
+  border-right: 2px solid var(--violet);
+  border-bottom: 2px solid var(--violet);
+  transform: rotate(45deg) translateY(-2px);
+  pointer-events: none;
 }
 
 .contact-submit { margin-top: 6px; align-self: flex-start; }
@@ -81,8 +105,53 @@
 }
 .contact-card a:hover { text-decoration: underline; }
 
+/* ============ WHAT HAPPENS NEXT ============ */
+.next-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  counter-reset: none;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.next-step {
+  position: relative;
+  padding: 32px 28px;
+}
+.next-step-num {
+  display: inline-grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  background: var(--grad);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.05rem;
+  margin-bottom: 18px;
+  box-shadow: 0 10px 24px rgba(123, 63, 228, 0.3);
+}
+.next-step h3 { font-size: 1.12rem; margin-bottom: 8px; }
+.next-step p { color: var(--muted); font-size: 0.95rem; }
+
+/* connector line between the three steps on wide screens */
+@media (min-width: 901px) {
+  .next-step:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 55px;
+    right: -22px;
+    width: 22px;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(123, 63, 228, 0.55), rgba(180, 63, 143, 0.25));
+  }
+}
+
 @media (max-width: 900px) {
   .contact-grid { grid-template-columns: 1fr; }
+  .next-steps { grid-template-columns: 1fr; }
 }
 @media (max-width: 480px) {
   .form-row { grid-template-columns: 1fr; }
