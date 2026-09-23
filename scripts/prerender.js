@@ -71,23 +71,10 @@ async function launchBrowser() {
 const BUILD = path.join(__dirname, "..", "build");
 /* Single source of truth for what exists: the prerenderer walks these and the
    sitemap is generated from the same list, so the two can never disagree. */
-/* Slugs are read out of the data file rather than repeated here, so adding a
-   service to site.js is enough to get it prerendered and into the sitemap. */
-const SERVICE_SLUGS = (
-  fs
-    .readFileSync(path.join(__dirname, "..", "src", "data", "site.js"), "utf8")
-    .match(/slug: "([a-z0-9-]+)",\n\s*seoTitle:/g) || []
-).map((m) => m.match(/slug: "([a-z0-9-]+)"/)[1]);
-
 const ROUTES = [
   { path: "/", priority: "1.0", changefreq: "weekly" },
   { path: "/about", priority: "0.8", changefreq: "monthly" },
   { path: "/services", priority: "0.9", changefreq: "monthly" },
-  ...SERVICE_SLUGS.map((slug) => ({
-    path: `/services/${slug}`,
-    priority: "0.8",
-    changefreq: "monthly",
-  })),
   { path: "/projects", priority: "0.8", changefreq: "monthly" },
   { path: "/contact", priority: "0.7", changefreq: "yearly" },
 ];
@@ -140,10 +127,6 @@ function serve(template) {
 }
 
 (async () => {
-  if (!SERVICE_SLUGS.length) {
-    console.error("prerender: no service slugs found in src/data/site.js");
-    process.exit(1);
-  }
   if (!fs.existsSync(path.join(BUILD, "index.html"))) {
     console.error("prerender: no build/ found — run the build first");
     process.exit(1);

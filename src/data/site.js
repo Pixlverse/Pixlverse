@@ -44,17 +44,11 @@ export const NAV_LINKS = [
  * `blurb` — the longer intro used on the Services page.
  * `heading` / `slug` — the Services page H2 and its jump-link anchor.
  * `titleTop` / `titleBottom` — the two-tone title on the Home cards.
- * `seoTitle` / `seoDescription` — for the service's own page at
- *   /services/<slug>. Each one targets a distinct search, which is the whole
- *   point of splitting six services off a single URL.
  */
 export const SERVICES = [
   {
     icon: "design",
     slug: "website-design",
-    seoTitle: "Custom Website Design Company in Kerala",
-    seoDescription:
-      "Custom website design in Kerala built around your customers: clean, mobile-first layouts that tell your brand story and turn visitors into enquiries.",
     title: "Website Design",
     titleTop: "Website",
     titleBottom: "Design",
@@ -75,9 +69,6 @@ export const SERVICES = [
   {
     icon: "code",
     slug: "web-development",
-    seoTitle: "Web Development Company in Kerala & India",
-    seoDescription:
-      "Web development in Kerala and across India: fast, secure, SEO-ready sites and web apps built with clean code, from static pages to full-stack builds.",
     title: "Web Development",
     titleTop: "Web",
     titleBottom: "Development",
@@ -98,9 +89,6 @@ export const SERVICES = [
   {
     icon: "seo",
     slug: "seo-optimization",
-    seoTitle: "SEO Services in Kerala | Technical & Local SEO",
-    seoDescription:
-      "SEO services in Kerala covering technical SEO, local search, structured data and speed tuning, so customers searching for your business actually find it.",
     title: "SEO Optimization",
     titleTop: "SEO",
     titleBottom: "Optimization",
@@ -121,9 +109,6 @@ export const SERVICES = [
   {
     icon: "tools",
     slug: "maintenance-support",
-    seoTitle: "Website Maintenance & Support in Kerala",
-    seoDescription:
-      "Website maintenance and support in Kerala: backups, security checks, uptime monitoring, updates and quick fixes, so your site stays fast and safe.",
     title: "Maintenance & Support",
     titleTop: "Maintenance",
     titleBottom: "& Support",
@@ -144,9 +129,6 @@ export const SERVICES = [
   {
     icon: "revamp",
     slug: "website-revamps",
-    seoTitle: "Website Redesign & Revamp Services in Kerala",
-    seoDescription:
-      "Website redesign in Kerala for slow, dated sites that aren't bringing in enquiries. We audit, redesign and rebuild so your site performs again.",
     title: "Website Revamps",
     titleTop: "Website",
     titleBottom: "Revamps",
@@ -167,9 +149,6 @@ export const SERVICES = [
   {
     icon: "hosting",
     slug: "domain-hosting",
-    seoTitle: "Domain Registration & Website Hosting in Kerala",
-    seoDescription:
-      "Domain registration, DNS, SSL and website hosting set up for you in Kerala, so your site launches smoothly without you wrestling with the technical side.",
     title: "Domain & Hosting",
     titleTop: "Domain",
     titleBottom: "& Hosting",

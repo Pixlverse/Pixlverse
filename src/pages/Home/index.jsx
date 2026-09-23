@@ -181,7 +181,7 @@ const Home = () => {
                     <span className="svc-title-bottom">{s.titleBottom}</span>
                   </h3>
                   <p>{s.card}</p>
-                  <Link to={`/services/${s.slug}`} className="service-more">
+                  <Link to={`/services#${s.slug}`} className="service-more">
                     <span className="service-more-badge">
                       <FaArrowRight />
                     </span>
