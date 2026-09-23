@@ -19,7 +19,6 @@ const About = () => {
       <SEO
         title="About Pixlverse | Web Design Studio in Kerala, India"
         description="Meet Pixlverse, a Kerala web design studio building fast, SEO-ready websites for clients in India, the UK, Qatar and Dubai since 2023."
-        keywords="web design studio Kerala, website design company India, web design for UK and Gulf businesses, about Pixlverse"
         path="/about"
         jsonLd={[
           organizationSchema,
@@ -41,7 +40,7 @@ const About = () => {
           <div className="container about-split">
             <Reveal className="about-media" direction="right">
               <img
-                src="/images/sl3.jpg"
+                src="/images/sl3.webp"
                 alt="The Pixlverse team designing a website in Kerala"
               />
             </Reveal>
@@ -71,7 +70,7 @@ const About = () => {
           <div className="container about-split about-split--reverse">
             <Reveal className="about-media" direction="left">
               <img
-                src="/images/sl5.jpg"
+                src="/images/sl5.webp"
                 alt="Pixlverse web design and development work"
               />
             </Reveal>
@@ -150,7 +149,7 @@ const About = () => {
                 and build a site that grows with you.
               </p>
               <Link to="/contact" className="btn btn--primary">
-                Talk to our team <FaArrowRight />
+                Talk to us <FaArrowRight />
               </Link>
             </Reveal>
           </div>

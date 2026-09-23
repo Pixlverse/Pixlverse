@@ -75,7 +75,6 @@ const Home = () => {
       <SEO
         title="Website Design & Development Company in Kerala | Pixlverse"
         description="Pixlverse is a Kerala web design studio building fast, SEO-ready websites that turn visitors into customers. Get a free quote in 24 hours."
-        keywords="website design & development company in Kerala, web design Kerala, website developers Kerala, custom website for business, website design company India"
         path="/"
         jsonLd={[organizationSchema, websiteSchema, faqSchema]}
       />
@@ -182,7 +181,7 @@ const Home = () => {
                     <span className="svc-title-bottom">{s.titleBottom}</span>
                   </h3>
                   <p>{s.card}</p>
-                  <Link to={`/services#${s.slug}`} className="service-more">
+                  <Link to={`/services/${s.slug}`} className="service-more">
                     <span className="service-more-badge">
                       <FaArrowRight />
                     </span>

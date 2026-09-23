@@ -12,12 +12,14 @@ import ScrollProgress from "./components/ScrollProgress";
 import BackToTop from "./components/BackToTop";
 import PageTransition from "./components/PageTransition";
 import PageLoader from "./components/PageLoader";
+import { IS_PRERENDER } from "./utils/prerender";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Projects from "./pages/Projects";
 import Services from "./pages/Services";
+import ServiceDetail from "./pages/ServiceDetail";
 import Contact from "./pages/Contact";
 
 /**
@@ -26,17 +28,21 @@ import Contact from "./pages/Contact";
  * active-link pill continuous from one route to the next.
  */
 /* How long the splash holds before it lifts. A deliberate pause, not a
-   measurement of anything real — the routes are already bundled and render
-   instantly. Lower it here to shorten the wait. */
-const SPLASH_MS = 2000;
+   measurement of anything real. Kept short: the curtain covers the page, so
+   every millisecond it stays up is added to Largest Contentful Paint, which
+   Google measures. */
+const SPLASH_MS = 700;
 
 const AnimatedRoutes = () => {
   const location = useLocation();
-  const [loading, setLoading] = useState(true);
+  /* the prerenderer waits for the page to settle; a 2s curtain would be
+     what it captured */
+  const [loading, setLoading] = useState(!IS_PRERENDER);
 
   /* First load only. Moving between routes is instant, and putting a curtain
      over every internal navigation made the site feel slower than it is. */
   useEffect(() => {
+    if (IS_PRERENDER) return;
     const t = setTimeout(() => setLoading(false), SPLASH_MS);
     return () => clearTimeout(t);
   }, []);
@@ -55,6 +61,10 @@ const AnimatedRoutes = () => {
             <Route path="/about" element={<About />} />
             <Route path="/projects" element={<Projects />} />
             <Route path="/services" element={<Services />} />
+            <Route
+              path="/services/:slug"
+              element={<ServiceDetail />}
+            />
             <Route path="/contact" element={<Contact />} />
           </Routes>
         </PageTransition>
