@@ -1,0 +1,28 @@
+.page-loader {
+  position: fixed;
+  inset: 0;
+  /* above the navbar (1000) and the scroll progress bar (1200) */
+  z-index: 3000;
+  display: grid;
+  place-items: center;
+  /* the hero's own ground, so lifting the curtain is a dissolve rather than a
+     jump from one colour to another */
+  background:
+    radial-gradient(70% 58% at 6% 0%, rgba(123, 63, 228, 0.32), transparent 72%),
+    radial-gradient(62% 52% at 96% 8%, rgba(180, 63, 143, 0.22), transparent 70%),
+    var(--bg-ink);
+}
+
+.page-loader-mark {
+  /* the mark scales toward the viewer on exit; without this the browser can
+     snap it to whole pixels mid-transform and the glow judders */
+  will-change: transform, opacity;
+  transform-origin: 50% 50%;
+}
+
+.page-loader-mark {
+  /* the mark scales toward the viewer on exit; without this the browser can
+     snap it to whole pixels mid-transform and the glow judders */
+  will-change: transform, opacity;
+  transform-origin: 50% 50%;
+}
