@@ -14,7 +14,59 @@
 const http = require("http");
 const fs = require("fs");
 const path = require("path");
-const puppeteer = require("puppeteer");
+const puppeteerCore = require("puppeteer-core");
+
+/**
+ * Launching a browser is the one part of this that differs by environment.
+ *
+ * Vercel's build image is Amazon Linux without Chrome's shared libraries, so
+ * Puppeteer's own bundled browser dies with "libnspr4.so: cannot open shared
+ * object file". @sparticuz/chromium exists for exactly that: a Chromium built
+ * for serverless images with those libraries packaged alongside it. It only
+ * ships Linux binaries, so locally we fall back to the normal Puppeteer
+ * download.
+ */
+async function launchBrowser() {
+  const COMMON = ["--no-sandbox", "--disable-setuid-sandbox", "--disable-dev-shm-usage"];
+
+  // an explicit path always wins, for CI images that provide their own Chrome
+  if (process.env.PUPPETEER_EXECUTABLE_PATH) {
+    console.log("prerender: browser = PUPPETEER_EXECUTABLE_PATH");
+    return puppeteerCore.launch({
+      executablePath: process.env.PUPPETEER_EXECUTABLE_PATH,
+      args: COMMON,
+      headless: true,
+    });
+  }
+
+  if (process.platform === "linux") {
+    /* The package is ESM with a default export, so a plain require() hands
+       back the interop wrapper ({__esModule, default, ...}) rather than the
+       API — .args would be undefined and spreading it would throw. */
+    const mod = require("@sparticuz/chromium");
+    const chromium = mod.default || mod;
+
+    if (typeof chromium.executablePath !== "function" || !Array.isArray(chromium.args)) {
+      throw new Error(
+        "@sparticuz/chromium did not expose the expected API — " +
+          `got keys: ${Object.keys(chromium).join(", ")}`
+      );
+    }
+
+    const executablePath = await chromium.executablePath();
+    console.log(`prerender: browser = @sparticuz/chromium (${executablePath})`);
+    return puppeteerCore.launch({
+      executablePath,
+      args: [...chromium.args, ...COMMON],
+      defaultViewport: { width: 1280, height: 900 },
+      headless: true,
+    });
+  }
+
+  console.log("prerender: browser = puppeteer (local download)");
+  // eslint-disable-next-line global-require
+  return require("puppeteer").launch({ headless: true, args: COMMON });
+}
 
 const BUILD = path.join(__dirname, "..", "build");
 /* Single source of truth for what exists: the prerenderer walks these and the
@@ -101,10 +153,7 @@ function serve(template) {
   const server = serve(template);
   await new Promise((r) => server.listen(PORT, r));
 
-  const browser = await puppeteer.launch({
-    headless: "new",
-    args: ["--no-sandbox", "--disable-setuid-sandbox", "--disable-dev-shm-usage"],
-  });
+  const browser = await launchBrowser();
 
   let failed = 0;
 
