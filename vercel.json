@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/services/:slug",
+      "destination": "/services",
+      "permanent": true
+    }
+  ]
+}

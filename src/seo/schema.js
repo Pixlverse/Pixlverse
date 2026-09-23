@@ -87,30 +87,3 @@ export const servicesSchema = {
     },
   })),
 };
-
-/**
- * Schema for one service's own page. A `Service` node with its provider and
- * area served is what makes these pages eligible to be understood as distinct
- * offerings rather than six paragraphs on one URL.
- */
-export function serviceSchema(service) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "@id": `${SITE.url}/services/${service.slug}#service`,
-    name: service.title,
-    serviceType: service.title,
-    description: service.blurb,
-    url: `${SITE.url}/services/${service.slug}`,
-    provider: { "@id": `${SITE.url}/#organization` },
-    areaServed: SITE.areasServed.map((name) => ({ "@type": "Place", name })),
-    hasOfferCatalog: {
-      "@type": "OfferCatalog",
-      name: `${service.title} — what's included`,
-      itemListElement: service.points.map((p) => ({
-        "@type": "Offer",
-        itemOffered: { "@type": "Service", name: p },
-      })),
-    },
-  };
-}

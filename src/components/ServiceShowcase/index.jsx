@@ -1,6 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { FaCheck, FaArrowRight } from "react-icons/fa";
+import { FaCheck } from "react-icons/fa";
 import Reveal from "../Reveal";
 import ServiceIcon from "../ServiceIcon";
 import ServiceArt from "../ServiceArt";
@@ -67,11 +66,6 @@ export default function ServiceShowcase({ services }) {
               <strong>Best for:</strong> {s.bestFor}
             </p>
 
-            {/* each service has its own page now — this is the internal link
-                that lets Google find and rank it */}
-            <Link className="svc-more" to={`/services/${s.slug}`}>
-              More on {s.title} <FaArrowRight aria-hidden="true" />
-            </Link>
           </div>
         </Reveal>
       ))}

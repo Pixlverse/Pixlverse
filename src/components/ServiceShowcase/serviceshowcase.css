@@ -172,19 +172,6 @@
   .svc-best { background: var(--bg-tint); }
 }
 
-.svc-more {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  margin-top: 16px;
-  font-weight: 600;
-  font-size: 0.92rem;
-  color: var(--accent);
-}
-.svc-more svg { transition: transform 0.25s ease; font-size: 0.78rem; }
-.svc-more:hover svg { transform: translateX(4px); }
-.svc-more:focus-visible { outline: none; box-shadow: var(--ring); border-radius: 6px; }
-
 /* ---------- stacked ---------- */
 @media (max-width: 880px) {
   .svc-row {

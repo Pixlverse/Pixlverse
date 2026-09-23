@@ -4,6 +4,7 @@ import {
   Routes,
   Route,
   useLocation,
+  Navigate,
 } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 
@@ -19,7 +20,6 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Projects from "./pages/Projects";
 import Services from "./pages/Services";
-import ServiceDetail from "./pages/ServiceDetail";
 import Contact from "./pages/Contact";
 
 /**
@@ -61,11 +61,12 @@ const AnimatedRoutes = () => {
             <Route path="/about" element={<About />} />
             <Route path="/projects" element={<Projects />} />
             <Route path="/services" element={<Services />} />
-            <Route
-              path="/services/:slug"
-              element={<ServiceDetail />}
-            />
             <Route path="/contact" element={<Contact />} />
+            {/* Nothing should ever render an empty shell: an unmatched
+                path is a soft-404 to a crawler. Vercel already 301s the
+                retired /services/:slug URLs (vercel.json); this catches
+                everything else client-side. */}
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </PageTransition>
       </AnimatePresence>
