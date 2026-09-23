@@ -5,11 +5,13 @@ import { SITE } from "../../data/site";
  * SEO — relies on React 19 native metadata hoisting.
  * Rendering <title>/<meta>/<link> anywhere lifts them into <head>.
  * `jsonLd` may be a single object or an array of schema objects.
+ *
+ * No keywords meta: Google dropped it as a ranking signal in 2009 and the
+ * other majors followed. It only ever advertised your targets to competitors.
  */
 export default function SEO({
   title,
   description,
-  keywords,
   path = "/",
   image,
   jsonLd,
@@ -24,7 +26,6 @@ export default function SEO({
     <>
       <title>{fullTitle}</title>
       <meta name="description" content={description} />
-      {keywords && <meta name="keywords" content={keywords} />}
       <link rel="canonical" href={canonical} />
       <meta name="robots" content="index, follow, max-image-preview:large" />
 

@@ -44,11 +44,17 @@ export const NAV_LINKS = [
  * `blurb` — the longer intro used on the Services page.
  * `heading` / `slug` — the Services page H2 and its jump-link anchor.
  * `titleTop` / `titleBottom` — the two-tone title on the Home cards.
+ * `seoTitle` / `seoDescription` — for the service's own page at
+ *   /services/<slug>. Each one targets a distinct search, which is the whole
+ *   point of splitting six services off a single URL.
  */
 export const SERVICES = [
   {
     icon: "design",
     slug: "website-design",
+    seoTitle: "Custom Website Design Company in Kerala",
+    seoDescription:
+      "Custom website design in Kerala built around your customers: clean, mobile-first layouts that tell your brand story and turn visitors into enquiries.",
     title: "Website Design",
     titleTop: "Website",
     titleBottom: "Design",
@@ -69,6 +75,9 @@ export const SERVICES = [
   {
     icon: "code",
     slug: "web-development",
+    seoTitle: "Web Development Company in Kerala & India",
+    seoDescription:
+      "Web development in Kerala and across India: fast, secure, SEO-ready sites and web apps built with clean code, from static pages to full-stack builds.",
     title: "Web Development",
     titleTop: "Web",
     titleBottom: "Development",
@@ -89,6 +98,9 @@ export const SERVICES = [
   {
     icon: "seo",
     slug: "seo-optimization",
+    seoTitle: "SEO Services in Kerala | Technical & Local SEO",
+    seoDescription:
+      "SEO services in Kerala covering technical SEO, local search, structured data and speed tuning, so customers searching for your business actually find it.",
     title: "SEO Optimization",
     titleTop: "SEO",
     titleBottom: "Optimization",
@@ -109,6 +121,9 @@ export const SERVICES = [
   {
     icon: "tools",
     slug: "maintenance-support",
+    seoTitle: "Website Maintenance & Support in Kerala",
+    seoDescription:
+      "Website maintenance and support in Kerala: backups, security checks, uptime monitoring, updates and quick fixes, so your site stays fast and safe.",
     title: "Maintenance & Support",
     titleTop: "Maintenance",
     titleBottom: "& Support",
@@ -129,6 +144,9 @@ export const SERVICES = [
   {
     icon: "revamp",
     slug: "website-revamps",
+    seoTitle: "Website Redesign & Revamp Services in Kerala",
+    seoDescription:
+      "Website redesign in Kerala for slow, dated sites that aren't bringing in enquiries. We audit, redesign and rebuild so your site performs again.",
     title: "Website Revamps",
     titleTop: "Website",
     titleBottom: "Revamps",
@@ -149,6 +167,9 @@ export const SERVICES = [
   {
     icon: "hosting",
     slug: "domain-hosting",
+    seoTitle: "Domain Registration & Website Hosting in Kerala",
+    seoDescription:
+      "Domain registration, DNS, SSL and website hosting set up for you in Kerala, so your site launches smoothly without you wrestling with the technical side.",
     title: "Domain & Hosting",
     titleTop: "Domain",
     titleBottom: "& Hosting",
@@ -179,7 +200,7 @@ export const PROJECTS = [
   {
     name: "Hiwaga Makers",
     url: "https://hiwagamakers.com/",
-    image: "/images/hiwaga-makers.png",
+    image: "/images/hiwaga-makers.webp",
     category: "Advertising",
     location: null,
     blurb:
@@ -190,7 +211,7 @@ export const PROJECTS = [
   {
     name: "Nearbymart",
     url: "https://www.thenearbymart.com/",
-    image: "/images/nearbymart.png",
+    image: "/images/nearbymart.webp",
     category: "E-commerce",
     location: null,
     blurb:
@@ -201,7 +222,7 @@ export const PROJECTS = [
   {
     name: "Mio Pizzeria",
     url: "https://mio-pizzeria.com/",
-    image: "/images/mio-pizzeria.png",
+    image: "/images/mio-pizzeria.webp",
     partner: "Hiwaga Makers",
     category: "Restaurant",
     location: "Qatar",
@@ -213,7 +234,7 @@ export const PROJECTS = [
   {
     name: "Alisha Tours & Travels",
     url: "https://alishatravels.in/",
-    image: "/images/alisha-tours-travels.png",
+    image: "/images/alisha-tours-travels.webp",
     partner: "Hiwaga Makers",
     category: "Travel",
     location: null,
@@ -225,7 +246,7 @@ export const PROJECTS = [
   {
     name: "AJ Homes & Lettings Ltd",
     url: "https://www.ajhomeslettings.co.uk/",
-    image: "/images/aj-homes-lettings-ltd.png",
+    image: "/images/aj-homes-lettings-ltd.webp",
     category: "Real Estate",
     location: "Birmingham, UK",
     blurb:
@@ -236,7 +257,7 @@ export const PROJECTS = [
   {
     name: "Komath & Associates",
     url: "https://komathassociates.in/",
-    image: "/images/komath-associates.png",
+    image: "/images/komath-associates.webp",
     category: "Legal",
     location: "Kerala",
     blurb:
@@ -247,7 +268,7 @@ export const PROJECTS = [
   {
     name: "Evolvers Career Clinic",
     url: "https://www.evolverscareerclinic.com/",
-    image: "/images/evolvers-career-clinic.png",
+    image: "/images/evolvers-career-clinic.webp",
     category: "Careers",
     location: null,
     blurb:
@@ -258,7 +279,7 @@ export const PROJECTS = [
   {
     name: "Government High School for the Blind, Olassa",
     url: "https://blindschoolktm.com/",
-    image: "/images/government-high-school-for-the-blind-olassa.png",
+    image: "/images/government-high-school-for-the-blind-olassa.webp",
     category: "Non-profit",
     location: "Kottayam, Kerala",
     blurb:
@@ -269,7 +290,7 @@ export const PROJECTS = [
   {
     name: "Intern-Preneur Development Program",
     url: "https://internpreneur.in/",
-    image: "/images/intern-preneur-development-program.png",
+    image: "/images/intern-preneur-development-program.webp",
     category: "EdTech",
     location: null,
     blurb:
@@ -280,7 +301,7 @@ export const PROJECTS = [
   {
     name: "N'Able by Shibi Anand",
     url: "https://shibianand.com/",
-    image: "/images/nable-by-shibi-anand.png",
+    image: "/images/nable-by-shibi-anand.webp",
     category: "Education",
     location: null,
     blurb:
@@ -307,14 +328,14 @@ export const TESTIMONIALS = [
   {
     name: "Ananthu Vasudev",
     role: "Founder, Evolvers",
-    img: "/images/ananthu.jpg",
+    img: "/images/ananthu.webp",
     message:
       "I have been working with the team at Pixlverse since 2023, right from their early stages. Having collaborated with several developers over the past 13 years, I can confidently say this is the best team I have worked with. They value their words and our time, and communicate clearly without over-committing. Completely dependable, trustworthy and a true pleasure to work with.",
   },
   {
     name: "Shibi Anand",
     role: "Founder, N'Able",
-    img: "/images/shibi.jpg",
+    img: "/images/shibi.webp",
     message:
       "The Pixlverse team built my website and made the whole process easy. They were approachable, patient and open to feedback. What I really valued was their balance of professionalism and flexibility. If you're looking for a team that listens, understands what you need and actually delivers, I'd recommend them without hesitation.",
   },
@@ -469,7 +490,7 @@ export const NEXT_STEPS = [
   {
     step: "01",
     title: "We read it properly",
-    text: "A real person on our team reviews your request.",
+    text: "A real person reads every request.",
   },
   {
     step: "02",

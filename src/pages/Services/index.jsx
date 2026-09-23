@@ -17,7 +17,6 @@ const Services = () => {
       <SEO
         title="Web Design, Development & SEO Services in Kerala | Pixlverse"
         description="Website design, web development, SEO, redesigns, hosting and ongoing support from a Kerala studio. Fast, secure sites built to bring in customers."
-        keywords="web design and SEO services in Kerala, website redesign, website maintenance, domain and hosting setup, web development services India"
         path="/services"
         jsonLd={[
           servicesSchema,

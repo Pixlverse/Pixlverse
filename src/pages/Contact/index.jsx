@@ -55,7 +55,6 @@ const Contact = () => {
       <SEO
         title="Get a Free Website Quote | Contact Pixlverse, Kerala"
         description="Tell us about your project and get a free, no-obligation website quote from Pixlverse within 24 hours. Kerala-based, serving India and beyond."
-        keywords="get a website quote Kerala, free website quote, hire web developer Kerala, contact Pixlverse"
         path="/contact"
         jsonLd={[
           organizationSchema,

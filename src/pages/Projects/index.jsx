@@ -30,7 +30,6 @@ const Projects = () => {
       <SEO
         title="Web Design Portfolio | Clients in India, UK, Qatar & Dubai"
         description="Browse 25+ websites by Pixlverse for clients in India, the UK, Qatar and Dubai: law, real estate, e-commerce, restaurants, education and more."
-        keywords="web design portfolio Kerala, website examples, client websites, restaurant website design, web development company Kerala"
         path="/projects"
         jsonLd={[
           portfolioSchema,

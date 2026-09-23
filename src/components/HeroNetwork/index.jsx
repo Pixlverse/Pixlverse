@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { useReducedMotion } from "framer-motion";
+import { IS_PRERENDER } from "../../utils/prerender";
 import "./heronetwork.css";
 
 /* Brand ends of the node palette, plus the near-white core every node burns at
@@ -270,7 +271,8 @@ export default function HeroNetwork() {
     };
 
     const start = () => {
-      if (running || reduceMotion) return;
+      /* an endless rAF loop means the prerenderer never sees the page go idle */
+      if (running || reduceMotion || IS_PRERENDER) return;
       running = true;
       last = performance.now();
       raf = requestAnimationFrame(frame);
@@ -283,7 +285,7 @@ export default function HeroNetwork() {
     buildSprites();
     resize();
 
-    if (reduceMotion) {
+    if (reduceMotion || IS_PRERENDER) {
       draw(0);
       return () => {};
     }
