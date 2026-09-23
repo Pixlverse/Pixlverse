@@ -1,54 +1,55 @@
-/* The same charcoal stage as the Home hero: an ink-to-charcoal ramp with
-   --violet and --plum as low-alpha accents rather than a saturated field, and
-   the same node canvas over it. Accents stay in the upper half so the band
-   settles on flat --bg-dark before handing off to the section below. */
 .page-hero {
   position: relative;
   overflow: hidden;
-  /* clears the floating navbar pill plus a gap beneath it */
-  padding: clamp(146px, 17vh, 196px) 0 clamp(52px, 7vw, 84px);
+  padding: clamp(120px, 15vw, 158px) 0 clamp(34px, 5vw, 52px);
+  background: linear-gradient(180deg, #e6e1f0 0%, #ffffff 92%);
   text-align: center;
-  color: #fff;
-  background:
-    radial-gradient(62% 76% at 5% -2%, rgba(123, 63, 228, 0.42) 0%, transparent 62%),
-    radial-gradient(56% 66% at 97% 6%, rgba(180, 63, 143, 0.28) 0%, transparent 60%),
-    linear-gradient(
-      180deg,
-      var(--bg-ink) 0%,
-      var(--bg-dark) 58%,
-      var(--bg-dark) 100%
-    );
 }
 
-.page-hero-bg {
+.page-hero-bg { position: absolute; inset: 0; pointer-events: none; }
+.ph-blob {
   position: absolute;
-  inset: 0;
-  pointer-events: none;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.42;
+}
+.ph-blob-1 {
+  width: 420px; height: 420px;
+  top: -160px; left: -80px;
+  background: radial-gradient(circle, rgba(123, 63, 228, 0.4), transparent 70%);
+}
+.ph-blob-2 {
+  width: 360px; height: 360px;
+  top: -120px; right: -60px;
+  background: radial-gradient(circle, rgba(180, 63, 143, 0.32), transparent 70%);
+}
+.ph-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(123, 63, 228, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(123, 63, 228, 0.05) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(ellipse 60% 70% at 50% 20%, #000 20%, transparent 72%);
+  -webkit-mask-image: radial-gradient(ellipse 60% 70% at 50% 20%, #000 20%, transparent 72%);
 }
 
 .page-hero-inner {
   position: relative;
-  max-width: 880px;
+  max-width: 820px;
 }
-
 .page-hero-title {
-  color: #fff;
-  font-size: clamp(2rem, 4.2vw, 3.05rem);
-  line-height: 1.12;
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
   font-weight: 800;
-  margin: 0 0 16px;
-  text-wrap: balance;
+  margin: 18px 0 16px;
 }
 .page-hero-sub {
-  color: rgba(255, 255, 255, 0.76);
-  font-size: clamp(1rem, 1.5vw, 1.1rem);
-  line-height: 1.6;
-  max-width: 640px;
+  color: var(--muted);
+  font-size: clamp(1.02rem, 1.6vw, 1.15rem);
+  max-width: 620px;
   margin: 0 auto;
-  text-wrap: pretty;
 }
 
-/* meta strip — chips below the subtitle so the hero never feels bare */
+/* meta strip — chips / stats below the subtitle so the hero never feels bare */
 .page-hero-meta {
   display: flex;
   flex-wrap: wrap;
@@ -56,25 +57,35 @@
   gap: 12px;
   margin-top: 30px;
 }
-
-/* glass pills, the same language as the navbar and the hero proof figures */
 .ph-chip {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 9px 18px;
+  background: #fff;
+  border: 1px solid var(--line);
   border-radius: 999px;
+  padding: 9px 18px;
   font-size: 0.9rem;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.88);
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  color: var(--ink-2);
+  box-shadow: var(--shadow-sm);
 }
-.ph-chip svg { color: #c9a6ff; }
+.ph-chip svg { color: var(--violet); }
 
-/* The hero is dark and the first content section is light, so that section
-   needs its own breathing room — it is no longer continuous with the banner
-   the way the old pale hero was. */
-.section--flush-top { padding-top: clamp(44px, 5vw, 68px); }
+.ph-stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(24px, 5vw, 56px);
+  margin-top: 34px;
+}
+.ph-stat { display: flex; flex-direction: column; gap: 2px; }
+.ph-stat b {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+}
+.ph-stat span { color: var(--muted); font-size: 0.88rem; }
+
+/* tighten the first content section so the hero doesn't leave a huge gap */
+.section--flush-top { padding-top: clamp(40px, 5vw, 60px); }

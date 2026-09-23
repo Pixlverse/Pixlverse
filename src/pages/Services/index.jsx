@@ -1,13 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
 import PageHero from "../../components/PageHero";
 import Reveal from "../../components/Reveal";
-import ProcessSteps from "../../components/ProcessSteps";
-import ServiceShowcase from "../../components/ServiceShowcase";
-import CtaRadar from "../../components/CtaRadar";
 import SEO from "../../components/SEO";
+import ServiceIcon from "../../components/ServiceIcon";
 import "./services.css";
-import { FaArrowRight } from "react-icons/fa";
+import { FaArrowRight, FaCheck } from "react-icons/fa";
 import { SERVICES, PROCESS } from "../../data/site";
 import { servicesSchema, breadcrumbSchema } from "../../seo/schema";
 
@@ -15,29 +15,51 @@ const Services = () => {
   return (
     <>
       <SEO
-        title="Web Design, Development & SEO Services in Kerala | Pixlverse"
-        description="Website design, web development, SEO, redesigns, hosting and ongoing support from a Kerala studio. Fast, secure sites built to bring in customers."
-        keywords="web design and SEO services in Kerala, website redesign, website maintenance, domain and hosting setup, web development services India"
+        title="Web Design, Development & SEO Services in Kerala, India | Pixlverse"
+        description="Explore Pixlverse's full suite of web services — website design, web development, SEO optimization, maintenance, revamps, and domain & hosting — for businesses in Kerala and across India."
+        keywords="website design services Kerala, web development services India, SEO services Kerala, website maintenance, website revamp, domain hosting Kerala, web design company Kerala"
         path="/services"
-        jsonLd={[
-          servicesSchema,
-          breadcrumbSchema([
-            { name: "Home", path: "/" },
-            { name: "Services", path: "/services" },
-          ]),
-        ]}
+        jsonLd={[servicesSchema, breadcrumbSchema([{ name: "Home", path: "/" }, { name: "Services", path: "/services" }])]}
       />
+      <Navbar />
 
       <main>
         <PageHero
-          title="Web Design, Development & SEO Services in Kerala"
-          subtitle="Six services, one accountable team. From your first idea to long-term growth, we build websites that get found, load fast and turn visitors into customers."
-        />
+          eyebrow="Our services"
+          title="Elevate your digital experience"
+          subtitle="A full suite of web services designed for impact, performance and growth — from first pixel to long-term partnership."
+        >
+          <div className="page-hero-meta">
+            {SERVICES.map((s) => (
+              <span key={s.title} className="ph-chip">
+                <ServiceIcon name={s.icon} /> {s.title}
+              </span>
+            ))}
+          </div>
+        </PageHero>
 
         {/* Services list */}
         <section className="section section--flush-top">
-          <div className="container">
-            <ServiceShowcase services={SERVICES} />
+          <div className="container services-stack">
+            {SERVICES.map((s, i) => (
+              <Reveal key={s.title} className="service-row card" delay={(i % 2) * 0.06}>
+                <div className="service-row-head">
+                  <span className="service-row-icon">
+                    <ServiceIcon name={s.icon} />
+                  </span>
+                  <div>
+                    <h2>{s.title}</h2>
+                    <p className="service-row-tagline">{s.tagline}</p>
+                  </div>
+                </div>
+                <p className="service-row-blurb">{s.blurb}</p>
+                <ul className="service-points">
+                  {s.points.map((p) => (
+                    <li key={p}><FaCheck /> {p}</li>
+                  ))}
+                </ul>
+              </Reveal>
+            ))}
           </div>
         </section>
 
@@ -45,13 +67,19 @@ const Services = () => {
         <section className="section section--dark">
           <div className="container">
             <Reveal className="section-head">
-              <h2>From First Idea to Successful Launch</h2>
-              <p>
-                A clear, collaborative process that keeps you in the loop at
-                every step.
-              </p>
+              <span className="eyebrow">How we work</span>
+              <h2>From first idea to successful launch</h2>
+              <p>A clear, collaborative process that keeps you in the loop at every step.</p>
             </Reveal>
-            <ProcessSteps steps={PROCESS} />
+            <div className="svc-process">
+              {PROCESS.map((p, i) => (
+                <Reveal key={p.step} className="svc-process-card" delay={i * 0.08}>
+                  <span className="svc-step">{p.step}</span>
+                  <h3>{p.title}</h3>
+                  <p>{p.desc}</p>
+                </Reveal>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -59,12 +87,8 @@ const Services = () => {
         <section className="section">
           <div className="container">
             <Reveal className="cta-box" direction="up">
-              <CtaRadar />
-              <h2>Ready to Start Your Project?</h2>
-              <p>
-                Tell us what you have in mind. We'll send a transparent quote
-                within 24 hours.
-              </p>
+              <h2>Ready to start your project?</h2>
+              <p>Tell us what you have in mind — we'll send a transparent quote within 24 hours.</p>
               <Link to="/contact" className="btn btn--primary">
                 Get a free quote <FaArrowRight />
               </Link>
@@ -73,6 +97,7 @@ const Services = () => {
         </section>
       </main>
 
+      <Footer />
     </>
   );
 };

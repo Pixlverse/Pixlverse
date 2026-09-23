@@ -1,25 +1,37 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
 import PageHero from "../../components/PageHero";
 import Reveal from "../../components/Reveal";
-import CtaRadar from "../../components/CtaRadar";
-import SectorMarquee from "../../components/SectorMarquee";
-import StatCircles from "../../components/StatCircles";
-import ServiceIcon from "../../components/ServiceIcon";
-import TiltCard from "../../components/TiltCard";
 import SEO from "../../components/SEO";
 import "./about.css";
-import { FaArrowRight } from "react-icons/fa";
-import { STATS, VALUES, SECTORS } from "../../data/site";
+import { FaArrowRight, FaCheck } from "react-icons/fa";
+import { STATS } from "../../data/site";
 import { organizationSchema, breadcrumbSchema } from "../../seo/schema";
+
+const VALUES = [
+  {
+    title: "Clarity over jargon",
+    text: "We explain things in plain language and never over-commit. You always know what's happening.",
+  },
+  {
+    title: "Craft over shortcuts",
+    text: "Clean, maintainable code and considered design — the kind that lasts and scales.",
+  },
+  {
+    title: "Partnership over hand-offs",
+    text: "We don't disappear at launch. We stay on as your long-term digital partner.",
+  },
+];
 
 const About = () => {
   return (
     <>
       <SEO
-        title="About Pixlverse | Web Design Studio in Kerala, India"
-        description="Meet Pixlverse, a Kerala web design studio building fast, SEO-ready websites for clients in India, the UK, Qatar and Dubai since 2023."
-        keywords="web design studio Kerala, website design company India, web design for UK and Gulf businesses, about Pixlverse"
+        title="About Pixlverse | Website Design & Development Team in Kerala, India"
+        description="Since 2023, Pixlverse has partnered with clients across India and the UK to build elegant, high-performing websites. Learn about our purpose-driven web studio in Kerala."
+        keywords="about Pixlverse, website design team Kerala, web development studio India, web designers Kerala"
         path="/about"
         jsonLd={[
           organizationSchema,
@@ -29,12 +41,23 @@ const About = () => {
           ]),
         ]}
       />
+      <Navbar />
 
       <main>
         <PageHero
-          title="About Pixlverse: A Web Design Studio Built on Craft and Care"
-          subtitle="We build websites that work as hard as you do. They look sharp, load fast and bring in customers."
-        />
+          eyebrow="About Pixlverse"
+          title="Building with purpose, pixel by pixel"
+          subtitle="We craft elegant, high-performing websites that do more than look good — they work hard for your business."
+        >
+          {/* <div className="ph-stats">
+            {STATS.map((s) => (
+              <div className="ph-stat" key={s.label}>
+                <b className="gradient-text">{s.value}</b>
+                <span>{s.label}</span>
+              </div>
+            ))}
+          </div> */}
+        </PageHero>
 
         {/* Story */}
         <section className="section section--flush-top">
@@ -42,47 +65,44 @@ const About = () => {
             <Reveal className="about-media" direction="right">
               <img
                 src="/images/sl3.jpg"
-                alt="The Pixlverse team designing a website in Kerala"
+                alt="The Pixlverse team crafting a website"
               />
             </Reveal>
             <Reveal className="about-text" direction="left" delay={0.1}>
-              <h2>A Studio Built on Craft and Care</h2>
+              <span className="eyebrow">Our story</span>
+              <h2>A studio built on craft &amp; care</h2>
               <p>
-                Pixlverse began in <strong>2023</strong> with a simple belief: a
-                website should be both well-designed and well-built. Too many
-                agencies do one and neglect the other. So every project we take
-                on balances clean, maintainable code with thoughtful, user-first
-                design, giving your visitors a smooth, fast and memorable
-                experience.
+                At Pixlverse, every project is built with a balance of clean,
+                maintainable code and thoughtful, user-centric design — ensuring
+                a smooth, fast and memorable experience for your visitors.
               </p>
               <p>
-                Since then, we've worked with clients across India, the UK,
-                Qatar and Dubai, turning ideas into websites that drive real
-                results. Whether you need a brand-new site or want to improve an
-                existing one, our work doesn't end at launch. We keep your
-                website secure, current and ahead of the curve.
+                Since <strong>2023</strong>, we've partnered with clients across
+                India and the world, transforming ideas into digital realities
+                that drive results. Whether you need a brand-new website or want
+                to elevate an existing one, our commitment goes beyond launch —
+                we provide continuous support to keep your online presence
+                secure, relevant and ahead of the curve.
               </p>
             </Reveal>
           </div>
         </section>
 
-        {/* Philosophy */}
+        {/* Why */}
         <section className="section section--dark">
           <div className="container about-split about-split--reverse">
             <Reveal className="about-media" direction="left">
-              <img
-                src="/images/sl5.jpg"
-                alt="Pixlverse web design and development work"
-              />
+              <img src="/images/sl5.jpg" alt="Pixlverse digital design work" />
             </Reveal>
             <Reveal className="about-text" direction="right" delay={0.1}>
-              <h2>Your Website Is Your Digital Brochure</h2>
+              <span className="eyebrow">Why Pixlverse</span>
+              <h2>Your idea, turned into a digital brochure</h2>
               <p>
-                For most customers, your website is the first impression. It's
-                your digital brochure, working 24/7 to show what you do and why
-                you're the right choice. Our job is to make sure it reflects
-                your vision and communicates your value clearly to the people
-                you want to reach.
+                Your website isn't just a collection of pages — it's your
+                digital brochure, the first impression that can take your brand
+                to the next level. Our goal is to ensure every website we
+                deliver reflects your unique vision while clearly communicating
+                your value to the world.
               </p>
               <p className="about-quote">
                 "Your idea. We turn it into a digital brochure."
@@ -91,21 +111,31 @@ const About = () => {
           </div>
         </section>
 
-        {/* Impact */}
+        {/* Stats */}
         <section className="section">
           <div className="container">
             <Reveal className="section-head">
-              <h2>Trusted by Businesses Near and Far</h2>
+              <span className="eyebrow">Our impact</span>
+              <h2>Trusted by businesses, near and far</h2>
               <p>
-                Our clients span technology, finance, healthcare, education,
-                consulting, logistics, real estate, legal, restaurants, travel
-                and e-commerce, across four countries.
+                From tech and finance to healthcare, education, consulting and
+                logistics — across 3+ countries.
               </p>
             </Reveal>
-
-            <StatCircles items={STATS} />
-
-            <SectorMarquee items={SECTORS} />
+            <div className="about-stats">
+              {STATS.map((s, i) => (
+                <Reveal
+                  key={s.label}
+                  className="about-stat card"
+                  delay={i * 0.08}
+                >
+                  <span className="about-stat-value gradient-text">
+                    {s.value}
+                  </span>
+                  <span className="about-stat-label">{s.label}</span>
+                </Reveal>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -113,26 +143,22 @@ const About = () => {
         <section className="section section--soft">
           <div className="container">
             <Reveal className="section-head">
-              <h2>The Values Behind Every Build</h2>
+              <span className="eyebrow">How we think</span>
+              <h2>The values behind every build</h2>
             </Reveal>
             <div className="about-values">
               {VALUES.map((v, i) => (
-                <TiltCard
+                <Reveal
                   key={v.title}
-                  /* no `card` class — that carries the white fill the dark
-                     bands override it to, and these are glass */
-                  className="value-card"
+                  className="value-card card"
                   delay={i * 0.08}
-                  style={{ "--accent": v.color }}
                 >
-                  <div className="value-head">
-                    <span className="value-icon">
-                      <ServiceIcon name={v.icon} />
-                    </span>
-                    <h3>{v.title}</h3>
-                  </div>
+                  <span className="value-check">
+                    <FaCheck />
+                  </span>
+                  <h3>{v.title}</h3>
                   <p>{v.text}</p>
-                </TiltCard>
+                </Reveal>
               ))}
             </div>
           </div>
@@ -142,20 +168,21 @@ const About = () => {
         <section className="section">
           <div className="container">
             <Reveal className="cta-box" direction="up">
-              <CtaRadar />
-              <h2>Not Sure Where to Start? We'll Help.</h2>
+              <h2>Not sure where to start?</h2>
               <p>
-                Planning a website can feel overwhelming. Tell us about your
-                business and we'll help you set clear goals, shape a strategy
-                and build a site that grows with you.
+                We know planning a website can feel overwhelming — that's where
+                we come in. We'll help you identify your goals, shape a
+                strategy, and build a site that grows with your business.
               </p>
               <Link to="/contact" className="btn btn--primary">
-                Talk to our team <FaArrowRight />
+                Let's talk <FaArrowRight />
               </Link>
             </Reveal>
           </div>
         </section>
       </main>
+
+      <Footer />
     </>
   );
 };

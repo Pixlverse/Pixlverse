@@ -1,25 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
 import PageHero from "../../components/PageHero";
 import Reveal from "../../components/Reveal";
-import CtaRadar from "../../components/CtaRadar";
 import SEO from "../../components/SEO";
-import ProjectIndex from "../../components/ProjectIndex";
 import "./projects.css";
-import { FaArrowRight, FaInfoCircle } from "react-icons/fa";
-import { PROJECTS, PARTNER, SITE } from "../../data/site";
+import { FaArrowRight, FaExternalLinkAlt } from "react-icons/fa";
+import { PROJECTS, SITE } from "../../data/site";
 import { breadcrumbSchema } from "../../seo/schema";
 
 const portfolioSchema = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
   name: "Pixlverse Portfolio",
-  description:
-    "Websites designed and developed by Pixlverse for clients in India, the UK, Qatar and Dubai.",
+  description: "Websites designed and developed by Pixlverse.",
   hasPart: PROJECTS.map((p) => ({
     "@type": "CreativeWork",
     name: p.name,
-    ...(p.url ? { url: p.url } : {}),
+    url: p.url,
     creator: { "@id": `${SITE.url}/#organization` },
   })),
 };
@@ -28,9 +27,9 @@ const Projects = () => {
   return (
     <>
       <SEO
-        title="Web Design Portfolio | Clients in India, UK, Qatar & Dubai"
-        description="Browse 25+ websites by Pixlverse for clients in India, the UK, Qatar and Dubai: law, real estate, e-commerce, restaurants, education and more."
-        keywords="web design portfolio Kerala, website examples, client websites, restaurant website design, web development company Kerala"
+        title="Our Work | Website Design & Development Portfolio | Pixlverse Kerala"
+        description="Explore websites designed and developed by Pixlverse for clients across India and the UK — e-commerce, real estate, legal, education and non-profit projects."
+        keywords="Pixlverse portfolio, website design portfolio Kerala, web development examples India, web development company Kerala"
         path="/projects"
         jsonLd={[
           portfolioSchema,
@@ -40,70 +39,73 @@ const Projects = () => {
           ]),
         ]}
       />
+      <Navbar />
 
       <main>
         <PageHero
-          title="Our Work: Websites We've Designed and Built"
-          subtitle="25+ projects across four countries and many industries. Every project below is live."
-        />
+          eyebrow="Our creations"
+          title="Work we're proud to share"
+          subtitle="A showcase of the websites we've designed and built for clients across industries and continents."
+        >
+          {/* <div className="ph-stats">
+            <div className="ph-stat"><b>{PROJECTS.length}+</b><span>Websites delivered</span></div>
+            <div className="ph-stat"><b>3+</b><span>Countries served</span></div>
+            <div className="ph-stat"><b>7</b><span>Industries</span></div>
+          </div> */}
+        </PageHero>
 
         <section className="section section--flush-top">
-          <div className="container">
-            {/* Sites go down for reasons that have nothing to do with the
-                build — an expired domain, a lapsed host. Saying so up front is
-                better than a visitor hitting a dead link and drawing their own
-                conclusion about the work. */}
-            <Reveal className="proj-notice" direction="up">
-              <span className="proj-notice-icon" aria-hidden="true">
-                <FaInfoCircle />
-              </span>
-              <p>
-                Every site below is one we designed and built. If a link
-                doesn't open, the client's domain or hosting may have lapsed or
-                be mid-renewal — once a project is handed over, that sits with
-                them rather than with us.
-              </p>
-            </Reveal>
-
-            <ProjectIndex projects={PROJECTS} />
-
-            {/* the standalone "Built Together" section said this at section
-                length and repeated two projects already listed above */}
-            <Reveal className="proj-partner" direction="up" delay={0.1}>
-              <div className="proj-partner-lockup">
-                <span className="proj-partner-eyebrow">Creative partner</span>
-                <p className="proj-partner-names">
-                  <span>{SITE.name}</span>
-                  <span className="proj-partner-x" aria-hidden="true">
-                    &times;
+          <div className="container projects-grid">
+            {PROJECTS.map((p, i) => (
+              <Reveal
+                key={p.name}
+                className="project-card card"
+                delay={(i % 2) * 0.08}
+              >
+                <a
+                  href={p.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="project-media"
+                >
+                  <img
+                    src={p.image}
+                    alt={`${p.name} website built by Pixlverse`}
+                    loading="lazy"
+                  />
+                  <span className="project-cat">{p.category}</span>
+                  <span className="project-overlay">
+                    <FaExternalLinkAlt />
                   </span>
-                  <span className="proj-partner-other">{PARTNER.name}</span>
-                </p>
-              </div>
-
-              <div className="proj-partner-copy">
-                <p>{PARTNER.note}</p>
-                <p className="proj-partner-legend">
-                  Projects marked
-                  <span className="proj-tag proj-tag--partner">
-                    Built with {PARTNER.name}
-                  </span>
-                  above were delivered together.
-                </p>
-              </div>
-            </Reveal>
+                </a>
+                <div className="project-body">
+                  <h2>
+                    <a href={p.url} target="_blank" rel="noopener noreferrer">
+                      {p.name}
+                    </a>
+                  </h2>
+                  <p>{p.blurb}</p>
+                  <a
+                    href={p.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="project-link"
+                  >
+                    Visit live site <FaArrowRight />
+                  </a>
+                </div>
+              </Reveal>
+            ))}
           </div>
         </section>
 
-        {/* ===================== CTA ===================== */}
-        <section className="section">
+        <section className="section section--dark">
           <div className="container">
-            <Reveal className="cta-box" direction="up">
-              <CtaRadar />
-              <h2>Want a Website Like These for Your Business?</h2>
+            <Reveal className="projects-cta" direction="up">
+              <h2>Ready to transform your online presence?</h2>
               <p>
-                From first idea to launch, we'll build a website that puts your
-                brand in front of the right customers.
+                From idea to execution, we'll create a powerful digital presence
+                that puts your brand at the forefront.
               </p>
               <Link to="/contact" className="btn btn--primary">
                 Start your project <FaArrowRight />
@@ -113,6 +115,7 @@ const Projects = () => {
         </section>
       </main>
 
+      <Footer />
     </>
   );
 };

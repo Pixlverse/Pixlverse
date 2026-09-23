@@ -17,14 +17,29 @@
   pointer-events: none;
 }
 
-/* The CTA banner that used to sit here was a near-duplicate of the .cta-box
-   panel immediately above it — the same sentence twice in a row. */
+/* CTA banner */
+.footer-cta {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  flex-wrap: wrap;
+  padding-top: clamp(56px, 7vw, 84px);
+  padding-bottom: clamp(40px, 5vw, 56px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.footer-cta h2 {
+  color: #fff;
+  font-size: clamp(1.6rem, 3.4vw, 2.4rem);
+}
+.footer-cta p {
+  color: #a99fc7;
+  margin-top: 8px;
+}
 
 /* main grid */
 .footer-main {
-  /* the removed banner carried the rule that separated the footer from the
-     page; the grid takes it over */
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
   position: relative;
   display: grid;
   grid-template-columns: 1.6fr 1fr 1fr 1fr;
@@ -34,9 +49,9 @@
 }
 
 .footer-logo {
-  height: 30px;
+  height: 60px;
   width: auto;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 
 .footer-desc {
@@ -67,7 +82,6 @@
 .footer-col ul li {
   margin-bottom: 11px;
 }
-.footer-col ul li:last-child { margin-bottom: 0; }
 .footer-col a,
 .footer-areas li {
   color: #a99fc7;
@@ -99,6 +113,17 @@
   color: #fff;
   transform: translateY(-3px);
 }
+.footer-socials .social-disabled {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.07);
+  color: #6f678c;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
 
 .footer-bottom {
   position: relative;
@@ -113,22 +138,10 @@
   font-size: 0.85rem;
   color: #8a82a8;
 }
-.footer-keywords {
-  color: #6f678c;
-  text-align: right;
-  max-width: 620px;
-  line-height: 1.6;
-}
-
-@media (max-width: 720px) {
-  .footer-keywords { text-align: left; }
-}
+.footer-keywords { color: #6f678c; }
 
 @media (max-width: 900px) {
   .footer-main {
-  /* the removed banner carried the rule that separated the footer from the
-     page; the grid takes it over */
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
     grid-template-columns: 1fr 1fr;
     gap: 32px;
   }
@@ -136,9 +149,6 @@
 }
 
 @media (max-width: 560px) {
-  .footer-main {
-  /* the removed banner carried the rule that separated the footer from the
-     page; the grid takes it over */
-  border-top: 1px solid rgba(255, 255, 255, 0.08); grid-template-columns: 1fr; }
+  .footer-main { grid-template-columns: 1fr; }
   .footer-bottom { flex-direction: column; align-items: flex-start; }
 }
