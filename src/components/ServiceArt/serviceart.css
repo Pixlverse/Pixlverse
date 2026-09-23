@@ -1,0 +1,29 @@
+/* Glass illustration sitting in the bottom-right of a service card, bleeding
+   slightly past the edge the way a product shot would. Colour comes from the
+   card tone via `color`, so one drawing serves all three tones. */
+.service-art {
+  position: absolute;
+  right: -10px;
+  bottom: -6px;
+  z-index: -1;
+  width: 208px;
+  max-width: 64%;
+  pointer-events: none;
+  transition: transform 0.5s cubic-bezier(0.16, 0.84, 0.24, 1);
+}
+
+.service-art svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* the glow that sells the glass */
+  filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.22));
+}
+
+.service-card:hover .service-art {
+  transform: translate(-6px, -6px) scale(1.04);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .service-art { transition: none; }
+}

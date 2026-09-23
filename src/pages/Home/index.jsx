@@ -1,20 +1,24 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
-import Navbar from "../../components/Navbar";
-import Footer from "../../components/Footer";
-import Reveal from "../../components/Reveal";
-import SEO from "../../components/SEO";
-import ServiceIcon from "../../components/ServiceIcon";
-import "./home.css";
 import {
-  FaArrowRight,
-  FaCheckCircle,
-  FaBolt,
-  FaComments,
-  FaBrain,
-  FaStar,
-  FaQuoteLeft,
-} from "react-icons/fa";
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
+import Reveal from "../../components/Reveal";
+import CtaRadar from "../../components/CtaRadar";
+import TiltCard from "../../components/TiltCard";
+import Counter from "../../components/Counter";
+import HeroNetwork from "../../components/HeroNetwork";
+import FaqGrid from "../../components/FaqGrid";
+import FlagIcon from "../../components/FlagIcon";
+import WhyDeck from "../../components/WhyDeck";
+import SEO from "../../components/SEO";
+import ServiceArt from "../../components/ServiceArt";
+import WorkShowcase from "../../components/WorkShowcase";
+import "./home.css";
+import { FaArrowRight, FaQuoteLeft } from "react-icons/fa";
 import {
   SERVICES,
   PROJECTS,
@@ -22,136 +26,169 @@ import {
   PROCESS,
   STATS,
   FAQS,
+  HERO_TRUST,
+  WHY_POINTS,
 } from "../../data/site";
 import { organizationSchema, websiteSchema, faqSchema } from "../../seo/schema";
 
-const WHY = [
-  {
-    icon: <FaCheckCircle />,
-    color: "#24b700",
-    title: "Pixel-perfect execution",
-    text: "Every detail crafted with care, from spacing to micro-interactions.",
-  },
-  {
-    icon: <FaBolt />,
-    color: "#f5a524",
-    title: "Built for speed & SEO",
-    text: "Fast-loading, search-optimised sites that get found and convert.",
-  },
-  {
-    icon: <FaComments />,
-    color: "#00abff",
-    title: "Ongoing collaboration",
-    text: "Clear communication and continuous support well beyond launch.",
-  },
-  {
-    icon: <FaBrain />,
-    color: "#b43f8f",
-    title: "Tech + design strategy",
-    text: "We pair clean engineering with thoughtful, business-driven design.",
-  },
+const FEATURED = PROJECTS.filter((p) => p.featured);
+
+/* One card surface — light glass — with three accents cycling across the grid,
+   so every row reads as the same trio repeating. The colour is positional
+   rhythm rather than a property of the service, which is why it lives here and
+   not in src/data/site.js.
+   `ink` is the same hue darkened enough to hold 4.5:1 as title text on the
+   light fill; `accent` is the raw hue for the illustration, badge and glow. */
+/* The brand gradient sampled at four points. Walking violet -> plum along the
+   track is what makes it read as progress rather than four identical markers.
+   Ring and halo are pre-baked rgba of the same hue so the CSS needs no
+   colour maths. */
+const PROCESS_ACCENTS = [
+  { c: "#7b3fe4", ring: "rgba(123, 63, 228, 0.42)", halo: "rgba(123, 63, 228, 0.09)" },
+  { c: "#8e3fc8", ring: "rgba(142, 63, 200, 0.42)", halo: "rgba(142, 63, 200, 0.09)" },
+  { c: "#a13fab", ring: "rgba(161, 63, 171, 0.42)", halo: "rgba(161, 63, 171, 0.09)" },
+  { c: "#b43f8f", ring: "rgba(180, 63, 143, 0.42)", halo: "rgba(180, 63, 143, 0.09)" },
+];
+
+const SERVICE_ACCENTS = [
+  { accent: "#7b3fe4", ink: "#7b3fe4" }, // violet
+  { accent: "#d63f9a", ink: "#b03681" }, // plum
+  { accent: "#12b886", ink: "#14745c" }, // emerald
 ];
 
 const Home = () => {
-  const newLocal = (
-    <span className="hero-pill hero-pill-4">
-      <FaBrain style={{ color: "#b43f8f" }} /> Strategy-led design
-    </span>
-  );
+  const reduceMotion = useReducedMotion();
+
+  /* Hero parallax: the copy drifts up and dissolves slightly faster than the
+     page scrolls, so the stage behind it appears to sit further back. */
+  const heroRef = useRef(null);
+  const { scrollYProgress: heroProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const heroY = useTransform(heroProgress, [0, 1], [0, 120]);
+  const heroFade = useTransform(heroProgress, [0, 0.75], [1, 0]);
+  const heroScale = useTransform(heroProgress, [0, 1], [1, 0.94]);
+
   return (
     <>
       <SEO
-        title="Pixlverse | Best Website Design & Development Company in India"
-        description="Pixlverse is a top website design & development studio in Kerala, India. We build elegant, fast, SEO-optimised websites for businesses. Get a free quote today."
-        keywords="website design Kerala, web development Kerala, best website builder Kerala, website development company India, website designers in Kerala, SEO optimization Kerala, affordable website design India, custom website development"
+        title="Website Design & Development Company in Kerala | Pixlverse"
+        description="Pixlverse is a Kerala web design studio building fast, SEO-ready websites that turn visitors into customers. Get a free quote in 24 hours."
+        keywords="website design & development company in Kerala, web design Kerala, website developers Kerala, custom website for business, website design company India"
         path="/"
         jsonLd={[organizationSchema, websiteSchema, faqSchema]}
       />
-      <Navbar />
 
       <main>
-        {/* ===================== HERO ===================== */}
-        <section className="hero">
-          <div className="hero-bg" aria-hidden="true">
-            <span className="blob blob-1"></span>
-            <span className="blob blob-2"></span>
-            <span className="grid-fade"></span>
-          </div>
-          <div className="container hero-inner">
+        {/* The hero and the Services band share one backdrop: a single
+            gradient on .hero-stage and a single node canvas spanning both, so
+            there is no boundary between them to match up. The network thins
+            out as it travels down — see the mask in heronetwork.css. */}
+        <div className="hero-stage">
+          <HeroNetwork />
+
+          {/* ===================== HERO ===================== */}
+          <section className="hero" ref={heroRef}>
+
+          <motion.div
+            className="container hero-inner"
+            style={
+              reduceMotion
+                ? undefined
+                : { y: heroY, opacity: heroFade, scale: heroScale }
+            }
+          >
             <Reveal className="hero-copy" direction="up">
-              {/* <span className="eyebrow">Website Studio · Kerala, India</span> */}
               <h1>
-                We build websites that{" "}
-                <span className="gradient-text">win you customers</span>.
+                Website Design &amp; Development{" "}
+                <span className="hero-accent">That Connects You to Customers</span>
               </h1>
               <p className="hero-sub">
-                We design and build elegant, high-performing websites that load
-                fast, rank well and turn visitors into customers — backed by
-                clean code, thoughtful design and support that never stops at
-                launch. Infinite possibilities, pixel perfect.
+                Fast, search-friendly websites that get found on Google and turn
+                visitors into enquiries — built in Kerala for businesses across
+                India, the UK, Qatar and Dubai.
               </p>
               <div className="btn-row hero-cta">
                 <Link to="/contact" className="btn btn--primary">
-                  Get a free quote <FaArrowRight />
+                  Get your free quote <FaArrowRight />
                 </Link>
-                <Link to="/projects" className="btn btn--ghost">
-                  View our work
+                <Link to="/projects" className="btn btn--light">
+                  See our work <FaArrowRight />
                 </Link>
-              </div>
-
-              <div className="hero-trust">
-                <div className="hero-stars">
-                  {[...Array(5)].map((_, i) => (
-                    <FaStar key={i} />
-                  ))}
-                </div>
-                <span>
-                  Trusted by 20+ businesses across India &amp; the UK since 2023
-                </span>
               </div>
             </Reveal>
-          </div>
 
-          <div className="hero-pills" aria-hidden="true">
-            <span className="hero-pill hero-pill-1">
-              <FaBolt /> Fast &amp; SEO-ready
-            </span>
-            <span className="hero-pill hero-pill-2">
-              <FaCheckCircle style={{ color: "#24b700" }} /> Pixel-perfect
-              design
-            </span>
-            <span className="hero-pill hero-pill-3">
-              <FaComments style={{ color: "#00abff" }} /> Ongoing support
-            </span>
-            {newLocal}
-          </div>
+            {/* the three proof points, set straight on the hero — no panel, no
+                fill, just figures separated by hairlines */}
+            <Reveal className="hero-proof" direction="up" delay={0.15}>
+              <ul>
+                {HERO_TRUST.map((item) => (
+                  <li className="proof-stat" key={item.label}>
+                    <Counter className="proof-value" value={item.value} />
+                    <span className="proof-label">{item.label}</span>
+
+                    {item.flags ? (
+                      <>
+                        <span className="proof-flags" aria-hidden="true">
+                          {item.flags.map((f) => (
+                            <span className="proof-flag" key={f.code}>
+                              <FlagIcon code={f.code} />
+                            </span>
+                          ))}
+                        </span>
+                        {/* the names stay as text — the flags are decoration */}
+                        <span className="proof-note">
+                          {item.flags.map((f) => f.name).join(" · ")}
+                        </span>
+                      </>
+                    ) : (
+                      item.note && <span className="proof-note">{item.note}</span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+          </motion.div>
         </section>
 
         {/* ===================== SERVICES ===================== */}
         <section className="section section--dark" id="services">
           <div className="container">
             <Reveal className="section-head">
-              <span className="eyebrow">What we offer</span>
-              <h2>Everything your website needs, in one team</h2>
+              <h2>Everything Your Business Needs Online, From One Team</h2>
               <p>
-                Expertly crafted digital solutions for modern brands — from
-                first pixel to long-term growth.
+                Stop juggling a designer, a developer, an SEO freelancer and a
+                hosting company. We handle the whole journey, from first sketch
+                to long-term growth.
               </p>
             </Reveal>
 
             <div className="services-grid">
               {SERVICES.map((s, i) => (
-                <Reveal
+                <TiltCard
                   key={s.title}
-                  className="service-card card"
+                  className="service-card"
                   delay={(i % 3) * 0.08}
+                  max={6}
+                  style={{
+                    "--accent": SERVICE_ACCENTS[i % 3].accent,
+                    "--accent-ink": SERVICE_ACCENTS[i % 3].ink,
+                  }}
                 >
-                  <div className="service-icon">
-                    <ServiceIcon name={s.icon} />
-                  </div>
-                  <h3>{s.title}</h3>
-                  <p>{s.blurb}</p>
-                </Reveal>
+                  <ServiceArt name={s.slug} />
+                  <h3>
+                    <span className="svc-title-top">{s.titleTop}</span>
+                    <span className="svc-title-bottom">{s.titleBottom}</span>
+                  </h3>
+                  <p>{s.card}</p>
+                  <Link to={`/services#${s.slug}`} className="service-more">
+                    <span className="service-more-badge">
+                      <FaArrowRight />
+                    </span>
+                    Learn more
+                  </Link>
+                </TiltCard>
               ))}
             </div>
 
@@ -161,87 +198,85 @@ const Home = () => {
               </Link>
             </Reveal>
           </div>
-        </section>
+          </section>
+        </div>
 
         {/* ===================== PROCESS ===================== */}
-        <section className="section">
+        <section className="section" id="process">
           <div className="container">
             <Reveal className="section-head">
-              <span className="eyebrow">How we work</span>
-              <h2>A simple process, a polished result</h2>
+              <h2>Our Simple 4-Step Website Process</h2>
               <p>
-                We guide you from the very first idea to a successful launch —
-                and stay on long after.
+                No jargon, no surprises. You'll always know what's happening and
+                what comes next.
               </p>
             </Reveal>
 
-            <div className="process-grid">
-              {PROCESS.map((p, i) => (
-                <Reveal key={p.step} className="process-card" delay={i * 0.08}>
-                  <span className="process-step">{p.step}</span>
-                  <h3>{p.title}</h3>
-                  <p>{p.desc}</p>
-                </Reveal>
-              ))}
+            {/* One connected track rather than four separate cards. The steps
+                are a sequence, so they are drawn as one thing: a rail that
+                draws itself in, with the markers lighting up along it. An <ol>
+                because the order is the point. */}
+            <div className="process-track">
+              <motion.span
+                className="process-rail"
+                aria-hidden="true"
+                initial={reduceMotion ? false : { scaleX: 0, scaleY: 0 }}
+                whileInView={{ scaleX: 1, scaleY: 1 }}
+                viewport={{ once: true, amount: 0.35 }}
+                transition={{ duration: 1.05, ease: [0.16, 0.84, 0.24, 1] }}
+              />
+
+              <ol className="process-steps">
+                {PROCESS.map((p, i) => (
+                  <motion.li
+                    key={p.step}
+                    className="process-item"
+                    style={{
+                      "--step": PROCESS_ACCENTS[i].c,
+                      "--step-ring": PROCESS_ACCENTS[i].ring,
+                      "--step-halo": PROCESS_ACCENTS[i].halo,
+                    }}
+                    initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.35 }}
+                    transition={{
+                      duration: 0.5,
+                      delay: 0.22 + i * 0.14,
+                      ease: [0.16, 0.84, 0.24, 1],
+                    }}
+                  >
+                    {/* the <ol> already carries the order for assistive tech */}
+                    <span className="process-node" aria-hidden="true">
+                      {p.step}
+                    </span>
+                    <h3>{p.title}</h3>
+                    <p>{p.desc}</p>
+                  </motion.li>
+                ))}
+              </ol>
             </div>
           </div>
         </section>
 
         {/* ===================== FEATURED WORK ===================== */}
-        <section className="section section--soft">
+        <section className="section section--soft" id="work">
           <div className="container">
             <Reveal className="section-head">
-              <span className="eyebrow">Our creations</span>
-              <h2>Recent work we're proud of</h2>
+              <h2>Websites We've Built for Real Businesses</h2>
               <p>
-                A look at some of the websites we've designed and built for our
-                clients.
+                A restaurant in Qatar, a travel agency in Kerala, a property
+                agency in the UK. Different sectors, same standard: fast,
+                findable and built to bring in enquiries.
               </p>
             </Reveal>
 
-            <div className="work-grid">
-              {PROJECTS.slice(0, 4).map((p, i) => (
-                <Reveal
-                  key={p.name}
-                  className="work-card card"
-                  delay={(i % 3) * 0.08}
-                >
-                  <a
-                    href={p.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="work-media"
-                  >
-                    <img
-                      src={p.image}
-                      alt={`${p.name} website by Pixlverse`}
-                      loading="lazy"
-                    />
-                    <span className="work-cat">{p.category}</span>
-                  </a>
-                  <div className="work-body">
-                    <h3>
-                      <a href={p.url} target="_blank" rel="noopener noreferrer">
-                        {p.name}
-                      </a>
-                    </h3>
-                    <p>{p.blurb}</p>
-                    <a
-                      href={p.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="work-link"
-                    >
-                      Visit site <FaArrowRight />
-                    </a>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
+            {/* not wrapped in <Reveal>: the showcase is taller than the
+                viewport and paces itself off scroll position */}
+            <WorkShowcase projects={FEATURED} />
 
             <Reveal className="services-foot" direction="none" delay={0.1}>
               <Link to="/projects" className="btn btn--ghost">
-                Explore more projects <FaArrowRight />
+                See all projects <FaArrowRight />
               </Link>
             </Reveal>
           </div>
@@ -251,49 +286,30 @@ const Home = () => {
         <section className="section">
           <div className="container">
             <Reveal className="section-head">
-              <span className="eyebrow">Why Pixlverse</span>
-              <h2>More than a website — a digital partner</h2>
-              <p>
-                We don't just build websites. We build digital experiences and
-                stand by you from concept to code to customer.
-              </p>
+              <h2>Why Businesses Choose Pixlverse as Their Web Design Partner</h2>
             </Reveal>
 
             <Reveal className="stats-box" direction="up">
               <div className="stats-grid">
                 {STATS.map((s) => (
                   <div className="stat" key={s.label}>
-                    <span className="stat-value">{s.value}</span>
+                    <Counter className="stat-value" value={s.value} />
                     <span className="stat-label">{s.label}</span>
+                    {s.note && <span className="stat-note">{s.note}</span>}
                   </div>
                 ))}
               </div>
             </Reveal>
 
-            <div className="why-grid">
-              {WHY.map((w, i) => (
-                <Reveal
-                  key={w.title}
-                  className="why-card card"
-                  delay={(i % 2) * 0.08}
-                >
-                  <span className="why-icon" style={{ color: w.color }}>
-                    {w.icon}
-                  </span>
-                  <h3>{w.title}</h3>
-                  <p>{w.text}</p>
-                </Reveal>
-              ))}
-            </div>
+            <WhyDeck points={WHY_POINTS} />
           </div>
         </section>
 
         {/* ===================== TESTIMONIALS ===================== */}
-        <section className="section section--soft">
+        <section className="section section--soft section--curve-top">
           <div className="container">
             <Reveal className="section-head">
-              <span className="eyebrow">Client love</span>
-              <h2>What our clients say</h2>
+              <h2>What Our Clients Say</h2>
               <p>
                 Don't just take our word for it — here's what working with
                 Pixlverse feels like.
@@ -302,10 +318,11 @@ const Home = () => {
 
             <div className="testimonial-grid">
               {TESTIMONIALS.map((t, i) => (
-                <Reveal
+                <TiltCard
                   key={t.name}
                   className="testimonial-card card"
                   delay={i * 0.1}
+                  max={5}
                 >
                   <FaQuoteLeft className="quote-mark" />
                   <p className="testimonial-text">{t.message}</p>
@@ -316,34 +333,21 @@ const Home = () => {
                       <span>{t.role}</span>
                     </div>
                   </div>
-                </Reveal>
+                </TiltCard>
               ))}
             </div>
           </div>
         </section>
 
         {/* ===================== FAQ ===================== */}
-        <section className="section">
-          <div className="container faq-wrap">
+        <section className="section" id="faq">
+          <div className="container">
             <Reveal className="section-head">
-              <span className="eyebrow">FAQ</span>
-              <h2>Questions, answered</h2>
+              <h2>Website Design Questions, Answered</h2>
               <p>Everything you might want to know before working with us.</p>
             </Reveal>
 
-            <div className="faq-list">
-              {FAQS.map((f, i) => (
-                <Reveal
-                  key={i}
-                  as="details"
-                  className="faq-item"
-                  delay={(i % 3) * 0.05}
-                >
-                  <summary>{f.q}</summary>
-                  <p>{f.a}</p>
-                </Reveal>
-              ))}
-            </div>
+            <FaqGrid items={FAQS} />
           </div>
         </section>
 
@@ -351,15 +355,16 @@ const Home = () => {
         <section className="final-cta">
           <div className="container">
             <Reveal className="cta-box" direction="up">
-              <h2>Not sure where to start?</h2>
+              <CtaRadar />
+              <h2>Ready for a Website That Works as Hard as You Do?</h2>
               <p>
-                Let's craft a website that aligns perfectly with your business
-                goals — and guide you seamlessly from the first idea to a
-                successful launch and beyond.
+                Tell us about your business and goals. We'll reply within 24
+                hours with honest advice and a transparent quote, with no
+                pressure and no obligation.
               </p>
               <div className="btn-row">
                 <Link to="/contact" className="btn btn--primary">
-                  Get a free quote <FaArrowRight />
+                  Get your free quote <FaArrowRight />
                 </Link>
                 <Link to="/services" className="btn btn--light">
                   See what we do
@@ -370,7 +375,6 @@ const Home = () => {
         </section>
       </main>
 
-      <Footer />
     </>
   );
 };

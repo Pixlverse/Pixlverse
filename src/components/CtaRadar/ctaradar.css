@@ -1,0 +1,51 @@
+.cta-radar {
+  position: absolute;
+  top: 50%;
+  /* Width 78 with right -36 puts the centre 3% inside the panel's right edge,
+     so only the left half of each ring is ever on screen — the signal reads as
+     coming from a source sitting on the edge rather than a target floating in
+     the middle of the panel. */
+  right: -36%;
+  width: 78%;
+  aspect-ratio: 1;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.cta-radar-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  /* a soft annulus rather than a hairline circle: at this scale a 1px border
+     would alias into a jagged arc as it grows */
+  background: radial-gradient(
+    closest-side,
+    rgba(255, 255, 255, 0) 63%,
+    rgba(255, 255, 255, 0.55) 78%,
+    rgba(255, 255, 255, 0) 95%
+  );
+  will-change: transform, opacity;
+}
+
+.cta-radar-core {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 30%;
+  height: 30%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    closest-side,
+    rgba(255, 255, 255, 0.85),
+    rgba(255, 255, 255, 0.22) 58%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+
+@media (max-width: 760px) {
+  /* pushed further off and dimmed — on a narrow panel the copy has to run the
+     full width, so the rings sit behind it rather than beside it */
+  .cta-radar { right: -40%; width: 92%; opacity: 0.55; }
+}

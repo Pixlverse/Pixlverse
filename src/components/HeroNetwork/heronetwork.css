@@ -1,0 +1,58 @@
+.hero-network {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  /* The canvas spans the hero AND the Services band. It runs at full strength
+     through the hero, then decays to roughly 20% across the Services section
+     so the network thins out as you travel down rather than stopping at a
+     boundary. The last few percent drop to zero only so no node is sliced in
+     half where the dark stage meets the light section below it. */
+  mask-image: linear-gradient(
+    180deg,
+    transparent 0%,
+    #000 7%,
+    #000 40%,
+    rgba(0, 0, 0, 0.2) 90%,
+    rgba(0, 0, 0, 0.2) 96%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    transparent 0%,
+    #000 7%,
+    #000 40%,
+    rgba(0, 0, 0, 0.2) 90%,
+    rgba(0, 0, 0, 0.2) 96%,
+    transparent 100%
+  );
+}
+
+/* On a phone the Services band stacks to six full-width cards, so it is far
+   taller than the hero and the stage's proportions flip. Hold full strength
+   over a smaller share of it so the decay still lines up with the hero rather
+   than running on into the cards. */
+@media (max-width: 900px) {
+  .hero-network {
+    mask-image: linear-gradient(
+      180deg,
+      transparent 0%,
+      #000 5%,
+      #000 26%,
+      rgba(0, 0, 0, 0.2) 88%,
+      rgba(0, 0, 0, 0.2) 96%,
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      180deg,
+      transparent 0%,
+      #000 5%,
+      #000 26%,
+      rgba(0, 0, 0, 0.2) 88%,
+      rgba(0, 0, 0, 0.2) 96%,
+      transparent 100%
+    );
+  }
+}
