@@ -101,8 +101,19 @@
 .contact-card a {
   color: var(--violet);
   font-weight: 600;
-  word-break: break-word;
+  /* only breaks a word when there's no other way to fit it — the email
+     carries its own break point at the "@" */
+  overflow-wrap: break-word;
 }
+.contact-whatsapp {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  margin-top: 10px;
+  font-size: 0.92rem;
+}
+.contact-whatsapp svg { color: #25d366; font-size: 1.1rem; }
 .contact-card a:hover { text-decoration: underline; }
 
 /* ============ WHAT HAPPENS NEXT ============ */

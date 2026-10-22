@@ -8,6 +8,11 @@ export const SITE = {
   tagline: "Website Design & Development in Kerala, India",
   url: "https://www.pixlverse.in",
   email: "explore.pixlverse@gmail.com",
+  /* `phone` is how the number is shown; `phoneE164` feeds tel: links, the
+     WhatsApp chat link and the schema */
+  phone: "+91 80784 94239",
+  phoneE164: "+918078494239",
+  whatsapp: "https://wa.me/918078494239",
   instagram: "https://www.instagram.com/explore.pixlverse/",
   region: "Kerala",
   country: "India",

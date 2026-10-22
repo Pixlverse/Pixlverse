@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./footer.css";
-import { FaEnvelope, FaInstagram } from "react-icons/fa";
+import { FaEnvelope, FaInstagram, FaPhoneAlt, FaWhatsapp } from "react-icons/fa";
 import { SITE, NAV_LINKS, SERVICES, SERVING } from "../../data/site";
 
 const Footer = () => {
@@ -26,6 +26,9 @@ const Footer = () => {
           </p>
           <a className="footer-email" href={`mailto:${SITE.email}`}>
             <FaEnvelope /> {SITE.email}
+          </a>
+          <a className="footer-email" href={`tel:${SITE.phoneE164}`}>
+            <FaPhoneAlt /> {SITE.phone}
           </a>
         </div>
 
@@ -61,6 +64,14 @@ const Footer = () => {
           <div className="footer-socials">
             <a href={`mailto:${SITE.email}`} aria-label="Email Pixlverse">
               <FaEnvelope />
+            </a>
+            <a
+              href={SITE.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Chat with Pixlverse on WhatsApp"
+            >
+              <FaWhatsapp />
             </a>
             <a
               href={SITE.instagram}

@@ -55,6 +55,8 @@
   transition: color 0.25s ease;
 }
 .footer-email:hover { color: var(--plum); }
+.footer-email + .footer-email { margin-top: 10px; }
+.footer-brand { display: flex; flex-direction: column; align-items: flex-start; }
 
 .footer-col h4 {
   color: #fff;
@@ -136,9 +138,25 @@
 }
 
 @media (max-width: 560px) {
+  /* Explore and Services stay side by side — stacked one column, the link
+     lists ran to more than a screen of mostly empty space */
   .footer-main {
-  /* the removed banner carried the rule that separated the footer from the
-     page; the grid takes it over */
-  border-top: 1px solid rgba(255, 255, 255, 0.08); grid-template-columns: 1fr; }
+    gap: 28px 20px;
+    padding-top: 44px;
+    padding-bottom: 36px;
+  }
+  .footer-col h4 { margin-bottom: 14px; }
+  .footer-col ul li { margin-bottom: 9px; }
+  .footer-col a,
+  .footer-areas li { font-size: 0.9rem; }
+  /* the areas read as one line of tags rather than another tall list */
+  .footer-col:last-child { grid-column: 1 / -1; }
+  .footer-areas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+  }
+  .footer-col .footer-areas li { margin-bottom: 0; }
+  .footer-socials { margin-top: 18px; }
   .footer-bottom { flex-direction: column; align-items: flex-start; }
 }

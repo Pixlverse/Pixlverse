@@ -1,7 +1,8 @@
 .back-to-top {
   position: fixed;
-  right: clamp(16px, 3vw, 28px);
-  bottom: clamp(16px, 3vw, 28px);
+  /* centred over the 54px WhatsApp button, stacked 12px above it */
+  right: calc(clamp(16px, 3vw, 28px) + 4px);
+  bottom: calc(clamp(16px, 3vw, 28px) + 54px + 12px);
   z-index: 900;
   display: grid;
   place-items: center;

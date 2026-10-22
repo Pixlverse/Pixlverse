@@ -261,6 +261,10 @@ code {
   .cta-box h2,
   .cta-box p { max-width: none; }
 }
+@media (max-width: 480px) {
+  /* room for the two buttons to sit side by side */
+  .cta-box { padding-left: 22px; padding-right: 22px; }
+}
 
 /* white primary button reads as elegant + high-contrast on the gradient box */
 .cta-box .btn--primary {
@@ -382,6 +386,26 @@ code {
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
+}
+
+/* Phones: the pair sits side by side on one line instead of stacking. Each
+   pill sizes to its own label and they share out the spare width — equal
+   columns forced the longer label onto two lines and made the buttons fat.
+   The arrow is dropped to give the labels the room, and the type scales a
+   little with the screen. A pill never shrinks below its label: where the
+   pair still can't fit (narrow phones, enlarged system text) they wrap to a
+   full-width stack rather than spilling the text out of the button. */
+@media (max-width: 480px) {
+  .btn-row {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .btn-row .btn {
+    flex: 1 1 auto;
+    padding: 11px clamp(10px, 3vw, 14px);
+    font-size: clamp(0.76rem, 3.4vw, 0.86rem);
+  }
+  .btn-row .btn svg { display: none; }
 }
 
 /* ---------- Cards ---------- */

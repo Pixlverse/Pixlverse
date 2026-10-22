@@ -42,12 +42,71 @@
   max-width: 54ch;
 }
 
+/* The question is a button so phones can toggle it, but on wide screens it
+   should read as nothing more than the heading text. */
+.faq-q {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: default;
+}
+.faq-q-chevron { display: none; }
+
 @media (max-width: 860px) {
   .faq-grid { grid-template-columns: 1fr; gap: 26px; }
 }
 
-@media (max-width: 520px) {
-  .faq-item { grid-template-columns: 38px minmax(0, 1fr); column-gap: 14px; }
+/* ---------- phones: accordion ---------- */
+@media (max-width: 600px) {
+  .faq-grid { gap: 0; border-top: 1px solid var(--line); }
+  .faq-item {
+    grid-template-columns: 38px minmax(0, 1fr);
+    column-gap: 14px;
+    /* top, not centre — the icon stays beside the question when it opens */
+    align-items: start;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+  }
   .faq-item-icon { width: 38px; height: 38px; border-radius: 10px; font-size: 0.9rem; }
-  .faq-item-body h3 { font-size: 0.98rem; margin-top: 5px; }
+  .faq-item-body h3 { font-size: 0.98rem; margin: 0; }
+
+  .faq-q {
+    align-items: center;
+    /* the icon's height, so a one-line question sits on its centre */
+    min-height: 38px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .faq-q:focus-visible { outline: none; box-shadow: var(--ring); border-radius: 6px; }
+  .faq-q-chevron {
+    display: block;
+    flex: none;
+    font-size: 0.78rem;
+    color: var(--violet);
+    transition: transform 0.3s ease;
+  }
+  .is-open .faq-q-chevron { transform: rotate(180deg); }
+
+  /* 0fr -> 1fr animates the panel to its natural height */
+  .faq-a {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s ease;
+  }
+  .is-open .faq-a { grid-template-rows: 1fr; }
+  .faq-a-inner { overflow: hidden; min-height: 0; }
+  .faq-item-body p { padding-top: 8px; font-size: 0.92rem; line-height: 1.6; }
+}
+
+@media (max-width: 600px) and (prefers-reduced-motion: reduce) {
+  .faq-a,
+  .faq-q-chevron { transition: none; }
 }

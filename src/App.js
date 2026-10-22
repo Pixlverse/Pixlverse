@@ -11,6 +11,7 @@ import { AnimatePresence } from "framer-motion";
 import ScrollToTop from "./components/ScrollToTop";
 import ScrollProgress from "./components/ScrollProgress";
 import BackToTop from "./components/BackToTop";
+import WhatsAppButton from "./components/WhatsAppButton";
 import PageTransition from "./components/PageTransition";
 import PageLoader from "./components/PageLoader";
 import { IS_PRERENDER } from "./utils/prerender";
@@ -81,6 +82,7 @@ const App = () => {
       <Navbar />
       <AnimatedRoutes />
       <Footer />
+      <WhatsAppButton />
       <BackToTop />
     </Router>
   );
