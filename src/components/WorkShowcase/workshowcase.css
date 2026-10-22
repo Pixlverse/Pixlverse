@@ -109,3 +109,26 @@
   .showcase-copy { padding-left: 18px; }
   .showcase-blurb { max-width: none; }
 }
+
+/* Phones: each row ran past a screen and a half. Tighter rhythm, and the
+   blurb is held to three lines — the full text stays in the markup for
+   crawlers and screen readers, and the Projects page carries it in full. */
+@media (max-width: 560px) {
+  .showcase { gap: 36px; }
+  .showcase-row { gap: 16px; }
+  .showcase-copy { gap: 4px; padding-left: 14px; }
+  .showcase-index { font-size: 0.72rem; }
+  .showcase-name { font-size: 1.22rem; margin: 0; }
+  .showcase-cat { font-size: 0.72rem; }
+  .showcase-blurb {
+    margin-top: 6px;
+    font-size: 0.9rem;
+    line-height: 1.55;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    overflow: hidden;
+  }
+  .showcase-visit { margin-top: 10px; font-size: 0.88rem; }
+}

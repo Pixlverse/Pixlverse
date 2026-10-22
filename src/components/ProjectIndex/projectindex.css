@@ -293,6 +293,38 @@
   .proj-go { display: none; }
 }
 
+/* Phones: the notice is a courtesy line, not a panel — a smaller icon, a
+   tighter box and a step down in type keep it to a few lines. */
+@media (max-width: 560px) {
+  .proj-notice {
+    grid-template-columns: 24px minmax(0, 1fr);
+    gap: 10px;
+    margin-bottom: 18px;
+    padding: 12px 14px 12px 12px;
+    border-radius: var(--radius-sm);
+  }
+  .proj-notice-icon { width: 24px; height: 24px; font-size: 0.7rem; }
+  .proj-notice p { font-size: 0.8rem; line-height: 1.5; align-self: start; }
+}
+
+/* Phones: a number column indented the whole blurb and left a gutter down the
+   left edge. The number moves up to label the row and the text runs full
+   width, flush with the screenshot. */
+@media (max-width: 560px) {
+  .proj-link {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+  .proj-shot { margin-bottom: 16px; }
+  .proj-num {
+    grid-row: 2;
+    margin-bottom: 6px;
+    font-size: 0.78rem;
+  }
+  .proj-main { grid-row: 3; }
+  .proj-head { margin-bottom: 10px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .proj-shot,
   .proj-go { transition: none; }

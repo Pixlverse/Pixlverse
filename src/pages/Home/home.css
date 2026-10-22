@@ -272,15 +272,16 @@
 @media (max-width: 440px) {
   /* a phone column is too narrow for the desktop step — the headline was
      running to four lines and the sub to eight */
-  .hero-copy h1 { font-size: 1.78rem; }
+  .hero-copy h1 { font-size: 2.05rem; line-height: 1.22; }
   .hero-sub { font-size: 0.94rem; margin-bottom: 26px; }
   /* one stat per row, with the hairline turned on its side */
   .hero-proof ul { grid-template-columns: 1fr; }
+  /* figure on the left; label above, flags + note below on the right */
   .proof-stat {
-    flex-flow: row wrap;
+    display: grid;
+    grid-template-columns: 84px auto 1fr;
     align-items: center;
-    justify-content: flex-start;
-    gap: 6px 16px;
+    gap: 6px 10px;
     text-align: left;
     padding: 15px 4px;
   }
@@ -305,13 +306,14 @@
     height: 66px;
     transform: translate(-50%, -50%);
   }
-  .proof-value { font-size: 1.8rem; flex: 0 0 auto; min-width: 78px; }
-  .proof-label { flex: 1 1 auto; }
-  .proof-flags { flex: 0 0 auto; margin: 0 0 0 auto; }
+  .proof-value { font-size: 1.8rem; grid-column: 1; grid-row: 1 / span 2; }
+  .proof-label { grid-column: 2 / -1; grid-row: 1; }
+  .proof-flags { grid-column: 2; grid-row: 2; justify-content: flex-start; margin: 0; }
+  .proof-flag { width: 22px; height: 22px; }
   /* keeps the country names on the page rather than hiding them on phones */
-  .proof-note { flex: 1 0 100%; padding-left: 94px; }
-  .hero-cta { flex-direction: column; align-self: stretch; }
-  .hero-cta .btn { width: 100%; }
+  .proof-note { grid-column: 2 / -1; grid-row: 2; }
+  .proof-flags + .proof-note { grid-column: 3; }
+  .hero-cta { align-self: stretch; }
 }
 
 /* ============================ SERVICES ============================ */
@@ -695,6 +697,26 @@
   letter-spacing: 0.02em;
 }
 
+/* Phones: a tight 2x2 of cells split by hairlines, instead of four loose
+   columns whose labels and note each broke onto extra lines. */
+@media (max-width: 560px) {
+  .stats-box { padding: 6px; }
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0;
+  }
+  .stat {
+    gap: 4px;
+    padding: 22px 8px;
+    justify-content: center;
+  }
+  .stat:nth-child(odd) { border-right: 1px solid rgba(255, 255, 255, 0.09); }
+  .stat:nth-child(n + 3) { border-top: 1px solid rgba(255, 255, 255, 0.09); }
+  .stat-value { font-size: 2rem; line-height: 1.1; }
+  .stat-label { font-size: 0.84rem; line-height: 1.3; }
+  .stat-note { font-size: 0.68rem; letter-spacing: 0; white-space: nowrap; }
+}
+
 /* ============================ TESTIMONIALS ============================ */
 .testimonial-grid {
   display: grid;
@@ -738,5 +760,26 @@
 }
 
 @media (max-width: 600px) {
-  .services-grid { grid-template-columns: 1fr; }
+  .services-grid { grid-template-columns: 1fr; gap: 14px; }
+  /* One card per row: the desktop min-height, the split title and the 78%
+     text column made each tile close to a full screen tall. */
+  .service-card {
+    min-height: 0;
+    padding: 24px 22px 20px;
+    border-radius: 22px;
+  }
+  .service-card::before,
+  .service-more::after { border-radius: 22px; }
+  .service-card h3 { font-size: 1.3rem; margin-bottom: 8px; }
+  .svc-title-top,
+  .svc-title-bottom { display: inline; }
+  .svc-title-top::after { content: " "; }
+  .service-card p {
+    max-width: none;
+    font-size: 0.93rem;
+    line-height: 1.55;
+    margin-bottom: 16px;
+  }
+  .service-card .service-art { width: 140px; opacity: 0.4; }
+  .service-more-badge { width: 30px; height: 30px; }
 }

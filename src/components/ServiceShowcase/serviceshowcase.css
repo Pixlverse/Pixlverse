@@ -184,8 +184,29 @@
   .svc-art { aspect-ratio: 16 / 10; }
 }
 
+/* Phones: the 16:10 drawing alone was half a screen before any copy. It
+   becomes a short banner, and the copy steps down a size. */
 @media (max-width: 560px) {
-  .svc-points { grid-template-columns: 1fr; }
+  .svc-row { gap: 16px; padding: 26px 0; }
+  .svc-art {
+    aspect-ratio: 21 / 9;
+    border-radius: var(--radius);
+    box-shadow: 0 14px 32px rgba(22, 18, 31, 0.08);
+  }
+  .svc-art .service-art { width: 40%; }
+  .svc-art-index { font-size: 2rem; top: 10px; left: 14px; }
+
+  .svc-kicker {
+    margin-bottom: 10px;
+    padding: 5px 12px 5px 9px;
+    font-size: 0.68rem;
+  }
+  .svc-body h2 { font-size: 1.3rem; margin-bottom: 8px; }
+  .svc-blurb { font-size: 0.92rem; line-height: 1.6; margin-bottom: 14px; }
+
+  .svc-points { grid-template-columns: 1fr; gap: 7px; margin-bottom: 14px; }
+  .svc-points li { font-size: 0.86rem; line-height: 1.45; gap: 8px; grid-template-columns: 14px minmax(0, 1fr); }
+  .svc-best { padding: 10px 14px; font-size: 0.86rem; line-height: 1.5; }
 }
 
 @media (prefers-reduced-motion: reduce) {

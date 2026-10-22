@@ -11,6 +11,8 @@ import {
   FaClock,
   FaPaperPlane,
   FaCheck,
+  FaPhoneAlt,
+  FaWhatsapp,
 } from "react-icons/fa";
 import { SITE, ENQUIRY_TYPES, NEXT_STEPS } from "../../data/site";
 import { organizationSchema, breadcrumbSchema } from "../../seo/schema";
@@ -187,7 +189,27 @@ const Contact = () => {
                   <FaEnvelope />
                 </span>
                 <h3>Email us</h3>
-                <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+                {/* <wbr> lets a narrow card break the address at the "@"
+                    instead of dropping its last letter onto a new line */}
+                <a href={`mailto:${SITE.email}`}>
+                  {SITE.email.split("@")[0]}
+                  <wbr />@{SITE.email.split("@")[1]}
+                </a>
+              </div>
+              <div className="contact-card card">
+                <span className="contact-icon">
+                  <FaPhoneAlt />
+                </span>
+                <h3>Call or WhatsApp</h3>
+                <a href={`tel:${SITE.phoneE164}`}>{SITE.phone}</a>
+                <a
+                  className="contact-whatsapp"
+                  href={SITE.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FaWhatsapp aria-hidden="true" /> Chat on WhatsApp
+                </a>
               </div>
               <div className="contact-card card">
                 <span className="contact-icon">

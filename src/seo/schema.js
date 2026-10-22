@@ -16,6 +16,7 @@ export const organizationSchema = {
     "Pixlverse is a website design and development studio in Kerala, India. We build fast, SEO-ready websites for businesses across India, the UK, Qatar and Dubai, and we stay on after launch to keep them secure, updated and growing.",
   url: SITE.url,
   email: SITE.email,
+  telephone: SITE.phoneE164,
   image: SITE.defaultOgImage,
   logo: SITE.organizationLogo,
   foundingDate: SITE.founded,
